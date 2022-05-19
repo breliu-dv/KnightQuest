@@ -3,6 +3,9 @@ using System.Collections;
 
 public class HeroKnight : MonoBehaviour {
 
+    private IKnightCommand right;
+    private IKnightCommand left;
+    private IKnightCommand roll;
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] float      m_rollForce = 6.0f;
@@ -37,6 +40,9 @@ public class HeroKnight : MonoBehaviour {
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
+        this.right = ScriptableObject.CreateInstance<MoveCharacterRight>();
+        this.left = ScriptableObject.CreateInstance<MoveCharacterLeft>();
+        this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
     }
 
     // Update is called once per frame
@@ -73,19 +79,15 @@ public class HeroKnight : MonoBehaviour {
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            this.right.Execute(this.gameObject, inputX, m_speed);
             m_facingDirection = 1;
         }
             
         else if (inputX < 0)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            this.left.Execute(this.gameObject, inputX, m_speed);
             m_facingDirection = -1;
         }
-
-        // Move
-        if (!m_rolling )
-            m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
 
         //Set AirSpeed in animator
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
@@ -141,7 +143,7 @@ public class HeroKnight : MonoBehaviour {
         {
             m_rolling = true;
             m_animator.SetTrigger("Roll");
-            m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
+            this.roll.Execute(this.gameObject, this.m_facingDirection, this.m_rollForce);
         }
             
 
