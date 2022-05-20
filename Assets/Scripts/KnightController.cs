@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class HeroKnight : MonoBehaviour {
+public class KnightController : MonoBehaviour {
 
     private IKnightCommand right;
     private IKnightCommand left;
