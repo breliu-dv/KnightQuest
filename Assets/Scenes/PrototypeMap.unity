@@ -503,6 +503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: slime-green 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1995477814096936273, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1995477814096936274, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
       propertyPath: path
       value: 
@@ -2119,9 +2123,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1995477812733497560, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995477812733497560, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
+      propertyPath: m_SleepingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995477812733497560, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1995477812733497561, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
       propertyPath: m_Name
       value: slime-green 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995477814096936273, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
+      propertyPath: maxSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1995477814096936274, guid: 9b52acaae0ce7fc408a7e276f8731484, type: 3}
       propertyPath: path
