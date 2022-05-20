@@ -7,7 +7,6 @@ public class GreenSlimeController : MonoBehaviour
 {
     public PatrolPath path;
     public AudioClip ouch;
-
     internal PatrolPath.Mover mover;
     internal AnimationController control;
     internal Collider2D _collider;
@@ -26,7 +25,14 @@ public class GreenSlimeController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Hit enemy");
+        var player = collision.gameObject.GetComponent<HeroKnight>();
+        if (player != null)
+        {
+            // var ev = Schedule<PlayerEnemyCollision>();
+            // ev.player = player;
+            // ev.enemy = this;
+            player.PlayerDeath();
+        }
     }
 
     void Update()

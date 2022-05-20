@@ -173,6 +173,12 @@ public class HeroKnight : MonoBehaviour {
         }
     }
 
+    public void PlayerDeath()
+    {
+        m_animator.SetBool("noBlood", m_noBlood);
+        m_animator.SetTrigger("Death");
+    }
+
     // Animation Events
     // Called in slide animation.
     void AE_SlideDust()
