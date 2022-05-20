@@ -21,7 +21,7 @@ namespace Obscura
         {
             var targetPosition = this.target.transform.position;
             var cameraPosition = this.managedCamera.transform.position;
-            Debug.Log(cameraPosition);
+            //Debug.Log(cameraPosition);
 
             cameraPosition = new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z); //lock at center. 
 
