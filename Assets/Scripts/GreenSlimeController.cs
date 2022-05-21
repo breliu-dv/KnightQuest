@@ -31,7 +31,16 @@ public class GreenSlimeController : MonoBehaviour
             // var ev = Schedule<PlayerEnemyCollision>();
             // ev.player = player;
             // ev.enemy = this;
-            player.PlayerDeath();
+            int damage = player.PlayerHurt(20);
+            if(damage > 0)
+            {
+                damage = damage;
+            }
+            else
+            {
+                player.PlayerDeath();
+            }
+            
         }
     }
 

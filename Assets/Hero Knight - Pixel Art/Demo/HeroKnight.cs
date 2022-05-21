@@ -27,6 +27,8 @@ public class HeroKnight : MonoBehaviour {
     private float               m_rollCurrentTime;
 
 
+    private int maxHealth = 100;
+    private int currentHealth;
     // Use this for initialization
     void Start ()
     {
@@ -37,6 +39,7 @@ public class HeroKnight : MonoBehaviour {
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -177,6 +180,12 @@ public class HeroKnight : MonoBehaviour {
     {
         m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
+    }
+    public int PlayerHurt(int damage)
+    {
+         currentHealth -= damage;
+         m_animator.SetTrigger("Hurt");
+         return currentHealth;
     }
 
     // Animation Events
