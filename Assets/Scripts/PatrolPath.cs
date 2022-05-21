@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// This component is used to create a patrol path, two points which enemies will move between.
+/// This component is used to create a green slime patrol path, two points which enemies will move between.
 /// </summary>
 public partial class PatrolPath : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public partial class PatrolPath : MonoBehaviour
     /// One end of the patrol path.
     /// </summary>
     public Vector2 startPosition, endPosition;
-
+    public int slimeType = 0;
     /// <summary>
     /// Create a Mover instance which is used to move an entity along the path at a certain speed.
     /// </summary>

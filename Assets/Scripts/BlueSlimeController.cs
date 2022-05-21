@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
-public class GreenSlimeController : MonoBehaviour
+public class BlueSlimeController : MonoBehaviour
 {
     public PatrolPath path;
     public AudioClip ouch;
@@ -12,7 +12,7 @@ public class GreenSlimeController : MonoBehaviour
     internal Collider2D _collider;
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
-
+    public GameObject knight;
     public Bounds Bounds => _collider.bounds;
 
     void Awake()
@@ -39,10 +39,11 @@ public class GreenSlimeController : MonoBehaviour
     {
         if (path != null)
         {
-            if (mover == null) 
+            if (mover == null)
             {
                 mover = path.CreateMover(control.maxSpeed * 0.5f);
             }
+            path.transform.position = knight.transform.position;
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
     }
