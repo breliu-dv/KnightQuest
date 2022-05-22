@@ -235,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -275,6 +275,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -22975,6 +22987,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
       value: Slime_Medium_Green
@@ -23110,7 +23134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23150,6 +23174,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -24814,7 +24850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24854,6 +24890,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -25097,7 +25145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25137,6 +25185,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -25607,6 +25667,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829939, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454888289809829943, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
       value: Slime_Medium_Green
@@ -25898,7 +25970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829938, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_LocalPosition.x
