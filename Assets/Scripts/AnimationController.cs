@@ -33,13 +33,11 @@ public class AnimationController : KinematicObject
     public bool stopJump;
 
     SpriteRenderer spriteRenderer;
-    Animator animator;
     PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
     }
 
     protected override void ComputeVelocity()
@@ -59,12 +57,13 @@ public class AnimationController : KinematicObject
         }
 
         if (move.x > 0.01f)
+        {
             spriteRenderer.flipX = false;
+        }
         else if (move.x < -0.01f)
+        {
             spriteRenderer.flipX = true;
-
-        animator.SetBool("grounded", IsGrounded);
-        animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        }
 
         targetVelocity = move * maxSpeed;
     }
