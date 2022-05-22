@@ -13,9 +13,21 @@ public class BlueSlimeController : MonoBehaviour
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
     public GameObject knight;
+    public GameObject blueSlime;
+    public float detectionZone;
     public Bounds Bounds => _collider.bounds;
-
+    public float followRange = 0.0f;
+    private float knightToSlimeDist;
+    private float knightToSlimeInitDist;
+    private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
     private int damage = 25;
+    private Vector3 initialSlimePosition;
+    private bool gotChasedAtLeastOnce;
+
+    void Start()
+    {
+        initialSlimePosition = gameObject.transform.position;
+    }
 
     void Awake()
     {
@@ -32,7 +44,6 @@ public class BlueSlimeController : MonoBehaviour
         {
             player.DoDamage(damage);
         }
-        
     }
 
     void Update()
@@ -43,7 +54,29 @@ public class BlueSlimeController : MonoBehaviour
             {
                 mover = path.CreateMover(control.maxSpeed * 0.5f);
             }
-            path.transform.position = knight.transform.position;
+
+            knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
+            knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
+
+
+            Debug.Log(knightToSlimeDist);
+            Debug.Log(knightPostOutrunPosition.magnitude);
+
+            if (knightToSlimeDist < followRange && knightToSlimeInitDist < followRange + detectionZone)
+            {
+                path.transform.position = knight.transform.position;
+                gotChasedAtLeastOnce = true;
+            }
+            else if (knightToSlimeDist > followRange && knightToSlimeInitDist > detectionZone && gotChasedAtLeastOnce)
+            {
+                knightPostOutrunPosition = knight.transform.position;
+            }
+            if (knightPostOutrunPosition.magnitude > 0.0f && gotChasedAtLeastOnce)
+            {
+                gotChasedAtLeastOnce = false;
+                path.transform.position = initialSlimePosition;
+                knightPostOutrunPosition = new Vector3(0,0,0);
+            }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
     }
