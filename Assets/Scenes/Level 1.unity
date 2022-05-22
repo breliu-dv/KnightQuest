@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -22977,7 +22977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -23154,7 +23154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -24858,7 +24858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -24873,9 +24873,8 @@ GameObject:
   - component: {fileID: 1072059775}
   - component: {fileID: 1072059774}
   - component: {fileID: 1072059778}
-  - component: {fileID: 1072059773}
   - component: {fileID: 1072059777}
-  - component: {fileID: 1072059776}
+  - component: {fileID: 1072059779}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -24883,14 +24882,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1072059773
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072059772}
-  m_Enabled: 1
 --- !u!20 &1072059774
 Camera:
   m_ObjectHideFlags: 0
@@ -24949,20 +24940,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1072059776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072059772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb707da7c4ae4959abca8043ecd7863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawLogic: 0
-  target: {fileID: 891335489}
 --- !u!120 &1072059777
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -25078,6 +25055,20 @@ MonoBehaviour:
   target: {fileID: 891335489}
   topLeft: {x: -25, y: 25, z: 85}
   bottomRight: {x: 25, y: -25, z: 85}
+--- !u!114 &1072059779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072059772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f4136e12573d74e9253991b2ecfa47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawLogic: 0
+  target: {fileID: 891335489}
 --- !u!114 &1121723592 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1316515165894701152, guid: 40c4fd84ea7f67d4cb2ab842b4003cec, type: 3}
@@ -25150,7 +25141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -25372,7 +25363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -25618,7 +25609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
@@ -25818,7 +25809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3159410452435397536, guid: 5e4d1f201f71dd94992f3d20aef3af02, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Blue_7
+      value: Slime_Medium_Blue
       objectReference: {fileID: 0}
     - target: {fileID: 3159410452435397596, guid: 5e4d1f201f71dd94992f3d20aef3af02, type: 3}
       propertyPath: path
@@ -25967,7 +25958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454888289809829964, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}
       propertyPath: m_Name
-      value: Slime_Medium_Green_7
+      value: Slime_Medium_Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05300edf8d9c16f47909b07e2211ada9, type: 3}

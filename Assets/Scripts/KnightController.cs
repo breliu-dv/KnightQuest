@@ -181,6 +181,10 @@ public class KnightController : MonoBehaviour {
     public void DoDamage(int damage) {
         this.currentHealth = Mathf.Max(0, currentHealth - damage);
         m_animator.SetTrigger("Hurt");
+
+        if (this.currentHealth <= 0) {
+            this.PlayerDeath();
+        }
     }
 
     public void PlayerDeath()
