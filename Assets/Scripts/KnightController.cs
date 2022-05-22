@@ -178,16 +178,15 @@ public class KnightController : MonoBehaviour {
         }
     }
 
+    public void DoDamage(int damage) {
+        this.currentHealth = Mathf.Max(0, currentHealth - damage);
+        m_animator.SetTrigger("Hurt");
+    }
+
     public void PlayerDeath()
     {
         m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
-    }
-    public int PlayerHurt(int damage)
-    {
-         currentHealth -= damage;
-         m_animator.SetTrigger("Hurt");
-         return currentHealth;
     }
 
     // Animation Events

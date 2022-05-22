@@ -13,6 +13,8 @@ public class GreenSlimeController : MonoBehaviour
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
 
+    private int damage = 20;
+
     public Bounds Bounds => _collider.bounds;
 
     void Awake()
@@ -28,19 +30,7 @@ public class GreenSlimeController : MonoBehaviour
         var player = collision.gameObject.GetComponent<KnightController>();
         if (player != null)
         {
-            // var ev = Schedule<PlayerEnemyCollision>();
-            // ev.player = player;
-            // ev.enemy = this;
-            int damage = player.PlayerHurt(20);
-            if(damage > 0)
-            {
-                damage = damage;
-            }
-            else
-            {
-                player.PlayerDeath();
-            }
-            
+            player.DoDamage(damage);
         }
     }
 
