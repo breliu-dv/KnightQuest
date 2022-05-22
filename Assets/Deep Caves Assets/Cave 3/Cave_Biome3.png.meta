@@ -216,6 +216,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1648,6 +1649,71 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Cave_Biome3_38: -6211729779820295851
+      Cave_Biome3_52: 7481817388916588009
+      Cave_Biome3_58: 2956278070174272536
+      Cave_Biome3_26: 6657653887502745843
+      Cave_Biome3_31: -6566014598810081219
+      Cave_Biome3_34: -9076933452836627880
+      Cave_Biome3_2: 6102481542119915490
+      Cave_Biome3_5: 3010444764177612543
+      Cave_Biome3_11: 4261911034952662546
+      Cave_Biome3_13: 5742254531392879258
+      Cave_Biome3_19: -3343738393831087669
+      Cave_Biome3_42: -7024953907209343858
+      Cave_Biome3_44: 4338883026369153526
+      Cave_Biome3_23: -8313105477821172966
+      Cave_Biome3_7: 2370030195515706913
+      Cave_Biome3_9: -9144972447611055892
+      Cave_Biome3_49: 8366827121270859016
+      Cave_Biome3_63: 5780612481189176655
+      Cave_Biome3_45: -8119021419262965097
+      Cave_Biome3_53: 3879127852054985638
+      Cave_Biome3_1: 7852208260362776297
+      Cave_Biome3_6: -6215092828128790139
+      Cave_Biome3_35: -7707626913653835120
+      Cave_Biome3_40: -5160273846671488385
+      Cave_Biome3_21: -145085063208757744
+      Cave_Biome3_15: -7790307436236770845
+      Cave_Biome3_56: 2486805895485863344
+      Cave_Biome3_36: 2646981558727052499
+      Cave_Biome3_4: 5776345825834800127
+      Cave_Biome3_8: 1449273025065023740
+      Cave_Biome3_32: -5588324257017039085
+      Cave_Biome3_61: -8488873117892257049
+      Cave_Biome3_12: -3853407330123352662
+      Cave_Biome3_37: 6190897783743233632
+      Cave_Biome3_50: 7718716913708938987
+      Cave_Biome3_59: 9208488101090435723
+      Cave_Biome3_20: 4325688628624136734
+      Cave_Biome3_25: -2631153380621901599
+      Cave_Biome3_0: 8290343351275127959
+      Cave_Biome3_54: 1319583924571025834
+      Cave_Biome3_14: -3794676802990607682
+      Cave_Biome3_43: 8229931794686805543
+      Cave_Biome3_57: -3688737314483446991
+      Cave_Biome3_28: -2601047469264471430
+      Cave_Biome3_60: -2327477173113916238
+      Cave_Biome3_51: 917952863183577568
+      Cave_Biome3_62: -4606517764524464516
+      Cave_Biome3_27: 4120703209343043913
+      Cave_Biome3_17: 6734370556201111493
+      Cave_Biome3_47: -6674922868805838049
+      Cave_Biome3_29: 1638673077615532375
+      Cave_Biome3_33: -6539975684539617922
+      Cave_Biome3_30: -7998695743998948381
+      Cave_Biome3_55: -7221505884695207996
+      Cave_Biome3_18: 7702726683214460737
+      Cave_Biome3_22: -6148039227877962060
+      Cave_Biome3_10: 290264864949323534
+      Cave_Biome3_16: 5825729058829348395
+      Cave_Biome3_39: -3629091892170042923
+      Cave_Biome3_46: -4731092521248813534
+      Cave_Biome3_3: 2966656334633018155
+      Cave_Biome3_41: -5955875183021990274
+      Cave_Biome3_24: 8363151835983352879
+      Cave_Biome3_48: -1969800441837623746
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

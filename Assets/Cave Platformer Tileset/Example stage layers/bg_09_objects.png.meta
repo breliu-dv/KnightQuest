@@ -123,6 +123,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -916,6 +917,40 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      bg_09_objects_22: 4480421446640061579
+      bg_09_objects_29: 5583396084084821067
+      bg_09_objects_16: -8894945479538074593
+      bg_09_objects_30: 1541044983764449185
+      bg_09_objects_1: -5533262482469768838
+      bg_09_objects_3: -351091566041841267
+      bg_09_objects_7: -1601848120950897877
+      bg_09_objects_2: 3820837260022465044
+      bg_09_objects_14: 1586589086246706133
+      bg_09_objects_19: 9152062874590378591
+      bg_09_objects_23: 6736317716608832436
+      bg_09_objects_6: -3106546337718571170
+      bg_09_objects_5: -311169746212525139
+      bg_09_objects_27: 6013242500154711400
+      bg_09_objects_13: 9057493704237547765
+      bg_09_objects_28: -4488104318801421697
+      bg_09_objects_12: -8574460874434737713
+      bg_09_objects_17: 6752020694634369307
+      bg_09_objects_21: 2414940330783248015
+      bg_09_objects_31: 9119859839201597868
+      bg_09_objects_18: -5366216118820553404
+      bg_09_objects_26: 7158208556798151590
+      bg_09_objects_4: -8426844086375058142
+      bg_09_objects_8: 1430539301893060714
+      bg_09_objects_32: 7745643892844361803
+      bg_09_objects_25: -6852515597389979178
+      bg_09_objects_11: 8738912909437931549
+      bg_09_objects_15: -7876201730473508296
+      bg_09_objects_20: -6341745819113290754
+      bg_09_objects_24: 3369075335704025377
+      bg_09_objects_0: -8959159015249748957
+      bg_09_objects_9: 8575619347602679143
+      bg_09_objects_10: 6586190258415954298
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

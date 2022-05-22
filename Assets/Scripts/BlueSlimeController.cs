@@ -25,7 +25,7 @@ public class BlueSlimeController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        var player = collision.gameObject.GetComponent<HeroKnight>();
+        var player = collision.gameObject.GetComponent<KnightController>();
         if (player != null)
         {
             // var ev = Schedule<PlayerEnemyCollision>();

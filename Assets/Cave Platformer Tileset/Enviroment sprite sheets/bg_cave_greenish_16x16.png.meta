@@ -84,6 +84,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -568,6 +569,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      bg_cave_greenish_16x16_2: 21300004
+      bg_cave_greenish_16x16_0: 21300000
+      bg_cave_greenish_16x16_9: 21300018
+      bg_cave_greenish_16x16_16: 21300032
+      bg_cave_greenish_16x16_3: 21300006
+      bg_cave_greenish_16x16_14: 21300028
+      bg_cave_greenish_16x16_8: 21300016
+      bg_cave_greenish_16x16_4: 21300008
+      bg_cave_greenish_16x16_13: 21300026
+      bg_cave_greenish_16x16_12: 21300024
+      bg_cave_greenish_16x16_15: 21300030
+      bg_cave_greenish_16x16_10: 21300020
+      bg_cave_greenish_16x16_19: 21300038
+      bg_cave_greenish_16x16_18: 21300036
+      bg_cave_greenish_16x16_17: 21300034
+      bg_cave_greenish_16x16_6: 21300012
+      bg_cave_greenish_16x16_5: 21300010
+      bg_cave_greenish_16x16_1: 21300002
+      bg_cave_greenish_16x16_11: 21300022
+      bg_cave_greenish_16x16_7: 21300014
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

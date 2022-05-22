@@ -29,6 +29,9 @@ public class KnightController : MonoBehaviour {
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
 
+    private int maxHealth = 100;
+    private int currentHealth;
+
 
     // Use this for initialization
     void Start ()
@@ -173,6 +176,18 @@ public class KnightController : MonoBehaviour {
                 if(m_delayToIdle < 0)
                     m_animator.SetInteger("AnimState", 0);
         }
+    }
+
+    public void PlayerDeath()
+    {
+        m_animator.SetBool("noBlood", m_noBlood);
+        m_animator.SetTrigger("Death");
+    }
+    public int PlayerHurt(int damage)
+    {
+         currentHealth -= damage;
+         m_animator.SetTrigger("Hurt");
+         return currentHealth;
     }
 
     // Animation Events

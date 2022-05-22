@@ -99,6 +99,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -688,6 +689,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      scorpion-red-sheet-x1_7: 21300014
+      scorpion-red-sheet-x1_8: 21300016
+      scorpion-red-sheet-x1_6: 21300012
+      scorpion-red-sheet-x1_23: 21300046
+      scorpion-red-sheet-x1_12: 21300024
+      scorpion-red-sheet-x1_20: 21300040
+      scorpion-red-sheet-x1_16: 21300032
+      scorpion-red-sheet-x1_13: 21300026
+      scorpion-red-sheet-x1_2: 21300004
+      scorpion-red-sheet-x1_15: 21300030
+      scorpion-red-sheet-x1_1: 21300002
+      scorpion-red-sheet-x1_17: 21300034
+      scorpion-red-sheet-x1_14: 21300028
+      scorpion-red-sheet-x1_3: 21300006
+      scorpion-red-sheet-x1_22: 21300044
+      scorpion-red-sheet-x1_4: 21300008
+      scorpion-red-sheet-x1_9: 21300018
+      scorpion-red-sheet-x1_21: 21300042
+      scorpion-red-sheet-x1_19: 21300038
+      scorpion-red-sheet-x1_24: 21300048
+      scorpion-red-sheet-x1_18: 21300036
+      scorpion-red-sheet-x1_0: 21300000
+      scorpion-red-sheet-x1_11: 21300022
+      scorpion-red-sheet-x1_10: 21300020
+      scorpion-red-sheet-x1_5: 21300010
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

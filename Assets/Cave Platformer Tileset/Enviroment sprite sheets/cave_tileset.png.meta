@@ -372,6 +372,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -2884,6 +2885,123 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tileset-cave_24: 21300048
+      tileset-cave_90: 21300180
+      tileset-cave_100: 21300200
+      tileset-cave_106: 21300212
+      tileset-cave_20: 21300040
+      tileset-cave_83: 21300166
+      tileset-cave_109: 21300218
+      tileset-cave_111: 21300222
+      tileset-cave_18: 21300036
+      tileset-cave_34: 21300068
+      tileset-cave_86: 21300172
+      tileset-cave_42: 21300084
+      tileset-cave_21: 21300042
+      tileset-cave_37: 21300074
+      tileset-cave_66: 21300132
+      tileset-cave_10: 21300020
+      tileset-cave_84: 21300168
+      tileset-cave_69: 21300138
+      tileset-cave_107: 21300214
+      tileset-cave_94: 21300188
+      tileset-cave_115: 21300230
+      tileset-cave_60: 21300120
+      tileset-cave_114: 21300228
+      tileset-cave_28: 21300056
+      tileset-cave_88: 21300176
+      tileset-cave_26: 21300052
+      tileset-cave_112: 21300224
+      tileset-cave_77: 21300154
+      tileset-cave_56: 21300112
+      tileset-cave_102: 21300204
+      tileset-cave_55: 21300110
+      tileset-cave_96: 21300192
+      tileset-cave_103: 21300206
+      tileset-cave_49: 21300098
+      tileset-cave_53: 21300106
+      tileset-cave_30: 21300060
+      tileset-cave_71: 21300142
+      tileset-cave_68: 21300136
+      tileset-cave_87: 21300174
+      tileset-cave_64: 21300128
+      tileset-cave_48: 21300096
+      tileset-cave_43: 21300086
+      tileset-cave_1: 21300002
+      tileset-cave_38: 21300076
+      tileset-cave_78: 21300156
+      tileset-cave_76: 21300152
+      tileset-cave_15: 21300030
+      tileset-cave_54: 21300108
+      tileset-cave_44: 21300088
+      tileset-cave_4: 21300008
+      tileset-cave_9: 21300018
+      tileset-cave_113: 21300226
+      tileset-cave_98: 21300196
+      tileset-cave_27: 21300054
+      tileset-cave_75: 21300150
+      tileset-cave_82: 21300164
+      tileset-cave_8: 21300016
+      tileset-cave_12: 21300024
+      tileset-cave_97: 21300194
+      tileset-cave_95: 21300190
+      tileset-cave_59: 21300118
+      tileset-cave_7: 21300014
+      tileset-cave_74: 21300148
+      tileset-cave_99: 21300198
+      tileset-cave_101: 21300202
+      tileset-cave_36: 21300072
+      tileset-cave_5: 21300010
+      tileset-cave_32: 21300064
+      tileset-cave_45: 21300090
+      tileset-cave_73: 21300146
+      tileset-cave_108: 21300216
+      tileset-cave_81: 21300162
+      tileset-cave_39: 21300078
+      tileset-cave_91: 21300182
+      tileset-cave_40: 21300080
+      tileset-cave_52: 21300104
+      tileset-cave_51: 21300102
+      tileset-cave_19: 21300038
+      tileset-cave_67: 21300134
+      tileset-cave_16: 21300032
+      tileset-cave_0: 21300000
+      tileset-cave_25: 21300050
+      tileset-cave_3: 21300006
+      tileset-cave_65: 21300130
+      tileset-cave_29: 21300058
+      tileset-cave_79: 21300158
+      tileset-cave_50: 21300100
+      tileset-cave_104: 21300208
+      tileset-cave_14: 21300028
+      tileset-cave_62: 21300124
+      tileset-cave_72: 21300144
+      tileset-cave_46: 21300092
+      tileset-cave_41: 21300082
+      tileset-cave_105: 21300210
+      tileset-cave_22: 21300044
+      tileset-cave_2: 21300004
+      tileset-cave_70: 21300140
+      tileset-cave_92: 21300184
+      tileset-cave_89: 21300178
+      tileset-cave_58: 21300116
+      tileset-cave_63: 21300126
+      tileset-cave_17: 21300034
+      tileset-cave_80: 21300160
+      tileset-cave_11: 21300022
+      tileset-cave_35: 21300070
+      tileset-cave_33: 21300066
+      tileset-cave_110: 21300220
+      tileset-cave_85: 21300170
+      tileset-cave_57: 21300114
+      tileset-cave_23: 21300046
+      tileset-cave_31: 21300062
+      tileset-cave_47: 21300094
+      tileset-cave_13: 21300026
+      tileset-cave_61: 21300122
+      tileset-cave_6: 21300012
+      tileset-cave_93: 21300186
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

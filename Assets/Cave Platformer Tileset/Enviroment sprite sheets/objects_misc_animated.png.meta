@@ -177,6 +177,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1348,6 +1349,58 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      objects-animated-1_48: 21300096
+      objects-animated-1_3: 21300006
+      objects-animated-1_25: 21300050
+      objects-animated-1_2: 21300004
+      objects-animated-1_44: 21300088
+      objects-animated-1_23: 21300046
+      objects-animated-1_41: 21300082
+      objects-animated-1_45: 21300090
+      objects-animated-1_39: 21300078
+      objects-animated-1_18: 21300036
+      objects-animated-1_42: 21300084
+      objects-animated-1_14: 21300028
+      objects-animated-1_30: 21300060
+      objects-animated-1_34: 21300068
+      objects-animated-1_33: 21300066
+      objects-animated-1_40: 21300080
+      objects-animated-1_24: 21300048
+      objects-animated-1_32: 21300064
+      objects-animated-1_0: 21300000
+      objects-animated-1_29: 21300058
+      objects-animated-1_9: 21300018
+      objects-animated-1_50: 21300100
+      objects-animated-1_19: 21300038
+      objects-animated-1_36: 21300072
+      objects-animated-1_35: 21300070
+      objects-animated-1_27: 21300054
+      objects-animated-1_10: 21300020
+      objects-animated-1_49: 21300098
+      objects-animated-1_37: 21300074
+      objects-animated-1_11: 21300022
+      objects-animated-1_28: 21300056
+      objects-animated-1_5: 21300010
+      objects-animated-1_22: 21300044
+      objects-animated-1_20: 21300040
+      objects-animated-1_4: 21300008
+      objects-animated-1_1: 21300002
+      objects-animated-1_16: 21300032
+      objects-animated-1_47: 21300094
+      objects-animated-1_26: 21300052
+      objects-animated-1_21: 21300042
+      objects-animated-1_6: 21300012
+      objects-animated-1_8: 21300016
+      objects-animated-1_12: 21300024
+      objects-animated-1_46: 21300092
+      objects-animated-1_13: 21300026
+      objects-animated-1_17: 21300034
+      objects-animated-1_38: 21300076
+      objects-animated-1_43: 21300086
+      objects-animated-1_31: 21300062
+      objects-animated-1_7: 21300014
+      objects-animated-1_15: 21300030
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
