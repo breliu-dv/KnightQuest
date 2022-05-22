@@ -9,9 +9,6 @@ public class SpikeController : MonoBehaviour
         var player = collision.gameObject.GetComponent<HeroKnight>();
         if (player != null)
         {
-            // var ev = Schedule<PlayerEnemyCollision>();
-            // ev.player = player;
-            // ev.enemy = this;
             int damage = player.PlayerHurt(100);
             if(damage > 0)
             {
