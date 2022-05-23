@@ -138,21 +138,25 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3936905588921903575, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
+      propertyPath: m_SortingFudge
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 3936905588921903577, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3936905588921903577, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 91.248665
+      value: 86.41
       objectReference: {fileID: 0}
     - target: {fileID: 3936905588921903577, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.07751
+      value: -26.3
       objectReference: {fileID: 0}
     - target: {fileID: 3936905588921903577, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3936905588921903577, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26341,7 +26345,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3408608713548985497, guid: fdd54dd924d40474287bbf407a43920a, type: 3}
       propertyPath: endPosition.x
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3408608713548985497, guid: fdd54dd924d40474287bbf407a43920a, type: 3}
       propertyPath: startPosition.x
@@ -29091,8 +29095,8 @@ MonoBehaviour:
   path: {fileID: 393139861}
   ouch: {fileID: 0}
   knight: {fileID: 891335489}
-  detectionZone: 6
-  followRange: 6
+  detectionZone: 8
+  followRange: 8
   minJumpInterval: 0.5
   maxJumpInterval: 7
   _psystem: {fileID: 793302786}

@@ -49,6 +49,7 @@ public class RedSlimeController : MonoBehaviour
         var player = collision.gameObject.GetComponent<KnightController>();
         if (player != null) 
         {
+            _psystem.transform.position = this.gameObject.transform.position;
             player.DoDamage(damage);
            _psystem.GetComponent<ParticleSystem>().Play();
             //Debug.Log(_psystem.GetComponent<ParticleSystem>());
