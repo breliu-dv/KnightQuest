@@ -17,16 +17,23 @@ public class BlueSlimeController : MonoBehaviour
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
     public float followRange = 0.0f;
+    public float minJumpInterval;
+    public float maxJumpInterval;
     private float knightToSlimeDist;
     private float knightToSlimeInitDist;
     private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
     private int damage = 25;
     private Vector3 initialSlimePosition;
     private bool gotChasedAtLeastOnce;
+    private float timeBeforeJump = 0.0f;
+    public float jumpInterval = 0.0f;
+
 
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
+        jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+
     }
 
     void Awake()
@@ -48,6 +55,8 @@ public class BlueSlimeController : MonoBehaviour
 
     void Update()
     {
+        timeBeforeJump += Time.deltaTime;
+        
         if (path != null)
         {
             if (mover == null)
@@ -70,11 +79,19 @@ public class BlueSlimeController : MonoBehaviour
             {
                 knightPostOutrunPosition = knight.transform.position;
             }
+
             if (knightPostOutrunPosition.magnitude > 0.0f && gotChasedAtLeastOnce)
             {
                 gotChasedAtLeastOnce = false;
                 path.transform.position = initialSlimePosition;
                 knightPostOutrunPosition = new Vector3(0,0,0);
+            }
+
+            if(timeBeforeJump > jumpInterval)
+            {
+                timeBeforeJump = 0;
+                jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+                control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }

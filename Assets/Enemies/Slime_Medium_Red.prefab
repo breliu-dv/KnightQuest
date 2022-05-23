@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 2709085380778589829}
   - component: {fileID: 2709085380778589828}
   - component: {fileID: 2709085380778589827}
-  - component: {fileID: 2709085380778589826}
-  - component: {fileID: 4822668736995545231}
   m_Layer: 0
   m_Name: Slime_Medium_Red
   m_TagString: Untagged
@@ -177,35 +175,3 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   jump: 0
   stopJump: 0
---- !u!114 &2709085380778589826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2709085380778589950}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df6cb5cb9bd498489aad40089eb7432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: {fileID: 0}
-  ouch: {fileID: 0}
---- !u!114 &4822668736995545231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2709085380778589950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3361b876e9fb374f993a47e4d5288f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: {fileID: 0}
-  ouch: {fileID: 0}
-  knight: {fileID: 0}
-  blueSlime: {fileID: 0}
-  detectionZone: 4
-  followRange: 4
