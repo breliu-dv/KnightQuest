@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2709085380778589829}
   - component: {fileID: 2709085380778589828}
   - component: {fileID: 2709085380778589827}
+  - component: {fileID: 1307926013808032770}
   m_Layer: 0
   m_Name: Slime_Medium_Red
   m_TagString: Untagged
@@ -175,3 +176,15 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   jump: 0
   stopJump: 0
+--- !u!114 &1307926013808032770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2709085380778589950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcecd3d25c31c3b418b92e881955749e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

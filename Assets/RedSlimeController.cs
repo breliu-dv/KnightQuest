@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
-public class BlueSlimeController : MonoBehaviour
+public class RedSlimeController : MonoBehaviour
 {
     public PatrolPath path;
     public AudioClip ouch;
@@ -13,7 +13,6 @@ public class BlueSlimeController : MonoBehaviour
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
     public GameObject knight;
-    public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
     public float followRange = 0.0f;
