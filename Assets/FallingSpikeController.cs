@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class FallingSpikeController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int damage = 100;
 
-    private void OnParticleCollision(GameObject HurricaneInner)
+    private void OnParticleCollision(GameObject collision)
     {
-        Debug.Log("Particle hit!");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var player = collision.gameObject.GetComponent<KnightController>();
+        if (player != null)
+        {
+            player.DoDamage(damage);
+        }
     }
 }
