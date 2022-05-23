@@ -184,6 +184,7 @@ public class KnightController : MonoBehaviour {
 
         if (this.currentHealth <= 0) {
             this.PlayerDeath();
+            this.maxHealth = 100;
         }
     }
 
