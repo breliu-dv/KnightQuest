@@ -16,6 +16,7 @@ public class BlueSlimeController : MonoBehaviour
     public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
+    public float jumpTriggerRange;
     public float followRange = 0.0f;
     public float minJumpInterval;
     public float maxJumpInterval;
@@ -67,7 +68,7 @@ public class BlueSlimeController : MonoBehaviour
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
 
-            // Debug.Log(knightToSlimeDist);
+            Debug.Log(knightToSlimeDist);
             // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < followRange + detectionZone)
@@ -87,7 +88,7 @@ public class BlueSlimeController : MonoBehaviour
                 knightPostOutrunPosition = new Vector3(0,0,0);
             }
 
-            if(timeBeforeJump > jumpInterval)
+            if(timeBeforeJump > jumpInterval && knightToSlimeDist < jumpTriggerRange)
             {
                 timeBeforeJump = 0;
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
