@@ -18,6 +18,7 @@ public class RedSlimeController : MonoBehaviour
     public float followRange = 0.0f;
     public float minJumpInterval;
     public float maxJumpInterval;
+    public GameObject _psystem;
     private float knightToSlimeDist;
     private float knightToSlimeInitDist;
     private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
@@ -49,6 +50,8 @@ public class RedSlimeController : MonoBehaviour
         if (player != null) 
         {
             player.DoDamage(damage);
+           _psystem.GetComponent<ParticleSystem>().Play();
+            //Debug.Log(_psystem.GetComponent<ParticleSystem>());
         }
     }
 
@@ -66,10 +69,11 @@ public class RedSlimeController : MonoBehaviour
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
 
-            // Debug.Log(knightToSlimeDist);
-            // Debug.Log(knightPostOutrunPosition.magnitude);
+            //Debug.Log(knightToSlimeDist);
+            Debug.Log(knightToSlimeInitDist);
+            Debug.Log(knightPostOutrunPosition.magnitude);
 
-            if (knightToSlimeDist < followRange && knightToSlimeInitDist < followRange + detectionZone)
+            if (knightToSlimeDist < followRange && knightToSlimeInitDist < detectionZone)
             {
                 path.transform.position = knight.transform.position;
                 gotChasedAtLeastOnce = true;
