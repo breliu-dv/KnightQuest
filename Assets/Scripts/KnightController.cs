@@ -29,8 +29,10 @@ public class KnightController : MonoBehaviour {
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
 
-    private int maxHealth = 100;
-    private int currentHealth;
+    private float maxHealth = 100f;
+    private float currentHealth = 0.0f;
+
+    public HealthBar healthBar;
 
 
     // Use this for initialization
@@ -47,6 +49,7 @@ public class KnightController : MonoBehaviour {
         this.left = ScriptableObject.CreateInstance<MoveCharacterLeft>();
         this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -184,11 +187,12 @@ public class KnightController : MonoBehaviour {
         this.currentHealth = Mathf.Max(0, currentHealth - damage);
         m_animator.SetTrigger("Hurt");
 
-        if (this.currentHealth <= 0) 
+        if (this.currentHealth <= 0f) 
         {
             this.PlayerDeath();
-            this.maxHealth = 100;
+            this.maxHealth = 100f;
         }
+        healthBar.SetHealth(currentHealth); // need to check this part.
     }
 
     public void PlayerDeath()
