@@ -17,6 +17,8 @@ public class GreenSlimeController : MonoBehaviour
 
     public Bounds Bounds => _collider.bounds;
 
+    public float health = 20f;
+
     void Awake()
     {
         control = GetComponent<AnimationController>();
@@ -44,5 +46,19 @@ public class GreenSlimeController : MonoBehaviour
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
+
+         Debug.Log("Health is "+ health);
+        if(health<= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        // need animator here. (Its animators job).
+        Debug.Log("damage Taken!");
+
     }
 }

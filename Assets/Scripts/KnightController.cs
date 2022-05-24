@@ -34,6 +34,17 @@ public class KnightController : MonoBehaviour {
 
     public HealthBar healthBar;
 
+    // variables to attack enemies.
+    public float attackRange;
+    public Transform attackPos;
+
+    public LayerMask blueEnemy;
+
+    public LayerMask greenEnemy;
+
+    public float damage;
+
+
 
     // Use this for initialization
     void Start ()
@@ -131,6 +142,22 @@ public class KnightController : MonoBehaviour {
             // Call one of three attack animations "Attack1", "Attack2", "Attack3"
             m_animator.SetTrigger("Attack" + m_currentAttack);
 
+            // maybe add attack pts here?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+
+            for(int i = 0; i< enemiesToDamage.Length;i++)
+            {
+                enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+            }
+
+            // for green enemies attack
+            Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+
+            for(int i = 0; i< enemiesToAttack.Length;i++)
+            {
+                enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+            }
+
             // Reset timer
             m_timeSinceAttack = 0.0f;
         }
@@ -180,6 +207,16 @@ public class KnightController : MonoBehaviour {
                 if(m_delayToIdle < 0)
                     m_animator.SetInteger("AnimState", 0);
         }
+
+        //transform.Translate(Vector2.left*speed*Time.deltaTime);
+    }
+
+
+
+      void onDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position,attackRange);
     }
 
     public void DoDamage(int damage) 
