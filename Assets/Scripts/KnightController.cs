@@ -46,6 +46,7 @@ public class KnightController : MonoBehaviour {
         this.right = ScriptableObject.CreateInstance<MoveCharacterRight>();
         this.left = ScriptableObject.CreateInstance<MoveCharacterLeft>();
         this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
