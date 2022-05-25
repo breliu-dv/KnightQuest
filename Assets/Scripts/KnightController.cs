@@ -69,7 +69,7 @@ public class KnightController : MonoBehaviour {
     void Update ()
     {
 
-        print(IsGrounded());
+        // print(IsGrounded());
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
