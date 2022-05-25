@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3159410452435397536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.16, y: 4.72, z: 0}
-  m_LocalScale: {x: 1.9067326, y: 2.2615, z: 0.7591705}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,7 +147,7 @@ Animator:
   m_GameObject: {fileID: 3159410452435397536}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f87cb083821cb4727ae5efe571c5146e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -191,6 +191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   ouch: {fileID: 0}
+  health: 20
+  speed: 0
+  startDazeTime: 0
 --- !u!114 &5525193779336955345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,4 +211,10 @@ MonoBehaviour:
   knight: {fileID: 0}
   blueSlime: {fileID: 3159410452435397536}
   detectionZone: 0
+  jumpTriggerRange: 0
   followRange: 0
+  minJumpInterval: 0
+  maxJumpInterval: 0
+  speed: 0
+  startDazeTime: 0
+  health: 40
