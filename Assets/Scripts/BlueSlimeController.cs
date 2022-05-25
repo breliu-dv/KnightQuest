@@ -71,7 +71,7 @@ public class BlueSlimeController : MonoBehaviour
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
 
-            Debug.Log(knightToSlimeDist);
+            // Debug.Log(knightToSlimeDist);
             // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < followRange + detectionZone)

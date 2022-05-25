@@ -14,13 +14,13 @@ public class KnightController : MonoBehaviour {
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
-    private Sensor_HeroKnight   m_groundSensor;
+    // private Sensor_HeroKnight   m_groundSensor;
     private Sensor_HeroKnight   m_wallSensorR1;
     private Sensor_HeroKnight   m_wallSensorR2;
     private Sensor_HeroKnight   m_wallSensorL1;
     private Sensor_HeroKnight   m_wallSensorL2;
     private bool                m_isWallSliding = false;
-    private bool                m_grounded = false;
+    // private bool                m_grounded = false;
     private bool                m_rolling = false;
     private int                 m_facingDirection = 1;
     private int                 m_currentAttack = 0;
@@ -44,6 +44,8 @@ public class KnightController : MonoBehaviour {
 
     public float damage;
 
+    public LayerMask groundLayer;
+
 
 
     // Use this for initialization
@@ -51,7 +53,7 @@ public class KnightController : MonoBehaviour {
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
+        // m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
         m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
@@ -66,6 +68,8 @@ public class KnightController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+
+        print(IsGrounded());
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
@@ -77,19 +81,21 @@ public class KnightController : MonoBehaviour {
         if(m_rollCurrentTime > m_rollDuration)
             m_rolling = false;
 
-        //Check if character just landed on the ground
-        if (!m_grounded && m_groundSensor.State())
-        {
-            m_grounded = true;
-            m_animator.SetBool("Grounded", m_grounded);
-        }
+        // //Check if character just landed on the ground
+        // if (!m_grounded && m_groundSensor.State())
+        // {
+        //     m_grounded = true;
+        //     m_animator.SetBool("Grounded", m_grounded);
+        // }
 
-        //Check if character just started falling
-        if (m_grounded && !m_groundSensor.State())
-        {
-            m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
-        }
+        // //Check if character just started falling
+        // if (m_grounded && !m_groundSensor.State())
+        // {
+        //     m_grounded = false;
+        //     m_animator.SetBool("Grounded", m_grounded);
+        // }
+
+        m_animator.SetBool("Grounded", IsGrounded());
 
         // -- Handle input and movement --
         float inputX = Input.GetAxis("Horizontal");
@@ -182,13 +188,13 @@ public class KnightController : MonoBehaviour {
             
 
         //Jump
-        else if (Input.GetKeyDown("space") && m_grounded && !m_rolling)
+        else if (Input.GetKeyDown("space") && IsGrounded() && !m_rolling)
         {
             m_animator.SetTrigger("Jump");
-            m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
+            // m_grounded = false;
+            m_animator.SetBool("Grounded", false);
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-            m_groundSensor.Disable(0.2f);
+            //m_groundSensor.Disable(0.2f);
         }
 
         //Run
@@ -257,4 +263,48 @@ public class KnightController : MonoBehaviour {
             dust.transform.localScale = new Vector3(m_facingDirection, 1, 1);
         }
     }
+
+    bool IsGrounded() 
+    {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
+        Vector2 leftPos = transform.position;
+        Vector2 rightPos = transform.position;
+        leftPos.x -= (0.73f/2);
+        leftPos.y += 0.9f;
+
+        rightPos.x += (0.73f/2);    //0.73f is from 2D Box Collider x size
+        rightPos.y += 0.9f;
+
+        
+        Debug.DrawRay(leftPos, direction, Color.green);
+        Debug.DrawRay(rightPos, direction, Color.green);
+		RaycastHit2D hitL = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
+        RaycastHit2D hitR = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
+
+        //if left end or right end of collision box as touching ground, is grounded.
+        if (hitL.collider != null || hitR.collider != null) 
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    //  void OnCollisionEnter2D(Collision2D  collision) 
+    //  {
+    //      Collider2D collider = collision.collider;
+  
+    //      if(collider.name == "Terrain")
+    //      { 
+    //          Vector3 contactPoint = collision.contacts[0].point;
+    //          Vector3 center = collider.bounds.center;
+ 
+    //          bool right = contactPoint.x > center.x;
+    //          bool top = contactPoint.y > center.y;
+
+    //          Debug.Log(right + " right, top " + top);
+    //      }
+    //  }
 }
