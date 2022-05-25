@@ -68,8 +68,6 @@ public class KnightController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
-        print(IsGrounded());
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
