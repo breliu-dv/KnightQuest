@@ -47,6 +47,7 @@ public class RedSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
+        Debug.Log(player);
         if (player != null) 
         {
             _psystem.transform.position = this.gameObject.transform.position;
