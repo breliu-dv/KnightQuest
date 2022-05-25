@@ -29,6 +29,12 @@ public class BlueSlimeController : MonoBehaviour
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
 
+    // for pausing when attacked
+    public float speed;
+    private float dazedTime;
+    public float startDazeTime;
+
+
 
 
     public float health = 40.0f;
@@ -59,6 +65,19 @@ public class BlueSlimeController : MonoBehaviour
 
     void Update()
     {
+
+        // this is for pausing mechanism when the enemy got attacked 
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = 5; // ig this is what makes it faster 
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
+
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -109,6 +128,7 @@ public class BlueSlimeController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        dazedTime = startDazeTime;
         health -= damage;
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");

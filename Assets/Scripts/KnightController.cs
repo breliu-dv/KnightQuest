@@ -219,7 +219,7 @@ public class KnightController : MonoBehaviour {
 
 
 
-      void onDrawGizmosSelected()
+    void onDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position,attackRange);

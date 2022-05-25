@@ -19,6 +19,13 @@ public class GreenSlimeController : MonoBehaviour
 
     public float health = 20f;
 
+
+    // for pausing when attacked
+    public float speed;
+    private float dazedTime;
+    public float startDazeTime;
+
+
     void Awake()
     {
         control = GetComponent<AnimationController>();
@@ -38,6 +45,18 @@ public class GreenSlimeController : MonoBehaviour
 
     void Update()
     {
+
+
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = 2; // ig this is what makes it faster try to set it to normal speed
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
         if (path != null)
         {
             if (mover == null) 
@@ -56,6 +75,7 @@ public class GreenSlimeController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        dazedTime = startDazeTime;
         health -= damage;
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
