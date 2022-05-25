@@ -30,6 +30,9 @@ public class BlueSlimeController : MonoBehaviour
     private float jumpInterval = 0.0f;
 
 
+
+    public float health = 40.0f;
+
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
@@ -96,5 +99,22 @@ public class BlueSlimeController : MonoBehaviour
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
+
+        Debug.Log("Health is "+ health);
+        if(health<= 0)
+        {
+            Destroy(gameObject);
+        }
     }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        // need animator here. (Its animators job).
+        Debug.Log("damage Taken!");
+
+    }
+
+
+
 }

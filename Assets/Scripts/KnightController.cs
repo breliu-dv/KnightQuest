@@ -29,8 +29,21 @@ public class KnightController : MonoBehaviour {
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
 
-    private int maxHealth = 100;
-    private int currentHealth;
+    private float maxHealth = 100f;
+    private float currentHealth = 0.0f;
+
+    public HealthBar healthBar;
+
+    // variables to attack enemies.
+    public float attackRange;
+    public Transform attackPos;
+
+    public LayerMask blueEnemy;
+
+    public LayerMask greenEnemy;
+
+    public float damage;
+
 
 
     // Use this for initialization
@@ -46,6 +59,8 @@ public class KnightController : MonoBehaviour {
         this.right = ScriptableObject.CreateInstance<MoveCharacterRight>();
         this.left = ScriptableObject.CreateInstance<MoveCharacterLeft>();
         this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -127,6 +142,22 @@ public class KnightController : MonoBehaviour {
             // Call one of three attack animations "Attack1", "Attack2", "Attack3"
             m_animator.SetTrigger("Attack" + m_currentAttack);
 
+            // maybe add attack pts here?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+
+            for(int i = 0; i< enemiesToDamage.Length;i++)
+            {
+                enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+            }
+
+            // for green enemies attack
+            Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+
+            for(int i = 0; i< enemiesToAttack.Length;i++)
+            {
+                enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+            }
+
             // Reset timer
             m_timeSinceAttack = 0.0f;
         }
@@ -176,6 +207,16 @@ public class KnightController : MonoBehaviour {
                 if(m_delayToIdle < 0)
                     m_animator.SetInteger("AnimState", 0);
         }
+
+        //transform.Translate(Vector2.left*speed*Time.deltaTime);
+    }
+
+
+
+      void onDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position,attackRange);
     }
 
     public void DoDamage(int damage) 
@@ -183,11 +224,12 @@ public class KnightController : MonoBehaviour {
         this.currentHealth = Mathf.Max(0, currentHealth - damage);
         m_animator.SetTrigger("Hurt");
 
-        if (this.currentHealth <= 0 && maxHealth > 0) 
+        if (this.currentHealth <= 0f) 
         {
             this.PlayerDeath();
-            this.maxHealth = 100;
+            this.maxHealth = 100f;
         }
+        healthBar.SetHealth(currentHealth); // need to check this part.
     }
 
     public void PlayerDeath()
