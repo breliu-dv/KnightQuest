@@ -67,7 +67,7 @@ public class GreenSlimeController : MonoBehaviour
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
 
-         Debug.Log("Health is "+ health);
+         //Debug.Log("Health is "+ health);
         if(health<= 0)
         {
             Destroy(gameObject);

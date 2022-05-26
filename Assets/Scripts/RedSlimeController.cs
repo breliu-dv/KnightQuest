@@ -53,7 +53,7 @@ public class RedSlimeController : MonoBehaviour
             _psystem.transform.position = this.gameObject.transform.position;
             player.DoDamage(damage);
            _psystem.GetComponent<ParticleSystem>().Play();
-            //Debug.Log(_psystem.GetComponent<ParticleSystem>());
+            Debug.Log(_psystem.GetComponent<ParticleSystem>());
         }
     }
 
@@ -71,9 +71,8 @@ public class RedSlimeController : MonoBehaviour
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
 
-            //Debug.Log(knightToSlimeDist);
-            Debug.Log(knightToSlimeInitDist);
-            Debug.Log(knightPostOutrunPosition.magnitude);
+            // Debug.Log(knightToSlimeDist);
+            // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < detectionZone)
             {
