@@ -114,6 +114,11 @@ public class RedSlimeController : MonoBehaviour
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+
+            if(health<= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
