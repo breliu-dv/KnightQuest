@@ -47,6 +47,8 @@ public class KnightController : MonoBehaviour {
     public float damage;
 
     public LayerMask groundLayer;
+    private Collision2D knightCollideObject;
+    private bool enteredAtLeastOnceAcid;
 
 
 
@@ -226,8 +228,6 @@ public class KnightController : MonoBehaviour {
         //transform.Translate(Vector2.left*speed*Time.deltaTime);
     }
 
-
-
     void onDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -273,6 +273,11 @@ public class KnightController : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        knightCollideObject = collision;
+    }
+
     bool IsGrounded() 
     {
         Vector2 position = transform.position;
@@ -292,8 +297,19 @@ public class KnightController : MonoBehaviour {
 		RaycastHit2D hitL = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
         RaycastHit2D hitR = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
 
+        AcidPool acidPoolInstance = null;
+        if(knightCollideObject != null)
+        {
+            acidPoolInstance = knightCollideObject.gameObject.GetComponent<AcidPool>();
+        }
+
+        if(acidPoolInstance != null)
+        {
+            enteredAtLeastOnceAcid = acidPoolInstance.GetAcidStatus();
+        }
+        
         //if left end or right end of collision box as touching ground, is grounded.
-        if (hitL.collider != null || hitR.collider != null) 
+        if (hitL.collider != null || hitR.collider != null || enteredAtLeastOnceAcid) 
         {
             return true;
         }
