@@ -28,6 +28,11 @@ public class RedSlimeController : MonoBehaviour
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
 
+    public float speed;
+    private float dazedTime;
+    public float startDazeTime;
+    public float health = 40.0f;
+
 
     void Start()
     {
@@ -59,6 +64,17 @@ public class RedSlimeController : MonoBehaviour
 
     void Update()
     {
+        // pausing mechanism when the enemy got attacked 
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = 5;
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -99,5 +115,13 @@ public class RedSlimeController : MonoBehaviour
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        dazedTime = startDazeTime;
+        health -= damage;
+        // need animator here. (Its animators job).
+        Debug.Log("damage Taken!");
     }
 }

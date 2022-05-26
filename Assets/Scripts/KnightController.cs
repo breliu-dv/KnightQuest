@@ -42,6 +42,8 @@ public class KnightController : MonoBehaviour {
 
     public LayerMask greenEnemy;
 
+    public LayerMask redEnemy;
+
     public float damage;
 
     public LayerMask groundLayer;
@@ -162,6 +164,13 @@ public class KnightController : MonoBehaviour {
             for(int i = 0; i< enemiesToAttack.Length;i++)
             {
                 enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+            }
+
+            Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+
+            for(int i = 0; i< redEnemiesToAttack.Length;i++)
+            {
+                redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
             }
 
             // Reset timer
