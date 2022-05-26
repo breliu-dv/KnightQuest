@@ -307,7 +307,7 @@ public class KnightController : MonoBehaviour {
         {
             enteredAtLeastOnceAcid = acidPoolInstance.GetAcidStatus();
         }
-        
+        //Debug.Log(enteredAtLeastOnceAcid);
         //if left end or right end of collision box as touching ground, is grounded.
         if (hitL.collider != null || hitR.collider != null || enteredAtLeastOnceAcid) 
         {
