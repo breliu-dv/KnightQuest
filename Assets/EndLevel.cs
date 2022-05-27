@@ -16,4 +16,10 @@ public class EndLevel : MonoBehaviour
 
         }
     }
+
+    void OnCollisionEnter2D (Collision2D other) {
+        if (other.transform.tag == "Player") {
+            _mStateManager.NotifyEndLevel();
+        }
+    }
 }

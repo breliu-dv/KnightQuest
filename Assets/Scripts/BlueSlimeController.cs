@@ -42,6 +42,7 @@ public class BlueSlimeController : MonoBehaviour
     public float health = 40.0f;
     private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
+    private float originalSpeed;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class BlueSlimeController : MonoBehaviour
         jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
         PrevPos = transform.position;
         NewPos = transform.position;
+        originalSpeed = control.maxSpeed;
     }
 
     void Awake()
@@ -73,7 +75,7 @@ public class BlueSlimeController : MonoBehaviour
         // this is for pausing mechanism when the enemy got attacked 
         if(dazedTime <= 0)
         {
-            control.maxSpeed = 5; // ig this is what makes it faster 
+            control.maxSpeed = originalSpeed;
         }
         else
         {
@@ -131,25 +133,43 @@ public class BlueSlimeController : MonoBehaviour
         float distance = 1.0f;
         Vector2 leftPos = transform.position;
         Vector2 rightPos = transform.position;
+
         leftPos.x -= (0.73f/2);
         leftPos.y += 0.2f;
 
         rightPos.x += (0.73f/2);
         rightPos.y += 0.2f;
 
-        
-        Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
-        //Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
+        Vector2 leftPosTall = transform.position;
+        Vector2 rightPosTall = transform.position;
 
-        Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
-        //Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
+        leftPosTall.x -= (0.73f/2);
+        leftPosTall.y += 0.2f;
+
+        rightPosTall.x += (0.73f/2);
+        rightPosTall.y += 0.2f;
+
+        // Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
+        // Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
+
+        // Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
+        // Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
+
+        Debug.DrawRay(leftPosTall, new Vector2(-1, 4), Color.green);
+        Debug.DrawRay(rightPosTall, new Vector2(1, 4), Color.green);
 
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
         RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
+        
+        //Jump over walls and obstacles that are short enough to jump over.
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
 
-        Debug.Log(hitLGround.collider);
+        //Do not jump over walls and obstacles that are too tall.
+        RaycastHit2D hitLWallTall = Physics2D.Raycast(leftPosTall, new Vector2(-1, 4), distance, groundLayer);
+        RaycastHit2D hitRWallTall = Physics2D.Raycast(rightPosTall, new Vector2(1, 4), distance, groundLayer);
+        
+        //Debug.Log(hitLGround.collider);
 
 
         NewPos = transform.position;  // each frame track the new position
@@ -161,8 +181,13 @@ public class BlueSlimeController : MonoBehaviour
         {
             dontKeepJumpFlag = true;
         }
-        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
+
+        Debug.Log(hitRWallTall.collider);
+
+        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag 
+            && hitRWallTall.collider == null && hitLWallTall.collider == null)
         {
+            Debug.Log("JUMP");
             control.jump = true;
         }
         if(timeAfterJump > 3.0f) // if jump is finished, reset flag so it can jump again if needed
@@ -173,7 +198,7 @@ public class BlueSlimeController : MonoBehaviour
         if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
-            Debug.Log(ObjVelocity.y);
+            //Debug.Log(ObjVelocity.y);
         }
     }
 
