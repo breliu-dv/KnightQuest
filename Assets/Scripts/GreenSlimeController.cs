@@ -37,7 +37,7 @@ public class GreenSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
-        Debug.Log("damage");
+        //Debug.Log("damage");
         if (player != null)
         {
             player.DoDamage(damage);

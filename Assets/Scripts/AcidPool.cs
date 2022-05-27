@@ -10,7 +10,7 @@ public class AcidPool : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         player = collision.gameObject.GetComponent<KnightController>();
-        Debug.Log(player);
+        //Debug.Log(player);
         if (player != null)
         {
             enteredAcid = true;

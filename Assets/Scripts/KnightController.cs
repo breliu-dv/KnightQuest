@@ -280,7 +280,7 @@ public class KnightController : MonoBehaviour {
 
     bool IsGrounded() 
     {
-        Vector2 position = transform.position;
+        //Vector2 position = transform.position;
         Vector2 direction = Vector2.down;
         float distance = 1.0f;
         Vector2 leftPos = transform.position;

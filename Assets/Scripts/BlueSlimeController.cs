@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
 public class BlueSlimeController : MonoBehaviour
@@ -72,6 +73,13 @@ public class BlueSlimeController : MonoBehaviour
             dazedTime -= Time.deltaTime;
         }
 
+        Tilemap tilemap = GetComponent<Tilemap>();
+
+        var originalPosition = gameObject.transform.position;
+        var posInFronOfSlime = new Vector3( originalPosition.x + 10.0f, originalPosition.y, originalPosition.z);
+        var tileInFrontOfSlime = getTile(tilemap, posInFronOfSlime);
+        Debug.Log(tileInFrontOfSlime);
+        
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -118,6 +126,13 @@ public class BlueSlimeController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    Tile getTile(Tilemap tileMap, Vector3 pos) 
+    { 
+        Vector3Int tilePos = tileMap.WorldToCell(pos);
+        var tile = tileMap.GetTile<Tile>(tilePos);
+        return tile;
     }
 
     public void TakeDamage(float damage)
