@@ -14,15 +14,16 @@ public class DisappearPlatform : MonoBehaviour
     [Header("Coroutine Timing Parameters")]
     public float mTimeBetweenCalls = 0.05f;
 
-    private SpriteRenderer _mSpriteRenderer;
-    private BoxCollider2D _mBoxCollider;
-    
-
+    // Just change the object. 
+    // private SpriteRenderer _mTilemap;
+    private Tilemap _mTilemap;
+    // private BoxCollider2D _mBoxCollider;
+    private TilemapCollider2D _mBoxCollider;
     // Start is called before the first frame update
     void Start()
     {
-        _mSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        _mBoxCollider = gameObject.GetComponent<BoxCollider2D>();
+        _mTilemap = gameObject.GetComponent<Tilemap>();
+        _mBoxCollider = gameObject.GetComponent<TilemapCollider2D>();
         StartCoroutine("StartStartOffset");
     }
 
@@ -33,11 +34,11 @@ public class DisappearPlatform : MonoBehaviour
 
 
     IEnumerator StartDisappear() {
-        Color col = _mSpriteRenderer.color;
+        Color col = _mTilemap.color;
         for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
             col.a = 1 - elapsedTime / mTimePerCycle;
-            _mSpriteRenderer.color = col;
-            if (_mSpriteRenderer.color.a < mThresholdRigid && _mBoxCollider.enabled) {
+            _mTilemap.color = col;
+            if (_mTilemap.color.a < mThresholdRigid && _mBoxCollider.enabled) {
                 _mBoxCollider.enabled = false;
             }
 
@@ -45,17 +46,17 @@ public class DisappearPlatform : MonoBehaviour
         }
 
         col.a = 0.0f;
-        _mSpriteRenderer.color = col;
+        _mTilemap.color = col;
 
         yield return StartCoroutine("StartIdleBeforeAppear");
     }
 
     IEnumerator StartAppear() {
-        Color col = _mSpriteRenderer.color;
+        Color col = _mTilemap .color;
         for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
             col.a = elapsedTime / mTimePerCycle;
-            _mSpriteRenderer.color = col;
-            if (_mSpriteRenderer.color.a < mThresholdRigid && !_mBoxCollider.enabled) {
+            _mTilemap .color = col;
+            if (_mTilemap.color.a < mThresholdRigid && !_mBoxCollider.enabled) {
                 _mBoxCollider.enabled = true;
             }
             
@@ -64,7 +65,7 @@ public class DisappearPlatform : MonoBehaviour
         }
 
         col.a = 1.0f;
-        _mSpriteRenderer.color = col;
+        _mTilemap.color = col;
         
         yield return StartCoroutine("StartIdleBeforeDisappear");
     }
