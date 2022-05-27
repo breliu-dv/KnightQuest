@@ -45,7 +45,7 @@ public class KnightController : MonoBehaviour {
     public LayerMask redEnemy;
 
     public float damage;
-
+    public LayerMask acidLayer;
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
     private bool enteredAtLeastOnceAcid;
@@ -294,8 +294,12 @@ public class KnightController : MonoBehaviour {
         
         Debug.DrawRay(leftPos, direction, Color.green);
         Debug.DrawRay(rightPos, direction, Color.green);
-		RaycastHit2D hitL = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
-        RaycastHit2D hitR = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
+
+		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
+        RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
+
+        RaycastHit2D hitLAcid = Physics2D.Raycast(leftPos, direction, distance, acidLayer);
+        RaycastHit2D hitRAcid = Physics2D.Raycast(rightPos, direction, distance, acidLayer);
 
         AcidPool acidPoolInstance = null;
         if(knightCollideObject != null)
@@ -307,9 +311,10 @@ public class KnightController : MonoBehaviour {
         {
             enteredAtLeastOnceAcid = acidPoolInstance.GetAcidStatus();
         }
-        //Debug.Log(enteredAtLeastOnceAcid);
+
         //if left end or right end of collision box as touching ground, is grounded.
-        if (hitL.collider != null || hitR.collider != null || enteredAtLeastOnceAcid) 
+        if (hitLGround.collider != null || hitRGround.collider != null 
+        || enteredAtLeastOnceAcid || hitLAcid.collider != null || hitRAcid.collider != null) 
         {
             return true;
         }
