@@ -16,6 +16,9 @@ public class BlueSlimeController : MonoBehaviour
     public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
+
+    private bool dontKeepJumpFlag = false;
+
     public float jumpTriggerRange;
     public float followRange = 0.0f;
     public float minJumpInterval;
@@ -28,19 +31,24 @@ public class BlueSlimeController : MonoBehaviour
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
+    private Vector3 PrevPos; 
+    private Vector3 NewPos; 
+    private Vector3 ObjVelocity;
 
     // for pausing when attacked
     public float speed;
     private float dazedTime;
     public float startDazeTime;
     public float health = 40.0f;
+    private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
 
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
         jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-
+        PrevPos = transform.position;
+        NewPos = transform.position;
     }
 
     void Awake()
@@ -115,7 +123,7 @@ public class BlueSlimeController : MonoBehaviour
         }
 
         //Debug.Log("Health is "+ health);
-        if(health<= 0)
+        if(health <= 0)
         {
             Destroy(gameObject);
         }
@@ -136,10 +144,26 @@ public class BlueSlimeController : MonoBehaviour
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
         RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
         Debug.Log(hitLGround.collider);
-        if((hitLGround.collider == null || hitRGround.collider == null) && timeBeforeJump > 1.3f)
+
+
+        NewPos = transform.position;  // each frame track the new position
+        ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  // velocity = dist/time
+        PrevPos = NewPos;  // update position for next frame calculation
+        timeAfterJump += Time.deltaTime;
+
+        if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
+        {
+            dontKeepJumpFlag = true;
+        }
+        if(timeAfterJump > 3.0f) // if jump is finished, reset flag so it can jump again if needed
+        {
+            timeAfterJump = 0;
+            dontKeepJumpFlag = false;
+        }
+        if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
-            timeBeforeJump = 0;
+            Debug.Log(ObjVelocity.y);
         }
     }
 
