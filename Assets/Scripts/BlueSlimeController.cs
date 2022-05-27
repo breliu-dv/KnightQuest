@@ -16,9 +16,8 @@ public class BlueSlimeController : MonoBehaviour
     public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
-
     private bool dontKeepJumpFlag = false;
-
+    public float setTimeBetweenJump;
     public float jumpTriggerRange;
     public float followRange = 0.0f;
     public float minJumpInterval;
@@ -140,37 +139,18 @@ public class BlueSlimeController : MonoBehaviour
         rightPos.x += (0.73f/2);
         rightPos.y += 0.2f;
 
-        Vector2 leftPosTall = transform.position;
-        Vector2 rightPosTall = transform.position;
-
-        leftPosTall.x -= (0.73f/2);
-        leftPosTall.y += 0.2f;
-
-        rightPosTall.x += (0.73f/2);
-        rightPosTall.y += 0.2f;
-
         // Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
         // Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
 
         // Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
         // Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
 
-        Debug.DrawRay(leftPosTall, new Vector2(-1, 4), Color.green);
-        Debug.DrawRay(rightPosTall, new Vector2(1, 4), Color.green);
-
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
         RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
         
-        //Jump over walls and obstacles that are short enough to jump over.
+        // Jump over walls and obstacles.
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
-
-        //Do not jump over walls and obstacles that are too tall.
-        RaycastHit2D hitLWallTall = Physics2D.Raycast(leftPosTall, new Vector2(-1, 4), distance, groundLayer);
-        RaycastHit2D hitRWallTall = Physics2D.Raycast(rightPosTall, new Vector2(1, 4), distance, groundLayer);
-        
-        //Debug.Log(hitLGround.collider);
-
 
         NewPos = transform.position;  // each frame track the new position
         ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  // velocity = dist/time
@@ -182,15 +162,12 @@ public class BlueSlimeController : MonoBehaviour
             dontKeepJumpFlag = true;
         }
 
-        Debug.Log(hitRWallTall.collider);
-
-        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag 
-            && hitRWallTall.collider == null && hitLWallTall.collider == null)
+        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
         {
             Debug.Log("JUMP");
             control.jump = true;
         }
-        if(timeAfterJump > 3.0f) // if jump is finished, reset flag so it can jump again if needed
+        if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
         {
             timeAfterJump = 0;
             dontKeepJumpFlag = false;

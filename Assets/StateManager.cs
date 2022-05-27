@@ -59,10 +59,12 @@ public class StateManager : MonoBehaviour
         StartCoroutine("ShowEndLevelDisplay");
     }
 
-    IEnumerator ShowEndLevelDisplay() {
+    IEnumerator ShowEndLevelDisplay() 
+    {
         Image backgroundImage = mEndLevelDisplay.transform.GetChild(0).GetComponent<Image>();
         Color backgroundImageColor = backgroundImage.color;
-        for (float elapsed = 0; elapsed < 1.5f; elapsed += 0.05f) {
+        for (float elapsed = 0; elapsed < 1.5f; elapsed += 0.05f) 
+        {
             backgroundImageColor.a = elapsed / 1.5f;
             backgroundImage.color = backgroundImageColor;
             yield return new WaitForSeconds(0.05f);
@@ -80,5 +82,4 @@ public class StateManager : MonoBehaviour
         SceneManager.LoadScene(0);
 
     }
-
 }

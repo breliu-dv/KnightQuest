@@ -173,7 +173,7 @@ MonoBehaviour:
   gravityModifier: 1
   velocity: {x: 0, y: 0}
   maxSpeed: 3
-  jumpTakeOffSpeed: 7
+  jumpTakeOffSpeed: 6
   move: {x: 0, y: 0}
   jump: 0
   stopJump: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   knight: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
   blueSlime: {fileID: 3159410452435397536}
   detectionZone: 3
+  setTimeBetweenJump: 3
   jumpTriggerRange: 0
   followRange: 0
   minJumpInterval: 1
