@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
 public class BlueSlimeController : MonoBehaviour
@@ -35,6 +34,7 @@ public class BlueSlimeController : MonoBehaviour
     private float dazedTime;
     public float startDazeTime;
     public float health = 40.0f;
+    public LayerMask groundLayer;
 
     void Start()
     {
@@ -73,13 +73,6 @@ public class BlueSlimeController : MonoBehaviour
             dazedTime -= Time.deltaTime;
         }
 
-        Tilemap tilemap = GetComponent<Tilemap>();
-
-        var originalPosition = gameObject.transform.position;
-        var posInFronOfSlime = new Vector3( originalPosition.x + 10.0f, originalPosition.y, originalPosition.z);
-        var tileInFrontOfSlime = getTile(tilemap, posInFronOfSlime);
-        Debug.Log(tileInFrontOfSlime);
-        
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -126,13 +119,28 @@ public class BlueSlimeController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    Tile getTile(Tilemap tileMap, Vector3 pos) 
-    { 
-        Vector3Int tilePos = tileMap.WorldToCell(pos);
-        var tile = tileMap.GetTile<Tile>(tilePos);
-        return tile;
+        float distance = 1.5f;
+        Vector2 leftPos = transform.position;
+        Vector2 rightPos = transform.position;
+        leftPos.x -= (0.73f/2);
+        leftPos.y += 0.9f;
+
+        rightPos.x += (0.73f/2);
+        rightPos.y += 0.9f;
+
+        
+        // Debug.DrawRay(leftPos, direction, Color.green);
+        // Debug.DrawRay(rightPos, direction, Color.green);
+
+		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
+        RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
+        Debug.Log(hitLGround.collider);
+        if((hitLGround.collider == null || hitRGround.collider == null) && timeBeforeJump > 1.3f)
+        {
+            control.jump = true;
+            timeBeforeJump = 0;
+        }
     }
 
     public void TakeDamage(float damage)
