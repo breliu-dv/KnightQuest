@@ -128,21 +128,27 @@ public class BlueSlimeController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        float distance = 1.5f;
+        float distance = 1.0f;
         Vector2 leftPos = transform.position;
         Vector2 rightPos = transform.position;
         leftPos.x -= (0.73f/2);
-        leftPos.y += 0.9f;
+        leftPos.y += 0.2f;
 
         rightPos.x += (0.73f/2);
-        rightPos.y += 0.9f;
+        rightPos.y += 0.2f;
 
         
-        // Debug.DrawRay(leftPos, direction, Color.green);
-        // Debug.DrawRay(rightPos, direction, Color.green);
+        Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
+        //Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
+
+        Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
+        //Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
 
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
         RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
+        RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
+        RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
+
         Debug.Log(hitLGround.collider);
 
 
@@ -154,6 +160,10 @@ public class BlueSlimeController : MonoBehaviour
         if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
         {
             dontKeepJumpFlag = true;
+        }
+        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
+        {
+            control.jump = true;
         }
         if(timeAfterJump > 3.0f) // if jump is finished, reset flag so it can jump again if needed
         {
