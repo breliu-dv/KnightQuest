@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7712861670172887861}
   - component: {fileID: 6501867459794441383}
   m_Layer: 0
-  m_Name: waterAnimated
+  m_Name: acidAnimated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
