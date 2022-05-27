@@ -28,20 +28,20 @@ public class KnightController : MonoBehaviour {
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
-
+    private int acidDamage = 10;
     private float maxHealth = 100f;
     private float currentHealth = 0.0f;
+    private float timeAfterDamage = 0.0f;
 
     public HealthBar healthBar;
+    public float damageAcidInterval;
+
 
     // variables to attack enemies.
     public float attackRange;
     public Transform attackPos;
-
     public LayerMask blueEnemy;
-
     public LayerMask greenEnemy;
-
     public LayerMask redEnemy;
 
     public float damage;
@@ -72,7 +72,7 @@ public class KnightController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
+        timeAfterDamage += Time.deltaTime;
         // print(IsGrounded());
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
@@ -244,7 +244,7 @@ public class KnightController : MonoBehaviour {
             this.PlayerDeath();
             this.maxHealth = 100f;
         }
-        healthBar.SetHealth(currentHealth); // need to check this part.
+        healthBar.SetHealth(currentHealth);
     }
 
     public void PlayerDeath()
@@ -316,9 +316,13 @@ public class KnightController : MonoBehaviour {
         if (hitLGround.collider != null || hitRGround.collider != null 
         || enteredAtLeastOnceAcid || hitLAcid.collider != null || hitRAcid.collider != null) 
         {
+            if (timeAfterDamage > damageAcidInterval && (hitLAcid.collider != null || hitRAcid.collider != null))
+            {
+                DoDamage(acidDamage);
+                timeAfterDamage = 0;
+            }
             return true;
         }
-        
         return false;
     }
 
