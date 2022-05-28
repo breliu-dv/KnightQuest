@@ -21,10 +21,14 @@ public class GreenSlimeController : MonoBehaviour
 
 
     // for pausing when attacked
-    public float speed;
+    private float originalSpeed;
     private float dazedTime;
     public float startDazeTime;
 
+    void Start()
+    {
+        originalSpeed = control.maxSpeed;
+    }
 
     void Awake()
     {
@@ -50,7 +54,7 @@ public class GreenSlimeController : MonoBehaviour
 
         if(dazedTime <= 0)
         {
-            control.maxSpeed = 2; // ig this is what makes it faster try to set it to normal speed
+            control.maxSpeed = originalSpeed;
         }
         else
         {
