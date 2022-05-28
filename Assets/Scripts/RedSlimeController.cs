@@ -22,7 +22,7 @@ public class RedSlimeController : MonoBehaviour
     private float knightToSlimeDist;
     private float knightToSlimeInitDist;
     private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
-    private int damage = 25;
+    private int damage = 50;
     private Vector3 initialSlimePosition;
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
@@ -111,6 +111,7 @@ public class RedSlimeController : MonoBehaviour
             {
                 timeBeforeJump = 0;
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+                Debug.Log("RED JUMP");
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);

@@ -13,7 +13,6 @@ public class BlueSlimeController : MonoBehaviour
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
     public GameObject knight;
-    public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
     private bool dontKeepJumpFlag = false;
@@ -139,10 +138,10 @@ public class BlueSlimeController : MonoBehaviour
         rightPos.x += (0.73f/2);
         rightPos.y += 0.2f;
 
-        // Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
+        Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
         // Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
 
-        // Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
+        Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
         // Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
 
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
@@ -164,7 +163,7 @@ public class BlueSlimeController : MonoBehaviour
 
         if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
         {
-            Debug.Log("JUMP");
+            Debug.Log("hitLWallShort JUMP");
             control.jump = true;
         }
         if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
@@ -175,6 +174,8 @@ public class BlueSlimeController : MonoBehaviour
         if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
+            Debug.Log("hitLGround JUMP");
+
             //Debug.Log(ObjVelocity.y);
         }
     }

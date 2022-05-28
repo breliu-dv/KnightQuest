@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 3159410452435397595}
   - component: {fileID: 3159410452435397594}
   - component: {fileID: 3159410452435397597}
-  - component: {fileID: 3159410452435397596}
   - component: {fileID: 5525193779336955345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime_Medium_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +127,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4375, y: 0.34375}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -177,23 +176,6 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   jump: 0
   stopJump: 0
---- !u!114 &3159410452435397596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3159410452435397536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df6cb5cb9bd498489aad40089eb7432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: {fileID: 0}
-  ouch: {fileID: 0}
-  health: 20
-  speed: 0
-  startDazeTime: 0
 --- !u!114 &5525193779336955345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +191,6 @@ MonoBehaviour:
   path: {fileID: 0}
   ouch: {fileID: 0}
   knight: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
-  blueSlime: {fileID: 3159410452435397536}
   detectionZone: 3
   setTimeBetweenJump: 3
   jumpTriggerRange: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7454888289809829942}
   - component: {fileID: 7454888289809829937}
   - component: {fileID: 7454888289809829936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime_Medium_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,5 +191,4 @@ MonoBehaviour:
   path: {fileID: 0}
   ouch: {fileID: 0}
   health: 20
-  speed: 0
   startDazeTime: 0
