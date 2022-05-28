@@ -22,11 +22,16 @@ public class RedSlimeController : MonoBehaviour
     private float knightToSlimeDist;
     private float knightToSlimeInitDist;
     private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
-    private int damage = 25;
+    private int damage = 50;
     private Vector3 initialSlimePosition;
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
+
+    public float speed;
+    private float dazedTime;
+    public float startDazeTime;
+    public float health = 100.0f;
 
 
     void Start()
@@ -47,17 +52,29 @@ public class RedSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
+        // Debug.Log(player);
         if (player != null) 
         {
             _psystem.transform.position = this.gameObject.transform.position;
             player.DoDamage(damage);
            _psystem.GetComponent<ParticleSystem>().Play();
-            //Debug.Log(_psystem.GetComponent<ParticleSystem>());
+            Debug.Log(_psystem.GetComponent<ParticleSystem>());
         }
     }
 
     void Update()
     {
+        // pausing mechanism when the enemy got attacked 
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = 5;
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -70,9 +87,8 @@ public class RedSlimeController : MonoBehaviour
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
 
-            //Debug.Log(knightToSlimeDist);
-            Debug.Log(knightToSlimeInitDist);
-            Debug.Log(knightPostOutrunPosition.magnitude);
+            // Debug.Log(knightToSlimeDist);
+            // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < detectionZone)
             {
@@ -95,9 +111,23 @@ public class RedSlimeController : MonoBehaviour
             {
                 timeBeforeJump = 0;
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+                Debug.Log("RED JUMP");
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+
+            if(health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        dazedTime = startDazeTime;
+        health -= damage;
+        // need animator here. (Its animators job).
+        Debug.Log("damage Taken!");
     }
 }

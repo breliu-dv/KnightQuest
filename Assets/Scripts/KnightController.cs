@@ -28,23 +28,27 @@ public class KnightController : MonoBehaviour {
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
-
+    private int acidDamage = 10;
     private float maxHealth = 100f;
     private float currentHealth = 0.0f;
+    private float timeAfterDamage = 0.0f;
 
     public HealthBar healthBar;
+    public float damageAcidInterval;
+
 
     // variables to attack enemies.
     public float attackRange;
     public Transform attackPos;
-
     public LayerMask blueEnemy;
-
     public LayerMask greenEnemy;
+    public LayerMask redEnemy;
 
     public float damage;
-
+    public LayerMask acidLayer;
     public LayerMask groundLayer;
+    private Collision2D knightCollideObject;
+    private bool enteredAtLeastOnceAcid;
 
 
 
@@ -68,6 +72,8 @@ public class KnightController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        timeAfterDamage += Time.deltaTime;
+        // print(IsGrounded());
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
@@ -162,6 +168,13 @@ public class KnightController : MonoBehaviour {
                 enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
             }
 
+            Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+
+            for(int i = 0; i< redEnemiesToAttack.Length;i++)
+            {
+                redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+            }
+
             // Reset timer
             m_timeSinceAttack = 0.0f;
         }
@@ -215,9 +228,7 @@ public class KnightController : MonoBehaviour {
         //transform.Translate(Vector2.left*speed*Time.deltaTime);
     }
 
-
-
-      void onDrawGizmosSelected()
+    void onDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position,attackRange);
@@ -233,7 +244,7 @@ public class KnightController : MonoBehaviour {
             this.PlayerDeath();
             this.maxHealth = 100f;
         }
-        healthBar.SetHealth(currentHealth); // need to check this part.
+        healthBar.SetHealth(currentHealth);
     }
 
     public void PlayerDeath()
@@ -262,9 +273,14 @@ public class KnightController : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        knightCollideObject = collision;
+    }
+
     bool IsGrounded() 
     {
-        Vector2 position = transform.position;
+        //Vector2 position = transform.position;
         Vector2 direction = Vector2.down;
         float distance = 1.0f;
         Vector2 leftPos = transform.position;
@@ -278,15 +294,35 @@ public class KnightController : MonoBehaviour {
         
         Debug.DrawRay(leftPos, direction, Color.green);
         Debug.DrawRay(rightPos, direction, Color.green);
-		RaycastHit2D hitL = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
-        RaycastHit2D hitR = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
+
+		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
+        RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
+
+        RaycastHit2D hitLAcid = Physics2D.Raycast(leftPos, direction, distance, acidLayer);
+        RaycastHit2D hitRAcid = Physics2D.Raycast(rightPos, direction, distance, acidLayer);
+
+        AcidPool acidPoolInstance = null;
+        if(knightCollideObject != null)
+        {
+            acidPoolInstance = knightCollideObject.gameObject.GetComponent<AcidPool>();
+        }
+
+        if(acidPoolInstance != null)
+        {
+            enteredAtLeastOnceAcid = acidPoolInstance.GetAcidStatus();
+        }
 
         //if left end or right end of collision box as touching ground, is grounded.
-        if (hitL.collider != null || hitR.collider != null) 
+        if (hitLGround.collider != null || hitRGround.collider != null 
+        || enteredAtLeastOnceAcid || hitLAcid.collider != null || hitRAcid.collider != null) 
         {
+            if (timeAfterDamage > damageAcidInterval && (hitLAcid.collider != null || hitRAcid.collider != null))
+            {
+                DoDamage(acidDamage);
+                timeAfterDamage = 0;
+            }
             return true;
         }
-        
         return false;
     }
 

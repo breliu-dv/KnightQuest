@@ -13,9 +13,10 @@ public class BlueSlimeController : MonoBehaviour
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
     public GameObject knight;
-    public GameObject blueSlime;
     public float detectionZone;
     public Bounds Bounds => _collider.bounds;
+    private bool dontKeepJumpFlag = false;
+    public float setTimeBetweenJump;
     public float jumpTriggerRange;
     public float followRange = 0.0f;
     public float minJumpInterval;
@@ -28,16 +29,26 @@ public class BlueSlimeController : MonoBehaviour
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
+    private Vector3 PrevPos; 
+    private Vector3 NewPos; 
+    private Vector3 ObjVelocity;
 
-
-
-    public float health = 40.0f;
+    // for pausing when attacked
+    public float speed;
+    private float dazedTime;
+    public float startDazeTime;
+    public float health = 60.0f;
+    private float timeAfterJump = 0.0f;
+    public LayerMask groundLayer;
+    private float originalSpeed;
 
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
         jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-
+        PrevPos = transform.position;
+        NewPos = transform.position;
+        originalSpeed = control.maxSpeed;
     }
 
     void Awake()
@@ -59,6 +70,17 @@ public class BlueSlimeController : MonoBehaviour
 
     void Update()
     {
+        // this is for pausing mechanism when the enemy got attacked 
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = originalSpeed;
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
         timeBeforeJump += Time.deltaTime;
         
         if (path != null)
@@ -100,21 +122,69 @@ public class BlueSlimeController : MonoBehaviour
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
 
-        Debug.Log("Health is "+ health);
-        if(health<= 0)
+        //Debug.Log("Health is "+ health);
+        if(health <= 0)
         {
             Destroy(gameObject);
+        }
+
+        float distance = 1.0f;
+        Vector2 leftPos = transform.position;
+        Vector2 rightPos = transform.position;
+
+        leftPos.x -= (0.73f/2);
+        leftPos.y += 0.2f;
+
+        rightPos.x += (0.73f/2);
+        rightPos.y += 0.2f;
+
+        Debug.DrawRay(leftPos, new Vector2(-1, 0), Color.green);
+        // Debug.DrawRay(leftPos, new Vector2(-1, 4), Color.green);
+
+        Debug.DrawRay(rightPos, new Vector2(1, 0), Color.green);
+        // Debug.DrawRay(rightPos, new Vector2(1, 4), Color.green);
+
+		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, Vector2.down, distance, groundLayer);
+        RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, Vector2.down, distance, groundLayer);
+        
+        // Jump over walls and obstacles.
+        RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
+        RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
+
+        NewPos = transform.position;  // each frame track the new position
+        ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  // velocity = dist/time
+        PrevPos = NewPos;  // update position for next frame calculation
+        timeAfterJump += Time.deltaTime;
+
+        if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
+        {
+            dontKeepJumpFlag = true;
+        }
+
+        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
+        {
+            Debug.Log("hitLWallShort JUMP");
+            control.jump = true;
+        }
+        if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
+        {
+            timeAfterJump = 0;
+            dontKeepJumpFlag = false;
+        }
+        if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
+        {
+            control.jump = true;
+            Debug.Log("hitLGround JUMP");
+
+            //Debug.Log(ObjVelocity.y);
         }
     }
 
     public void TakeDamage(float damage)
     {
+        dazedTime = startDazeTime;
         health -= damage;
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
-
     }
-
-
-
 }

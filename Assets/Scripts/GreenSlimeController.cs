@@ -19,6 +19,17 @@ public class GreenSlimeController : MonoBehaviour
 
     public float health = 20f;
 
+
+    // for pausing when attacked
+    private float originalSpeed;
+    private float dazedTime;
+    public float startDazeTime;
+
+    void Start()
+    {
+        originalSpeed = control.maxSpeed;
+    }
+
     void Awake()
     {
         control = GetComponent<AnimationController>();
@@ -30,6 +41,7 @@ public class GreenSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
+        //Debug.Log("damage");
         if (player != null)
         {
             player.DoDamage(damage);
@@ -38,6 +50,18 @@ public class GreenSlimeController : MonoBehaviour
 
     void Update()
     {
+
+
+        if(dazedTime <= 0)
+        {
+            control.maxSpeed = originalSpeed;
+        }
+        else
+        {
+            control.maxSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
+
         if (path != null)
         {
             if (mover == null) 
@@ -47,7 +71,7 @@ public class GreenSlimeController : MonoBehaviour
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
 
-         Debug.Log("Health is "+ health);
+         //Debug.Log("Health is "+ health);
         if(health<= 0)
         {
             Destroy(gameObject);
@@ -56,6 +80,7 @@ public class GreenSlimeController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        dazedTime = startDazeTime;
         health -= damage;
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");

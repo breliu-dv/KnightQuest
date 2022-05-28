@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2709085380778589828}
   - component: {fileID: 2709085380778589827}
   - component: {fileID: 1307926013808032770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime_Medium_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2709085380778589950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.16, y: 4.72, z: 0}
-  m_LocalScale: {x: 1.9067326, y: 2.2615, z: 0.7591705}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: -1007590633
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -251046530, guid: 5491604a280e14af18d24bd54d3f4508, type: 3}
+  m_Sprite: {fileID: -128638495, guid: 5491604a280e14af18d24bd54d3f4508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,14 +127,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.4375, y: 0.34375}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.4}
+  m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
 --- !u!95 &2709085380778589828
 Animator:
@@ -146,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 2709085380778589950}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 613fee0b5dbb04bb498c534970ec6dbc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -188,3 +188,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcecd3d25c31c3b418b92e881955749e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: {fileID: 0}
+  ouch: {fileID: 8300000, guid: 6f590bb26e8e32f4d8ef877e8c12626d, type: 3}
+  knight: {fileID: 6323719953710832613, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+  detectionZone: 4
+  followRange: 4
+  minJumpInterval: 1
+  maxJumpInterval: 4
+  _psystem: {fileID: 3936905588921903572, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
+  speed: 0
+  startDazeTime: 0
+  health: 100
