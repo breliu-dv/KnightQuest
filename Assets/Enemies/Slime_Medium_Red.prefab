@@ -198,4 +198,4 @@ MonoBehaviour:
   _psystem: {fileID: 3936905588921903572, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
   speed: 0
   startDazeTime: 0
-  health: 40
+  health: 100

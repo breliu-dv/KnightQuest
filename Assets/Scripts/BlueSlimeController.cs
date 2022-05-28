@@ -37,7 +37,7 @@ public class BlueSlimeController : MonoBehaviour
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float health = 40.0f;
+    public float health = 60.0f;
     private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
     private float originalSpeed;

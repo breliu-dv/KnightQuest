@@ -199,7 +199,7 @@ MonoBehaviour:
   maxJumpInterval: 1
   speed: 0
   startDazeTime: 0
-  health: 40
+  health: 60
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

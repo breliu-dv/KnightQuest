@@ -31,7 +31,7 @@ public class RedSlimeController : MonoBehaviour
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float health = 40.0f;
+    public float health = 100.0f;
 
 
     void Start()
@@ -116,7 +116,7 @@ public class RedSlimeController : MonoBehaviour
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
 
-            if(health<= 0)
+            if(health <= 0)
             {
                 Destroy(gameObject);
             }
