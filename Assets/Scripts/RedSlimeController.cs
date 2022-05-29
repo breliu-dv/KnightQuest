@@ -28,17 +28,18 @@ public class RedSlimeController : MonoBehaviour
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
 
+    // for pausing when attacked
+    private float originalSpeed;
     public float speed;
     private float dazedTime;
     public float startDazeTime;
     public float health = 100.0f;
 
-
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
         jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-
+        originalSpeed = control.maxSpeed;
     }
 
     void Awake()
@@ -67,7 +68,7 @@ public class RedSlimeController : MonoBehaviour
         // pausing mechanism when the enemy got attacked 
         if(dazedTime <= 0)
         {
-            control.maxSpeed = 5;
+            control.maxSpeed = originalSpeed;
         }
         else
         {

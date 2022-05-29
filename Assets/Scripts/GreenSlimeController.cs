@@ -12,13 +12,9 @@ public class GreenSlimeController : MonoBehaviour
     internal Collider2D _collider;
     internal AudioSource _audio;
     SpriteRenderer spriteRenderer;
-
     private int damage = 20;
-
     public Bounds Bounds => _collider.bounds;
-
     public float health = 20f;
-
 
     // for pausing when attacked
     private float originalSpeed;
