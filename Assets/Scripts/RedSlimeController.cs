@@ -112,7 +112,7 @@ public class RedSlimeController : MonoBehaviour
             {
                 timeBeforeJump = 0;
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-                Debug.Log("RED JUMP");
+                //Debug.Log("RED JUMP");
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);

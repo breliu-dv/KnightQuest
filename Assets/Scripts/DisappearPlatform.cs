@@ -6,25 +6,38 @@ using UnityEngine.Tilemaps;
 public class DisappearPlatform : MonoBehaviour
 {
     [Header("Timing Parameters")]
-    public float mTimePerCycle;
-    public float mIdleTime;
+    private float mTimePerCycle;
+    private float mIdleTime;
     public float mThresholdRigid = 0.3f;
     public float mStartOffset = 1.0f; 
-
-    [Header("Coroutine Timing Parameters")]
+    public float minCycleTime;
+    public float maxCycleTime;
+    public float minIdleTime;
+    public float maxIdleTime;
     public float mTimeBetweenCalls = 0.05f;
 
-    // Just change the object. 
-    // private SpriteRenderer _mTilemap;
     private Tilemap _mTilemap;
-    // private BoxCollider2D _mBoxCollider;
     private TilemapCollider2D _mBoxCollider;
+    private bool startedSequence;
+
     // Start is called before the first frame update
     void Start()
     {
+        mTimePerCycle = Random.Range(minCycleTime, maxCycleTime);
+        mIdleTime = Random.Range(minIdleTime, maxIdleTime);
+        startedSequence = false;
         _mTilemap = gameObject.GetComponent<Tilemap>();
         _mBoxCollider = gameObject.GetComponent<TilemapCollider2D>();
-        StartCoroutine("StartStartOffset");
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject != null && !startedSequence)
+        {
+            startedSequence = true;
+            Debug.Log("HingeJoint");
+            StartCoroutine("StartStartOffset");
+        }
     }
 
     IEnumerator StartStartOffset() {
@@ -48,7 +61,7 @@ public class DisappearPlatform : MonoBehaviour
         col.a = 0.0f;
         _mTilemap.color = col;
 
-        yield return StartCoroutine("StartIdleBeforeAppear");
+        //yield return StartCoroutine("StartIdleBeforeAppear");
     }
 
     IEnumerator StartAppear() {

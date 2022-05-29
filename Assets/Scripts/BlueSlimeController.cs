@@ -163,7 +163,7 @@ public class BlueSlimeController : MonoBehaviour
 
         if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
         {
-            Debug.Log("hitLWallShort JUMP");
+            //Debug.Log("hitLWallShort JUMP");
             control.jump = true;
         }
         if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
@@ -174,7 +174,7 @@ public class BlueSlimeController : MonoBehaviour
         if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
-            Debug.Log("hitLGround JUMP");
+            //Debug.Log("hitLGround JUMP");
 
             //Debug.Log(ObjVelocity.y);
         }
