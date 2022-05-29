@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115724cfa0d696c4c92a6e476741a34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: -2, y: 0}
-  endPosition: {x: 2, y: 0}
+  startPosition: {x: -4, y: 0}
+  endPosition: {x: 4, y: 0}
+  blueSlime: {fileID: 0}
   slimeType: 0
