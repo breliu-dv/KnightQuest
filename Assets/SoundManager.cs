@@ -1,34 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿//  This class has been folded into the soundmanager in assets/scripts
 
-public class SoundManager : MonoBehaviour
-{
-    public AudioClip mJumpSound;
-    public AudioClip mHitSound;
-    public AudioClip mPickupSound;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
 
-    private AudioSource _mAudioSource;
+// public class SoundManager : MonoBehaviour
+// {
+//     [SerializeField]
+//     private SoundClip mJumpSound;
+//     [SerializeField]
+//     private SoundClip mHitSound;
+//     [SerializeField]
+//     private SoundClip mPickupSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _mAudioSource = gameObject.GetComponent<AudioSource>();
+//     [SerializeField]
+//     private SoundClip mBGM;
 
-    }
+//     [SerializeField]
+//     private List<SoundClip> musicTracks;
 
-    public void NotifyJump()
-    {
-        _mAudioSource.PlayOneShot(mJumpSound);
-    }
+//     private AudioSource _mAudioSource;
 
-    public void NotifyHit()
-    {
-        _mAudioSource.PlayOneShot(mHitSound);
-    }
+//     // Start is called before the first frame update
+//     void Start()
+//     {
+//         _mAudioSource = gameObject.GetComponent<AudioSource>();
+//         mBGM.audioSource = _mAudioSource;
+//         mBGM.audioSource.play();
 
-    public void NotifyPickup()
-    {
-        _mAudioSource.PlayOneShot(mPickupSound);
-    }
-}
+//     }
+
+//     public void NotifyJump()
+//     {
+//         _mAudioSource.PlayOneShot(mJumpSound);
+//     }
+
+//     public void NotifyHit()
+//     {
+//         _mAudioSource.PlayOneShot(mHitSound);
+//     }
+
+//     public void NotifyPickup()
+//     {
+//         _mAudioSource.PlayOneShot(mPickupSound);
+//     }
+// }
