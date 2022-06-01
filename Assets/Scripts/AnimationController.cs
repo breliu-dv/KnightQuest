@@ -40,6 +40,16 @@ public class AnimationController : KinematicObject
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public void setJumpTakeOffSpeed(float newSpeed)
+    {
+        this.jumpTakeOffSpeed = newSpeed;
+    }
+
+    public float getJumpTakeOffSpeed()
+    {
+        return this.jumpTakeOffSpeed;
+    }
+
     protected override void ComputeVelocity()
     {
         if (jump && IsGrounded)

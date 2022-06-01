@@ -49,7 +49,7 @@ public class BlueSlimeController : MonoBehaviour
         PrevPos = transform.position;
         NewPos = transform.position;
         originalSpeed = control.maxSpeed;
-        originalJumpSpeed = control.jumpTakeOffSpeed;
+        originalJumpSpeed = control.getJumpTakeOffSpeed();
     }
 
     void Awake()
@@ -154,16 +154,15 @@ public class BlueSlimeController : MonoBehaviour
 
         RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/10, groundLayer);
         RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/10, groundLayer);
-        //control.jumpTakeOffSpeed = control.jumpTakeOffSpeed * 2;
+
         if(hitLWallSuperShort || hitRWallSuperShort) 
         {
-            //control.jumpTakeOffSpeed = control.jumpTakeOffSpeed * 2;
+            control.setJumpTakeOffSpeed(20);
             Debug.Log("hitWallSuperShort JUMP");
-            
         }
         else
         {
-            //control.jumpTakeOffSpeed = originalJumpSpeed;
+            control.setJumpTakeOffSpeed(originalJumpSpeed);
         }
 
         NewPos = transform.position;  // each frame track the new position
