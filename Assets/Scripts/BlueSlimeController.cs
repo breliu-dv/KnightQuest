@@ -41,7 +41,7 @@ public class BlueSlimeController : MonoBehaviour
     private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
     private float originalSpeed;
-
+    private float originalJumpSpeed;
     void Start()
     {
         initialSlimePosition = gameObject.transform.position;
@@ -49,6 +49,7 @@ public class BlueSlimeController : MonoBehaviour
         PrevPos = transform.position;
         NewPos = transform.position;
         originalSpeed = control.maxSpeed;
+        originalJumpSpeed = control.jumpTakeOffSpeed;
     }
 
     void Awake()
@@ -150,6 +151,20 @@ public class BlueSlimeController : MonoBehaviour
         // Jump over walls and obstacles.
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
+
+        RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/10, groundLayer);
+        RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/10, groundLayer);
+        //control.jumpTakeOffSpeed = control.jumpTakeOffSpeed * 2;
+        if(hitLWallSuperShort || hitRWallSuperShort) 
+        {
+            //control.jumpTakeOffSpeed = control.jumpTakeOffSpeed * 2;
+            Debug.Log("hitWallSuperShort JUMP");
+            
+        }
+        else
+        {
+            //control.jumpTakeOffSpeed = originalJumpSpeed;
+        }
 
         NewPos = transform.position;  // each frame track the new position
         ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  // velocity = dist/time
