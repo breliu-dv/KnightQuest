@@ -28,13 +28,11 @@ public class KnightController : MonoBehaviour {
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
-    private int acidDamage = 10;
     private float maxHealth = 100f;
     private float currentHealth = 0.0f;
     private float timeAfterDamage = 0.0f;
 
     public HealthBar healthBar;
-    public float damageAcidInterval;
 
 
     // variables to attack enemies.
@@ -45,10 +43,8 @@ public class KnightController : MonoBehaviour {
     public LayerMask redEnemy;
 
     public float damage;
-    public LayerMask acidLayer;
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
-    private bool enteredAtLeastOnceAcid;
 
 
 
@@ -298,29 +294,10 @@ public class KnightController : MonoBehaviour {
 		RaycastHit2D hitLGround = Physics2D.Raycast(leftPos, direction, distance, groundLayer);
         RaycastHit2D hitRGround = Physics2D.Raycast(rightPos, direction, distance, groundLayer);
 
-        RaycastHit2D hitLAcid = Physics2D.Raycast(leftPos, direction, distance, acidLayer);
-        RaycastHit2D hitRAcid = Physics2D.Raycast(rightPos, direction, distance, acidLayer);
-
-        AcidPool acidPoolInstance = null;
-        if(knightCollideObject != null)
-        {
-            acidPoolInstance = knightCollideObject.gameObject.GetComponent<AcidPool>();
-        }
-
-        if(acidPoolInstance != null)
-        {
-            enteredAtLeastOnceAcid = acidPoolInstance.GetAcidStatus();
-        }
 
         //if left end or right end of collision box as touching ground, is grounded.
-        if (hitLGround.collider != null || hitRGround.collider != null 
-        || enteredAtLeastOnceAcid || hitLAcid.collider != null || hitRAcid.collider != null) 
+        if (hitLGround.collider != null || hitRGround.collider != null) 
         {
-            if (timeAfterDamage > damageAcidInterval && (hitLAcid.collider != null || hitRAcid.collider != null))
-            {
-                DoDamage(acidDamage);
-                timeAfterDamage = 0;
-            }
             return true;
         }
         return false;
