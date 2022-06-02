@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformAnimatorController : KinematicObject
+public class PlatformAnimatorController : KinematicPlatforms
 {
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;

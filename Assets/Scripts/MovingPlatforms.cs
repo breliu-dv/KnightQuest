@@ -13,7 +13,6 @@ public class MovingPlatforms : MonoBehaviour
     void Awake()
     {
         control = GetComponent<PlatformAnimatorController>();
-        Debug.Log(control);
     }
 
     void Update()

@@ -120,7 +120,6 @@ public class KinematicObject : MonoBehaviour
         move = Vector2.up * deltaPosition.y;
 
         PerformMovement(move, true);
-
     }
 
     void PerformMovement(Vector2 move, bool yMovement)
