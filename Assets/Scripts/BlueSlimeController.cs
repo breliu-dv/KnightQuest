@@ -33,6 +33,7 @@ public class BlueSlimeController : MonoBehaviour
     private Vector3 NewPos; 
     private Vector3 ObjVelocity;
     private float timePassedSinceStuck;
+    
     // for pausing when attacked
     public float speed;
     private float dazedTime;
@@ -175,13 +176,11 @@ public class BlueSlimeController : MonoBehaviour
                 timePassedSinceStuck = 0;
             }
             else if (ObjVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
-            {            
-
+            {
                 tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
                 control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
                 control.jump = true;
             }
-            Debug.Log(timePassedSinceStuck);
         }
         else
         {

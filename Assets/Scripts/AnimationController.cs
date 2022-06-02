@@ -8,30 +8,17 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
 public class AnimationController : KinematicObject
 {
-    /// <summary>
-    /// Max horizontal speed.
-    /// </summary>
     public float maxSpeed = 7;
-    /// <summary>
-    /// Max jump velocity
-    /// </summary>
     public float jumpTakeOffSpeed = 7;
 
-    /// <summary>
-    /// Used to indicated desired direction of travel.
-    /// </summary>
+    // For desired direction of travel.
     public Vector2 move;
 
-    /// <summary>
-    /// Set to true to initiate a jump.
-    /// </summary>
+    // Set to true to initiate a jump.
     public bool jump;
 
-    /// <summary>
-    /// Set to true to set the current jump velocity to zero.
-    /// </summary>
+    // Set to true to set the current jump velocity to zero.
     public bool stopJump;
-
     SpriteRenderer spriteRenderer;
     PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 

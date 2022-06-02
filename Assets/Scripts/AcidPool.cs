@@ -11,15 +11,14 @@ public class AcidPool : MonoBehaviour
     private bool enteredAcid = false;
     [SerializeField]
     private GameObject player;
-
-    private BoxCollider2D collider;
+    private BoxCollider2D boxCollider;
 
     void Awake() {
-        this.collider = this.GetComponent<BoxCollider2D>();
+        this.boxCollider = this.GetComponent<BoxCollider2D>();
     }
     void Update()
     {
-        if (this.collider.IsTouching(player.GetComponent<CapsuleCollider2D>()))
+        if (this.boxCollider.IsTouching(player.GetComponent<CapsuleCollider2D>()))
         {
             Action<int> DamageKnight = player.GetComponent<KnightController>().DoDamage;
             
