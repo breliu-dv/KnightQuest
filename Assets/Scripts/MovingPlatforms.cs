@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlatformAnimatorController), typeof(Collider2D))]
+
 public class MovingPlatforms : MonoBehaviour
 {
     public PatrolPath path;
     internal PatrolPath.Mover mover;
-    internal AnimationController control;
+    internal PlatformAnimatorController control;
 
     void Awake()
     {
-        control = GetComponent<AnimationController>();
+        control = GetComponent<PlatformAnimatorController>();
+        Debug.Log(control);
     }
 
     void Update()
@@ -20,10 +23,7 @@ public class MovingPlatforms : MonoBehaviour
             if (mover == null) 
             {
                 mover = path.CreateMover(control.maxSpeed * 0.5f);
-                Debug.Log(mover);
-            }//, path, control
-                            Debug.Log(mover);
-
+            }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
     }
