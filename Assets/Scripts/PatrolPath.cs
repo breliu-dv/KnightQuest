@@ -9,7 +9,7 @@ public partial class PatrolPath : MonoBehaviour
     /// One end of the patrol path.
     /// </summary>
     public Vector2 startPosition, endPosition;
-    public GameObject blueSlime;
+    public GameObject movingObj;
     public int slimeType = 0;
     /// <summary>
     /// Create a Mover instance which is used to move an entity along the path at a certain speed.
@@ -26,9 +26,9 @@ public partial class PatrolPath : MonoBehaviour
 
     void Update()
     {
-        if(blueSlime != null)
+        if(movingObj != null)
         {
-            gameObject.transform.position = blueSlime.transform.position;
+            gameObject.transform.position = movingObj.transform.position;
         }
     }
 }
