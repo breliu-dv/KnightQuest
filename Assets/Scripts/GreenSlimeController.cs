@@ -46,8 +46,6 @@ public class GreenSlimeController : MonoBehaviour
 
     void Update()
     {
-
-
         if(dazedTime <= 0)
         {
             control.maxSpeed = originalSpeed;
