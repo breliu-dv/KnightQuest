@@ -9,6 +9,7 @@ public class MovingPlatforms : MonoBehaviour
     public PatrolPath path;
     internal PatrolPath.Mover mover;
     internal PlatformAnimatorController control;
+    public bool disableYMovement;
 
     void Awake()
     {
@@ -23,7 +24,13 @@ public class MovingPlatforms : MonoBehaviour
             {
                 mover = path.CreateMover(control.maxSpeed * 0.5f);
             }
+            
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+
+            if(!disableYMovement)
+            {
+                control.move.y = Mathf.Clamp(mover.Position.y - transform.position.y, -1, 1);
+            }
         }
     }
 }

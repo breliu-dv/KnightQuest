@@ -52,6 +52,7 @@ public class KinematicPlatforms : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         velocity.x = targetVelocity.x;
+        velocity.y = targetVelocity.y;
         
         var deltaPosition = velocity * Time.deltaTime;
         var moveAlong = new Vector2(initialXStart, initialYStart);

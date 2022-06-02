@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 0}
+  disableYMovement: 1
 --- !u!95 &6135511467142929452
 Animator:
   serializedVersion: 4
@@ -439,8 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7109b0a0a3d8ecf4193cc24b05f2614c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minGroundNormalY: 0.65
-  gravityModifier: 0
   velocity: {x: 0, y: 0}
   maxSpeed: 7
   jumpTakeOffSpeed: 0
