@@ -152,23 +152,34 @@ public class BlueSlimeController : MonoBehaviour
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
 
-        RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/10, groundLayer);
-        RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/10, groundLayer);
+        RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/20, groundLayer);
+        RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/20, groundLayer);
 
+        NewPos = transform.position;
+        ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;
+        PrevPos = NewPos;
+        timeAfterJump += Time.deltaTime;
+
+        float tempTakeOffToUnstuck = 50.0f;
+        float originalTempTakeOffToUnstuck = tempTakeOffToUnstuck;
         if(hitLWallSuperShort || hitRWallSuperShort) 
         {
-            control.setJumpTakeOffSpeed(20);
-            Debug.Log("hitWallSuperShort JUMP");
+            timeAfterJump+=2;
+            if(ObjVelocity.x == 0)
+            {
+                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck+=50);
+            }
+            else
+            {
+                tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
+                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
+            }
+            Debug.Log(tempTakeOffToUnstuck);
         }
         else
         {
             control.setJumpTakeOffSpeed(originalJumpSpeed);
         }
-
-        NewPos = transform.position;  // each frame track the new position
-        ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  // velocity = dist/time
-        PrevPos = NewPos;  // update position for next frame calculation
-        timeAfterJump += Time.deltaTime;
 
         if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
         {
@@ -177,20 +188,18 @@ public class BlueSlimeController : MonoBehaviour
 
         if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
         {
-            //Debug.Log("hitLWallShort JUMP");
             control.jump = true;
         }
+
         if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
         {
             timeAfterJump = 0;
             dontKeepJumpFlag = false;
         }
+
         if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
-            //Debug.Log("hitLGround JUMP");
-
-            //Debug.Log(ObjVelocity.y);
         }
     }
 
