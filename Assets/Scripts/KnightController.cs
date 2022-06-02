@@ -14,13 +14,11 @@ public class KnightController : MonoBehaviour {
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
-    // private Sensor_HeroKnight   m_groundSensor;
     private Sensor_HeroKnight   m_wallSensorR1;
     private Sensor_HeroKnight   m_wallSensorR2;
     private Sensor_HeroKnight   m_wallSensorL1;
     private Sensor_HeroKnight   m_wallSensorL2;
     private bool                m_isWallSliding = false;
-    // private bool                m_grounded = false;
     private bool                m_rolling = false;
     private int                 m_facingDirection = 1;
     private int                 m_currentAttack = 0;
@@ -53,7 +51,6 @@ public class KnightController : MonoBehaviour {
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        // m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
         m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
@@ -81,19 +78,6 @@ public class KnightController : MonoBehaviour {
         if(m_rollCurrentTime > m_rollDuration)
             m_rolling = false;
 
-        // //Check if character just landed on the ground
-        // if (!m_grounded && m_groundSensor.State())
-        // {
-        //     m_grounded = true;
-        //     m_animator.SetBool("Grounded", m_grounded);
-        // }
-
-        // //Check if character just started falling
-        // if (m_grounded && !m_groundSensor.State())
-        // {
-        //     m_grounded = false;
-        //     m_animator.SetBool("Grounded", m_grounded);
-        // }
 
         m_animator.SetBool("Grounded", IsGrounded());
 
@@ -302,20 +286,4 @@ public class KnightController : MonoBehaviour {
         }
         return false;
     }
-
-    //  void OnCollisionEnter2D(Collision2D  collision) 
-    //  {
-    //      Collider2D collider = collision.collider;
-  
-    //      if(collider.name == "Terrain")
-    //      { 
-    //          Vector3 contactPoint = collision.contacts[0].point;
-    //          Vector3 center = collider.bounds.center;
- 
-    //          bool right = contactPoint.x > center.x;
-    //          bool top = contactPoint.y > center.y;
-
-    //          Debug.Log(right + " right, top " + top);
-    //      }
-    //  }
 }
