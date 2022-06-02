@@ -244,10 +244,10 @@ public class KnightController : MonoBehaviour {
 
     IEnumerator DelayedRespawn() {
         yield return new WaitForSeconds(respawnTime);
-        m_animator.SetTrigger("Respawn");
         this.transform.position = this.spawnPosition;
         this.currentHealth = this.maxHealth;
         healthBar.SetHealth(currentHealth);
+        m_animator.SetTrigger("Respawn");
     }
 
     // Animation Events
