@@ -26,12 +26,13 @@ public class KnightController : MonoBehaviour {
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
     private float               m_rollCurrentTime;
+    private Vector2             spawnPosition;
+    [SerializeField] float      respawnTime = 1.5f;
     private float maxHealth = 100f;
     private float currentHealth = 0.0f;
     private float timeAfterDamage = 0.0f;
 
     public HealthBar healthBar;
-
 
     // variables to attack enemies.
     public float attackRange;
@@ -43,6 +44,8 @@ public class KnightController : MonoBehaviour {
     public float damage;
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
+
+    [SerializeField] private bool debugAlwaysInput = true;
 
 
 
@@ -60,6 +63,7 @@ public class KnightController : MonoBehaviour {
         this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        this.spawnPosition = this.transform.position;
     }
 
     // Update is called once per frame
@@ -82,130 +86,130 @@ public class KnightController : MonoBehaviour {
         m_animator.SetBool("Grounded", IsGrounded());
 
         // -- Handle input and movement --
-        float inputX = Input.GetAxis("Horizontal");
+        if (this.currentHealth > 0 || debugAlwaysInput) {
+            float inputX = Input.GetAxis("Horizontal");
 
-        // Swap direction of sprite depending on walk direction
-        if (inputX > 0)
-        {
-            this.right.Execute(this.gameObject, inputX, m_speed);
-            m_facingDirection = 1;
-        }
-            
-        else if (inputX < 0)
-        {
-            this.left.Execute(this.gameObject, inputX, m_speed);
-            m_facingDirection = -1;
-        }
-
-        //Set AirSpeed in animator
-        m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
-
-        // -- Handle Animations --
-        //Wall Slide
-        m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
-        m_animator.SetBool("WallSlide", m_isWallSliding);
-
-        //Death
-        if (Input.GetKeyDown("e") && !m_rolling)
-        {
-            m_animator.SetBool("noBlood", m_noBlood);
-            m_animator.SetTrigger("Death");
-        }
-            
-        //Hurt
-        else if (Input.GetKeyDown("q") && !m_rolling)
-            m_animator.SetTrigger("Hurt");
-
-        //Attack
-        else if(Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
-        {
-            m_currentAttack++;
-
-            // Loop back to one after third attack
-            if (m_currentAttack > 3)
-                m_currentAttack = 1;
-
-            // Reset Attack combo if time since last attack is too large
-            if (m_timeSinceAttack > 1.0f)
-                m_currentAttack = 1;
-
-            // Call one of three attack animations "Attack1", "Attack2", "Attack3"
-            m_animator.SetTrigger("Attack" + m_currentAttack);
-
-            // maybe add attack pts here?
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
-
-            for(int i = 0; i< enemiesToDamage.Length;i++)
+            // Swap direction of sprite depending on walk direction
+            if (inputX > 0)
             {
-                enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                this.right.Execute(this.gameObject, inputX, m_speed);
+                m_facingDirection = 1;
+            }
+                
+            else if (inputX < 0)
+            {
+                this.left.Execute(this.gameObject, inputX, m_speed);
+                m_facingDirection = -1;
             }
 
-            // for green enemies attack
-            Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+            //Set AirSpeed in animator
+            m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
-            for(int i = 0; i< enemiesToAttack.Length;i++)
+            // -- Handle Animations --
+            //Wall Slide
+            m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
+            m_animator.SetBool("WallSlide", m_isWallSliding);
+
+            //Death
+            if (Input.GetKeyDown("e") && !m_rolling)
             {
-                enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                m_animator.SetBool("noBlood", m_noBlood);
+                m_animator.SetTrigger("Death");
+            }
+                
+            //Hurt
+            else if (Input.GetKeyDown("q") && !m_rolling)
+                m_animator.SetTrigger("Hurt");
+
+            //Attack
+            else if(Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+            {
+                m_currentAttack++;
+
+                // Loop back to one after third attack
+                if (m_currentAttack > 3)
+                    m_currentAttack = 1;
+
+                // Reset Attack combo if time since last attack is too large
+                if (m_timeSinceAttack > 1.0f)
+                    m_currentAttack = 1;
+
+                // Call one of three attack animations "Attack1", "Attack2", "Attack3"
+                m_animator.SetTrigger("Attack" + m_currentAttack);
+
+                // maybe add attack pts here?
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+
+                for(int i = 0; i< enemiesToDamage.Length;i++)
+                {
+                    enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                }
+
+                // for green enemies attack
+                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+
+                for(int i = 0; i< enemiesToAttack.Length;i++)
+                {
+                    enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                }
+
+                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+
+                for(int i = 0; i< redEnemiesToAttack.Length;i++)
+                {
+                    redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                }
+
+                // Reset timer
+                m_timeSinceAttack = 0.0f;
             }
 
-            Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
-
-            for(int i = 0; i< redEnemiesToAttack.Length;i++)
+            // Block
+            else if (Input.GetMouseButtonDown(1) && !m_rolling)
             {
-                redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                m_animator.SetTrigger("Block");
+                m_animator.SetBool("IdleBlock", true);
             }
 
-            // Reset timer
-            m_timeSinceAttack = 0.0f;
+            else if (Input.GetMouseButtonUp(1))
+                m_animator.SetBool("IdleBlock", false);
+
+            // Roll
+            else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
+            {
+                m_rolling = true;
+                m_animator.SetTrigger("Roll");
+                this.roll.Execute(this.gameObject, this.m_facingDirection, this.m_rollForce);
+            }
+                
+
+            //Jump
+            else if (Input.GetKeyDown("space") && IsGrounded() && !m_rolling)
+            {
+                m_animator.SetTrigger("Jump");
+                // m_grounded = false;
+                m_animator.SetBool("Grounded", false);
+                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+                //m_groundSensor.Disable(0.2f);
+            }
+
+            //Run
+            else if (Mathf.Abs(inputX) > Mathf.Epsilon)
+            {
+                // Reset timer
+                m_delayToIdle = 0.05f;
+                m_animator.SetInteger("AnimState", 1);
+            }
+
+            //Idle
+            else
+            {
+                // Prevents flickering transitions to idle
+                m_delayToIdle -= Time.deltaTime;
+                    if(m_delayToIdle < 0)
+                        m_animator.SetInteger("AnimState", 0);
+            }
         }
-
-        // Block
-        else if (Input.GetMouseButtonDown(1) && !m_rolling)
-        {
-            m_animator.SetTrigger("Block");
-            m_animator.SetBool("IdleBlock", true);
-        }
-
-        else if (Input.GetMouseButtonUp(1))
-            m_animator.SetBool("IdleBlock", false);
-
-        // Roll
-        else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
-        {
-            m_rolling = true;
-            m_animator.SetTrigger("Roll");
-            this.roll.Execute(this.gameObject, this.m_facingDirection, this.m_rollForce);
-        }
-            
-
-        //Jump
-        else if (Input.GetKeyDown("space") && IsGrounded() && !m_rolling)
-        {
-            m_animator.SetTrigger("Jump");
-            // m_grounded = false;
-            m_animator.SetBool("Grounded", false);
-            m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-            //m_groundSensor.Disable(0.2f);
-        }
-
-        //Run
-        else if (Mathf.Abs(inputX) > Mathf.Epsilon)
-        {
-            // Reset timer
-            m_delayToIdle = 0.05f;
-            m_animator.SetInteger("AnimState", 1);
-        }
-
-        //Idle
-        else
-        {
-            // Prevents flickering transitions to idle
-            m_delayToIdle -= Time.deltaTime;
-                if(m_delayToIdle < 0)
-                    m_animator.SetInteger("AnimState", 0);
-        }
-
-        //transform.Translate(Vector2.left*speed*Time.deltaTime);
     }
 
     void onDrawGizmosSelected()
@@ -216,21 +220,34 @@ public class KnightController : MonoBehaviour {
 
     public void DoDamage(int damage) 
     {
-        this.currentHealth = Mathf.Max(0, currentHealth - damage);
-        m_animator.SetTrigger("Hurt");
+        // only update if still have health to remove
+        if (currentHealth > 0) {
+            this.currentHealth = Mathf.Max(0, currentHealth - damage);
+            m_animator.SetTrigger("Hurt");
 
-        if (this.currentHealth <= 0f) 
-        {
-            this.PlayerDeath();
-            this.maxHealth = 100f;
+            if (this.currentHealth <= 0f) 
+            {
+                this.PlayerDeath();
+                //this.maxHealth = 100f;
+            }
+            healthBar.SetHealth(currentHealth);
         }
-        healthBar.SetHealth(currentHealth);
     }
 
     public void PlayerDeath()
     {
         m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
+
+        StartCoroutine(DelayedRespawn());
+    }
+
+    IEnumerator DelayedRespawn() {
+        yield return new WaitForSeconds(respawnTime);
+        m_animator.SetTrigger("Respawn");
+        this.transform.position = this.spawnPosition;
+        this.currentHealth = this.maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
 
     // Animation Events
