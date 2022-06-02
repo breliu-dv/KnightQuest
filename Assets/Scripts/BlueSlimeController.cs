@@ -32,7 +32,7 @@ public class BlueSlimeController : MonoBehaviour
     private Vector3 PrevPos; 
     private Vector3 NewPos; 
     private Vector3 ObjVelocity;
-
+    private float timePassedSinceStuck;
     // for pausing when attacked
     public float speed;
     private float dazedTime;
@@ -50,6 +50,7 @@ public class BlueSlimeController : MonoBehaviour
         NewPos = transform.position;
         originalSpeed = control.maxSpeed;
         originalJumpSpeed = control.getJumpTakeOffSpeed();
+        timePassedSinceStuck = 0;
     }
 
     void Awake()
@@ -123,13 +124,15 @@ public class BlueSlimeController : MonoBehaviour
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
 
-        //Debug.Log("Health is "+ health);
         if(health <= 0)
         {
             Destroy(gameObject);
         }
 
         float distance = 1.0f;
+        float shortWallDistanceModifier = 50.0f;
+        float tempTakeOffToUnstuck = 30.0f;
+        float secondTempTakeOffToUnstuck = 50.0f;
         Vector2 leftPos = transform.position;
         Vector2 rightPos = transform.position;
 
@@ -151,30 +154,34 @@ public class BlueSlimeController : MonoBehaviour
         // Jump over walls and obstacles.
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
-
-        RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/20, groundLayer);
-        RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/20, groundLayer);
+        
+        RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/shortWallDistanceModifier, groundLayer);
+        RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/shortWallDistanceModifier, groundLayer);
 
         NewPos = transform.position;
         ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;
         PrevPos = NewPos;
         timeAfterJump += Time.deltaTime;
 
-        float tempTakeOffToUnstuck = 50.0f;
         float originalTempTakeOffToUnstuck = tempTakeOffToUnstuck;
         if(hitLWallSuperShort || hitRWallSuperShort) 
         {
-            timeAfterJump+=2;
-            if(ObjVelocity.x == 0)
+            timePassedSinceStuck += Time.deltaTime;
+            if(ObjVelocity.x == 0 && timePassedSinceStuck > 0.20)
             {
-                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck+=50);
+                tempTakeOffToUnstuck = secondTempTakeOffToUnstuck;
+                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
+                control.jump = true;
+                timePassedSinceStuck = 0;
             }
-            else
-            {
+            else if (ObjVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
+            {            
+
                 tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
                 control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
+                control.jump = true;
             }
-            Debug.Log(tempTakeOffToUnstuck);
+            Debug.Log(timePassedSinceStuck);
         }
         else
         {
