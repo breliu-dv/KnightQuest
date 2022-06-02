@@ -53,7 +53,6 @@ public class RedSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
-        // Debug.Log(player);
         if (player != null) 
         {
             _psystem.transform.position = this.gameObject.transform.position;
@@ -112,7 +111,6 @@ public class RedSlimeController : MonoBehaviour
             {
                 timeBeforeJump = 0;
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-                //Debug.Log("RED JUMP");
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
