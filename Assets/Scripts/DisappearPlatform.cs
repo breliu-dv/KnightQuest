@@ -40,18 +40,23 @@ public class DisappearPlatform : MonoBehaviour
         }
     }
 
-    IEnumerator StartStartOffset() {
+    IEnumerator StartStartOffset() 
+    {
         yield return new WaitForSeconds(mStartOffset);
         yield return StartCoroutine("StartIdleBeforeDisappear");
     }
 
 
-    IEnumerator StartDisappear() {
+    IEnumerator StartDisappear() 
+    {
         Color col = _mTilemap.color;
-        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
+
+        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) 
+        {
             col.a = 1 - elapsedTime / mTimePerCycle;
             _mTilemap.color = col;
-            if (_mTilemap.color.a < mThresholdRigid && _mBoxCollider.enabled) {
+            if (_mTilemap.color.a < mThresholdRigid && _mBoxCollider.enabled) 
+            {
                 _mBoxCollider.enabled = false;
             }
 
@@ -61,19 +66,23 @@ public class DisappearPlatform : MonoBehaviour
         col.a = 0.0f;
         _mTilemap.color = col;
 
-        //yield return StartCoroutine("StartIdleBeforeAppear");
+        yield return StartCoroutine("StartIdleBeforeAppear");
     }
 
-    IEnumerator StartAppear() {
+    IEnumerator StartAppear() 
+    {
         Color col = _mTilemap .color;
-        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
+
+        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) 
+        {
             col.a = elapsedTime / mTimePerCycle;
             _mTilemap .color = col;
-            if (_mTilemap.color.a < mThresholdRigid && !_mBoxCollider.enabled) {
+
+            if (_mTilemap.color.a < mThresholdRigid && !_mBoxCollider.enabled) 
+            {
                 _mBoxCollider.enabled = true;
             }
             
-
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 
@@ -83,16 +92,20 @@ public class DisappearPlatform : MonoBehaviour
         yield return StartCoroutine("StartIdleBeforeDisappear");
     }
 
-    IEnumerator StartIdleBeforeDisappear() {
-        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) {
+    IEnumerator StartIdleBeforeDisappear() 
+    {
+        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) 
+        {
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 
         yield return StartCoroutine("StartDisappear");
     }
 
-    IEnumerator StartIdleBeforeAppear() {
-        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) {
+    IEnumerator StartIdleBeforeAppear() 
+    {
+        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) 
+        {
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 
