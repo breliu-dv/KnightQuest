@@ -22,7 +22,7 @@ public class RedSlimeController : MonoBehaviour
     private float knightToSlimeDist;
     private float knightToSlimeInitDist;
     private Vector3 knightPostOutrunPosition = new Vector3(0, 0, 0);
-    private int damage = 50;
+    private int damage = 25;
     private Vector3 initialSlimePosition;
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
@@ -33,7 +33,7 @@ public class RedSlimeController : MonoBehaviour
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float maxHealth = 100.0f;
+    public float maxHealth = 80.0f;
     private float currentHealth;
     private Vector2 spawnPosition;
     void Start()
