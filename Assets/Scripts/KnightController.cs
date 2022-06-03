@@ -45,9 +45,6 @@ public class KnightController : MonoBehaviour
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
 
-    [SerializeField] private bool debugAlwaysInput = true;
-
-
 
     // Use this for initialization
     void Start ()
@@ -90,7 +87,7 @@ public class KnightController : MonoBehaviour
         m_animator.SetBool("Grounded", IsGrounded());
 
         // -- Handle input and movement --
-        if (this.currentHealth > 0 || debugAlwaysInput) 
+        if (this.currentHealth > 0f) 
         {
             float inputX = Input.GetAxis("Horizontal");
 
@@ -260,8 +257,8 @@ public class KnightController : MonoBehaviour
             if (this.currentHealth <= 0f) 
             {
                 this.PlayerDeath();
-                //this.maxHealth = 100f;
             }
+            
             this.healthBar.SetHealth(currentHealth);
         }
     }
@@ -270,7 +267,7 @@ public class KnightController : MonoBehaviour
     {
         this.m_animator.SetBool("noBlood", m_noBlood);
         this.m_animator.SetTrigger("Death");
-
+        
         StartCoroutine(DelayedRespawn());
     }
 
