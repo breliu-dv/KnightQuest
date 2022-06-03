@@ -71,6 +71,7 @@ public class StateManager : MonoBehaviour
         {
             backgroundImageColor.a = elapsed / 1.5f;
             backgroundImage.color = backgroundImageColor;
+            
             yield return new WaitForSeconds(0.05f);
         }
 
