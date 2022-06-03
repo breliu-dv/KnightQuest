@@ -292,11 +292,11 @@ public class KnightController : MonoBehaviour
 
         if (m_facingDirection == 1)
         {
-            spawnPosition = m_wallSensorR2.transform.position;
+            dustSpawnPosition = m_wallSensorR2.transform.position;
         }
         else
         {
-            spawnPosition = m_wallSensorL2.transform.position;
+            dustSpawnPosition = m_wallSensorL2.transform.position;
         }
 
         if (m_slideDust != null)
