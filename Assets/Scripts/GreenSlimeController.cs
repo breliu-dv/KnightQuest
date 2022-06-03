@@ -14,12 +14,15 @@ public class GreenSlimeController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     private int damage = 20;
     public Bounds Bounds => _collider.bounds;
-    public float health = 20f;
+    public float maxHealth = 20f;
+    private float currentHealth;
 
     // for pausing when attacked
     private float originalSpeed;
     private float dazedTime;
     public float startDazeTime;
+
+    private Vector2 spawnPosition;
 
     void Start()
     {
@@ -32,6 +35,8 @@ public class GreenSlimeController : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _audio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        this.spawnPosition = this.transform.position;
+        this.currentHealth = this.maxHealth;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -64,17 +69,33 @@ public class GreenSlimeController : MonoBehaviour
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
+    }
 
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+    void SlimeDeath()
+    {
+        this.spriteRenderer.enabled = false;
+        this._collider.enabled = false;
+        this.GetComponent<Rigidbody2D>().simulated = false;
+        GameObject.Find("EnemyManager").GetComponent<PublisherManager>().SubscribeToGroup(1, Respawn);
+    }
+
+    void Respawn() {
+        this.transform.position = this.spawnPosition;
+        this.currentHealth = this.maxHealth;
+        this.spriteRenderer.enabled = true;
+        this._collider.enabled = true;
+        this.GetComponent<Rigidbody2D>().simulated = true;
     }
 
     public void TakeDamage(float damage)
     {
-        dazedTime = startDazeTime;
-        health -= damage;
+        this.dazedTime = this.startDazeTime;
+        this.currentHealth -= damage;
+        if(this.currentHealth <= 0)
+        {
+            //Destroy(gameObject);
+            SlimeDeath();
+        }
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
 

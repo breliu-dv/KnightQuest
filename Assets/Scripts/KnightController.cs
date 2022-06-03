@@ -52,17 +52,17 @@ public class KnightController : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        m_animator = GetComponent<Animator>();
-        m_body2d = GetComponent<Rigidbody2D>();
-        m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
-        m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
+        this.m_animator = GetComponent<Animator>();
+        this.m_body2d = GetComponent<Rigidbody2D>();
+        this.m_wallSensorR1 = this.transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
+        this.m_wallSensorR2 = this.transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
+        this.m_wallSensorL1 = this.transform.Find("WallSensor_L1").GetComponent<Sensor_HeroKnight>();
+        this.m_wallSensorL2 = this.transform.Find("WallSensor_L2").GetComponent<Sensor_HeroKnight>();
         this.right = ScriptableObject.CreateInstance<MoveCharacterRight>();
         this.left = ScriptableObject.CreateInstance<MoveCharacterLeft>();
         this.roll = ScriptableObject.CreateInstance<CharacterRoll>();
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        this.currentHealth = this.maxHealth;
+        this.healthBar.SetMaxHealth(maxHealth);
         this.spawnPosition = this.transform.position;
     }
 
@@ -223,21 +223,21 @@ public class KnightController : MonoBehaviour {
         // only update if still have health to remove
         if (currentHealth > 0) {
             this.currentHealth = Mathf.Max(0, currentHealth - damage);
-            m_animator.SetTrigger("Hurt");
+            this.m_animator.SetTrigger("Hurt");
 
             if (this.currentHealth <= 0f) 
             {
                 this.PlayerDeath();
                 //this.maxHealth = 100f;
             }
-            healthBar.SetHealth(currentHealth);
+            this.healthBar.SetHealth(currentHealth);
         }
     }
 
     public void PlayerDeath()
     {
-        m_animator.SetBool("noBlood", m_noBlood);
-        m_animator.SetTrigger("Death");
+        this.m_animator.SetBool("noBlood", m_noBlood);
+        this.m_animator.SetTrigger("Death");
 
         StartCoroutine(DelayedRespawn());
     }
@@ -246,25 +246,26 @@ public class KnightController : MonoBehaviour {
         yield return new WaitForSeconds(respawnTime);
         this.transform.position = this.spawnPosition;
         this.currentHealth = this.maxHealth;
-        healthBar.SetHealth(currentHealth);
-        m_animator.SetTrigger("Respawn");
+        this.healthBar.SetHealth(currentHealth);
+        this.m_animator.SetTrigger("Respawn");
+        GameObject.Find("EnemyManager").GetComponent<PublisherManager>().Trigger(1);
     }
 
     // Animation Events
     // Called in slide animation.
     void AE_SlideDust()
     {
-        Vector3 spawnPosition;
+        Vector3 dustSpawnPosition;
 
         if (m_facingDirection == 1)
-            spawnPosition = m_wallSensorR2.transform.position;
+            dustSpawnPosition = m_wallSensorR2.transform.position;
         else
-            spawnPosition = m_wallSensorL2.transform.position;
+            dustSpawnPosition = m_wallSensorL2.transform.position;
 
         if (m_slideDust != null)
         {
             // Set correct arrow spawn position
-            GameObject dust = Instantiate(m_slideDust, spawnPosition, gameObject.transform.localRotation) as GameObject;
+            GameObject dust = Instantiate(m_slideDust, dustSpawnPosition, gameObject.transform.localRotation) as GameObject;
             // Turn arrow in correct direction
             dust.transform.localScale = new Vector3(m_facingDirection, 1, 1);
         }

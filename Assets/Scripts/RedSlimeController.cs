@@ -33,13 +33,16 @@ public class RedSlimeController : MonoBehaviour
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float health = 100.0f;
-
+    public float maxHealth = 100.0f;
+    private float currentHealth;
+    private Vector2 spawnPosition;
     void Start()
     {
-        initialSlimePosition = gameObject.transform.position;
-        jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-        originalSpeed = control.maxSpeed;
+        this.initialSlimePosition = gameObject.transform.position;
+        this.jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+        this.originalSpeed = this.control.maxSpeed;
+        this.spawnPosition = this.transform.position;
+        this.currentHealth = this.maxHealth;
     }
 
     void Awake()
@@ -114,18 +117,34 @@ public class RedSlimeController : MonoBehaviour
                 control.jump = true;
             }
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
-
-            if(health <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
+    }
+
+    void SlimeDeath()
+    {
+        this.spriteRenderer.enabled = false;
+        this._collider.enabled = false;
+        this.GetComponent<Rigidbody2D>().simulated = false;
+        GameObject.Find("EnemyManager").GetComponent<PublisherManager>().SubscribeToGroup(1, Respawn);
+    }
+
+    void Respawn() {
+        this.transform.position = this.spawnPosition;
+        this.currentHealth = this.maxHealth;
+        this.spriteRenderer.enabled = true;
+        this._collider.enabled = true;
+        this.GetComponent<Rigidbody2D>().simulated = true;
     }
 
     public void TakeDamage(float damage)
     {
-        dazedTime = startDazeTime;
-        health -= damage;
+        this.dazedTime = this.startDazeTime;
+        this.currentHealth -= damage;
+        if(this.currentHealth <= 0)
+        {
+            // Destroy(gameObject);
+            SlimeDeath();
+        }
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
     }

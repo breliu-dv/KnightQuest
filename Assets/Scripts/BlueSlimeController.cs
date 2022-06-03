@@ -29,29 +29,34 @@ public class BlueSlimeController : MonoBehaviour
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
-    private Vector3 PrevPos; 
-    private Vector3 NewPos; 
-    private Vector3 ObjVelocity;
+    private Vector3 prevPos; 
+    private Vector3 newPos; 
+    private Vector3 objVelocity;
     private float timePassedSinceStuck;
     
     // for pausing when attacked
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float health = 60.0f;
+    public float maxHealth = 60.0f;
+    private float currentHealth;
     private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
     private float originalSpeed;
     private float originalJumpSpeed;
+    private Vector2 spawnPosition;
+
     void Start()
     {
-        initialSlimePosition = gameObject.transform.position;
-        jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
-        PrevPos = transform.position;
-        NewPos = transform.position;
-        originalSpeed = control.maxSpeed;
-        originalJumpSpeed = control.getJumpTakeOffSpeed();
-        timePassedSinceStuck = 0;
+        this.initialSlimePosition = this.gameObject.transform.position;
+        this.jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
+        this.prevPos = this.transform.position;
+        this.newPos = this.transform.position;
+        this.originalSpeed = this.control.maxSpeed;
+        this.originalJumpSpeed = this.control.getJumpTakeOffSpeed();
+        this.timePassedSinceStuck = 0;
+        this.spawnPosition = this.transform.position;
+        this.currentHealth = this.maxHealth;
     }
 
     void Awake()
@@ -125,11 +130,6 @@ public class BlueSlimeController : MonoBehaviour
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
         }
 
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
-
         float distance = 1.0f;
         float shortWallDistanceModifier = 50.0f;
         float tempTakeOffToUnstuck = 30.0f;
@@ -159,23 +159,23 @@ public class BlueSlimeController : MonoBehaviour
         RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/shortWallDistanceModifier, groundLayer);
         RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/shortWallDistanceModifier, groundLayer);
 
-        NewPos = transform.position;
-        ObjVelocity = (NewPos - PrevPos) / Time.fixedDeltaTime;
-        PrevPos = NewPos;
+        newPos = transform.position;
+        objVelocity = (newPos - prevPos) / Time.fixedDeltaTime;
+        prevPos = newPos;
         timeAfterJump += Time.deltaTime;
 
         float originalTempTakeOffToUnstuck = tempTakeOffToUnstuck;
         if(hitLWallSuperShort || hitRWallSuperShort) 
         {
             timePassedSinceStuck += Time.deltaTime;
-            if(ObjVelocity.x == 0 && timePassedSinceStuck > 0.20)
+            if(objVelocity.x == 0 && timePassedSinceStuck > 0.20)
             {
                 tempTakeOffToUnstuck = secondTempTakeOffToUnstuck;
                 control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
                 control.jump = true;
                 timePassedSinceStuck = 0;
             }
-            else if (ObjVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
+            else if (objVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
             {
                 tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
                 control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
@@ -187,12 +187,12 @@ public class BlueSlimeController : MonoBehaviour
             control.setJumpTakeOffSpeed(originalJumpSpeed);
         }
 
-        if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
+        if (objVelocity.y > 0.0f) // if jumped then don't keep jumping
         {
             dontKeepJumpFlag = true;
         }
 
-        if(ObjVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
+        if(objVelocity.x == 0.0f && (hitLWallShort || hitRWallShort) && !dontKeepJumpFlag)
         {
             control.jump = true;
         }
@@ -203,16 +203,38 @@ public class BlueSlimeController : MonoBehaviour
             dontKeepJumpFlag = false;
         }
 
-        if(ObjVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
+        if(objVelocity.y < 0.0f && !dontKeepJumpFlag && (hitLGround.collider != null || hitRGround.collider != null))
         {
             control.jump = true;
         }
     }
 
+    void SlimeDeath()
+    {
+        this.spriteRenderer.enabled = false;
+        this._collider.enabled = false;
+        this.GetComponent<Rigidbody2D>().simulated = false;
+        GameObject.Find("EnemyManager").GetComponent<PublisherManager>().SubscribeToGroup(1, Respawn);
+    }
+
+    void Respawn() {
+        this.transform.position = this.spawnPosition;
+        this.currentHealth = this.maxHealth;
+        this.spriteRenderer.enabled = true;
+        this._collider.enabled = true;
+        this.GetComponent<Rigidbody2D>().simulated = true;
+    }
+
     public void TakeDamage(float damage)
     {
         dazedTime = startDazeTime;
-        health -= damage;
+        this.currentHealth -= damage;
+
+        if(this.currentHealth <= 0)
+        {
+            // Destroy(gameObject);
+            SlimeDeath();
+        }
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
     }
