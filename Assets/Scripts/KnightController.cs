@@ -227,7 +227,23 @@ public class KnightController : MonoBehaviour
         }
     }
 
-    void onDrawGizmosSelected()
+    public void SetPlayerHealth(float newHealthValue)
+    {
+        currentHealth = newHealthValue;
+        healthBar.SetMaxHealth(newHealthValue);
+    }
+
+    public float getPlayerHealth()
+    {
+        return currentHealth;
+    }
+
+    public float getPlayerMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void onDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position,attackRange);
