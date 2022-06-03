@@ -16,7 +16,7 @@ public class GreenSlimeController : MonoBehaviour
     public Bounds Bounds => _collider.bounds;
     public float health = 20f;
 
-    // for pausing when attacked
+    // For pausing when attacked.
     private float originalSpeed;
     private float dazedTime;
     public float startDazeTime;
@@ -77,6 +77,5 @@ public class GreenSlimeController : MonoBehaviour
         health -= damage;
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
-
     }
 }

@@ -36,11 +36,14 @@ public class StateManager : MonoBehaviour
         Color col = mIncrementNbPickupsTextComponent.color;
         col.a = 1.0f;
         mIncrementNbPickupsTextComponent.color = col;
+
         yield return new WaitForSeconds(mLengthNotification);
+
         for (float elapsed = 0f; elapsed < mLengthDecay; elapsed += 0.05f)
         {
             col.a = (mLengthDecay - elapsed) / mLengthDecay;
             mIncrementNbPickupsTextComponent.color = col;
+
             yield return new WaitForSeconds(0.05f);
         }
 
@@ -63,6 +66,7 @@ public class StateManager : MonoBehaviour
     {
         Image backgroundImage = mEndLevelDisplay.transform.GetChild(0).GetComponent<Image>();
         Color backgroundImageColor = backgroundImage.color;
+
         for (float elapsed = 0; elapsed < 1.5f; elapsed += 0.05f) 
         {
             backgroundImageColor.a = elapsed / 1.5f;
@@ -73,13 +77,11 @@ public class StateManager : MonoBehaviour
         mEndLevelDisplay.transform.GetChild(1).gameObject.SetActive(true);
         mEndLevelDisplay.transform.GetChild(2).gameObject.SetActive(true);
 
-
         yield return null;
     }
 
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(0);
-
     }
 }

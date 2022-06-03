@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class KnightController : MonoBehaviour {
-
+public class KnightController : MonoBehaviour 
+{
     private IKnightCommand right;
     private IKnightCommand left;
     private IKnightCommand roll;
@@ -76,17 +76,22 @@ public class KnightController : MonoBehaviour {
 
         // Increase timer that checks roll duration
         if(m_rolling)
+        {
             m_rollCurrentTime += Time.deltaTime;
+        }
 
         // Disable rolling if timer extends duration
         if(m_rollCurrentTime > m_rollDuration)
+        {
             m_rolling = false;
+        }
 
 
         m_animator.SetBool("Grounded", IsGrounded());
 
         // -- Handle input and movement --
-        if (this.currentHealth > 0 || debugAlwaysInput) {
+        if (this.currentHealth > 0 || debugAlwaysInput) 
+        {
             float inputX = Input.GetAxis("Horizontal");
 
             // Swap direction of sprite depending on walk direction
@@ -119,7 +124,9 @@ public class KnightController : MonoBehaviour {
                 
             //Hurt
             else if (Input.GetKeyDown("q") && !m_rolling)
+            {
                 m_animator.SetTrigger("Hurt");
+            }
 
             //Attack
             else if(Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
@@ -128,11 +135,15 @@ public class KnightController : MonoBehaviour {
 
                 // Loop back to one after third attack
                 if (m_currentAttack > 3)
+                {
                     m_currentAttack = 1;
+                }
 
                 // Reset Attack combo if time since last attack is too large
                 if (m_timeSinceAttack > 1.0f)
+                {
                     m_currentAttack = 1;
+                }
 
                 // Call one of three attack animations "Attack1", "Attack2", "Attack3"
                 m_animator.SetTrigger("Attack" + m_currentAttack);
@@ -172,7 +183,9 @@ public class KnightController : MonoBehaviour {
             }
 
             else if (Input.GetMouseButtonUp(1))
+            {
                 m_animator.SetBool("IdleBlock", false);
+            }
 
             // Roll
             else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
@@ -206,8 +219,10 @@ public class KnightController : MonoBehaviour {
             {
                 // Prevents flickering transitions to idle
                 m_delayToIdle -= Time.deltaTime;
-                    if(m_delayToIdle < 0)
-                        m_animator.SetInteger("AnimState", 0);
+                if (m_delayToIdle < 0)
+                {
+                    m_animator.SetInteger("AnimState", 0);
+                }
             }
         }
     }
@@ -221,7 +236,8 @@ public class KnightController : MonoBehaviour {
     public void DoDamage(int damage) 
     {
         // only update if still have health to remove
-        if (currentHealth > 0) {
+        if (currentHealth > 0) 
+        {
             this.currentHealth = Mathf.Max(0, currentHealth - damage);
             m_animator.SetTrigger("Hurt");
 
@@ -230,6 +246,7 @@ public class KnightController : MonoBehaviour {
                 this.PlayerDeath();
                 //this.maxHealth = 100f;
             }
+
             healthBar.SetHealth(currentHealth);
         }
     }
@@ -242,7 +259,8 @@ public class KnightController : MonoBehaviour {
         StartCoroutine(DelayedRespawn());
     }
 
-    IEnumerator DelayedRespawn() {
+    IEnumerator DelayedRespawn() 
+    {
         yield return new WaitForSeconds(respawnTime);
         this.transform.position = this.spawnPosition;
         this.currentHealth = this.maxHealth;
@@ -257,9 +275,13 @@ public class KnightController : MonoBehaviour {
         Vector3 spawnPosition;
 
         if (m_facingDirection == 1)
+        {
             spawnPosition = m_wallSensorR2.transform.position;
+        }
         else
+        {
             spawnPosition = m_wallSensorL2.transform.position;
+        }
 
         if (m_slideDust != null)
         {
@@ -301,6 +323,7 @@ public class KnightController : MonoBehaviour {
         {
             return true;
         }
+        
         return false;
     }
 }

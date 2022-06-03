@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class MoveCharacterLeft : ScriptableObject, IKnightCommand
 {
-
     public void Execute(GameObject gameObject, float inputX, float m_speed)
     {
         var m_body2d = gameObject.GetComponent<Rigidbody2D>();
@@ -15,5 +13,4 @@ public class MoveCharacterLeft : ScriptableObject, IKnightCommand
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
     }
-
 }

@@ -2,30 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Implements game physics for some in game entity.
-/// </summary>
+// Implements game physics for some in game entity.
 public class KinematicObject : MonoBehaviour
 {
-    /// <summary>
-    /// The minimum normal (dot product) considered suitable for the entity sit on.
-    /// </summary>
+    // The minimum normal (dot product) considered suitable for the entity sit on.
     public float minGroundNormalY = .65f;
 
-    /// <summary>
-    /// A custom gravity coefficient applied to this entity.
-    /// </summary>
+    // A custom gravity coefficient applied to this entity.
     public float gravityModifier = 1f;
 
-    /// <summary>
-    /// The current velocity of the entity.
-    /// </summary>
+    // The current velocity of the entity.
     public Vector2 velocity;
 
-    /// <summary>
-    /// Is the entity currently sitting on a surface?
-    /// </summary>
-    /// <value></value>
+    // Is the entity currently sitting on a surface?
     public bool IsGrounded { get; private set; }
 
     protected Vector2 targetVelocity;
@@ -38,29 +27,23 @@ public class KinematicObject : MonoBehaviour
     protected const float shellRadius = 0.01f;
 
 
-    /// <summary>
-    /// Bounce the object's vertical velocity.
-    /// </summary>
-    /// <param name="value"></param>
+
+    // Bounce the object's vertical velocity.
     public void Bounce(float value)
     {
         velocity.y = value;
     }
 
-    /// <summary>
-    /// Bounce the objects velocity in a direction.
-    /// </summary>
-    /// <param name="dir"></param>
+
+    // Bounce the objects velocity in a direction.
     public void Bounce(Vector2 dir)
     {
         velocity.y = dir.y;
         velocity.x = dir.x;
     }
 
-    /// <summary>
-    /// Teleport to some position.
-    /// </summary>
-    /// <param name="position"></param>
+
+    // Teleport to some position.
     public void Teleport(Vector3 position)
     {
         body.position = position;
@@ -99,26 +82,25 @@ public class KinematicObject : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //if already falling, fall faster than the jump speed, otherwise use normal gravity.
+        // If already falling, fall faster than the jump speed, otherwise use normal gravity.
         if (velocity.y < 0)
+        {
             velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+        }
         else
+        {
             velocity += Physics2D.gravity * Time.deltaTime;
+        }
 
         velocity.x = targetVelocity.x;
-
         IsGrounded = false;
-
         var deltaPosition = velocity * Time.deltaTime;
 
         var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
-
         var move = moveAlongGround * deltaPosition.x;
-
         PerformMovement(move, false);
 
         move = Vector2.up * deltaPosition.y;
-
         PerformMovement(move, true);
     }
 
@@ -128,17 +110,19 @@ public class KinematicObject : MonoBehaviour
 
         if (distance > minMoveDistance)
         {
-            //check if we hit anything in current direction of travel
+            // Check if we hit anything in current direction of travel.
             var count = body.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+
             for (var i = 0; i < count; i++)
             {
                 var currentNormal = hitBuffer[i].normal;
 
-                //is this surface flat enough to land on?
+                // Check if this is the surface flat enough to land on.
                 if (currentNormal.y > minGroundNormalY)
                 {
                     IsGrounded = true;
-                    // if moving up, change the groundNormal to new surface normal.
+
+                    // If moving up, change the groundNormal to new surface normal.
                     if (yMovement)
                     {
                         groundNormal = currentNormal;
@@ -149,6 +133,7 @@ public class KinematicObject : MonoBehaviour
                 {
                     //how much of our velocity aligns with surface normal?
                     var projection = Vector2.Dot(velocity, currentNormal);
+
                     if (projection < 0)
                     {
                         //slower velocity if moving against the normal (up a hill).
@@ -161,6 +146,7 @@ public class KinematicObject : MonoBehaviour
                     velocity.x *= 0;
                     velocity.y = Mathf.Min(velocity.y, 0);
                 }
+                
                 //remove shellDistance from actual move distance.
                 var modifiedDistance = hitBuffer[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;

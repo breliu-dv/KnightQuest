@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PlatformerModel
 {
-    /// <summary>
-    /// A global jump modifier applied to all initial jump velocities.
-    /// </summary>
+    // A global jump modifier applied to all initial jump velocities.
     public float jumpModifier = 1.5f;
 
-    /// <summary>
-    /// A global jump modifier applied to slow down an active jump when 
-    /// the user releases the jump input.
-    /// </summary>
+    // A global jump modifier to slow down active jump when release jump input.
     public float jumpDeceleration = 0.5f;
 }

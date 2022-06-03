@@ -9,6 +9,7 @@ public class FallingSpikeController : MonoBehaviour
     private void OnParticleCollision(GameObject collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
+        
         if (player != null)
         {
             player.DoDamage(damage);

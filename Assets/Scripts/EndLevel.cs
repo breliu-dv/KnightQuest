@@ -16,7 +16,6 @@ public class EndLevel : MonoBehaviour
         if (other.transform.tag == "Player") 
         {
             _mStateManager.NotifyEndLevel();
-
         }
     }
 

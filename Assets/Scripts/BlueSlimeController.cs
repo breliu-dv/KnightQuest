@@ -34,7 +34,7 @@ public class BlueSlimeController : MonoBehaviour
     private Vector3 ObjVelocity;
     private float timePassedSinceStuck;
     
-    // for pausing when attacked
+    // For pausing when attacked.
     public float speed;
     private float dazedTime;
     public float startDazeTime;
@@ -73,7 +73,7 @@ public class BlueSlimeController : MonoBehaviour
 
     void Update()
     {
-        // this is for pausing mechanism when the enemy got attacked 
+        // This is for pausing mechanism when the enemy got attacked.
         if(dazedTime <= 0)
         {
             control.maxSpeed = originalSpeed;
@@ -95,9 +95,6 @@ public class BlueSlimeController : MonoBehaviour
 
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
-
-            // Debug.Log(knightToSlimeDist);
-            // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < followRange + detectionZone)
             {
@@ -187,7 +184,7 @@ public class BlueSlimeController : MonoBehaviour
             control.setJumpTakeOffSpeed(originalJumpSpeed);
         }
 
-        if (ObjVelocity.y > 0.0f) // if jumped then don't keep jumping
+        if (ObjVelocity.y > 0.0f) // If jumped then don't keep jumping.
         {
             dontKeepJumpFlag = true;
         }
@@ -197,7 +194,7 @@ public class BlueSlimeController : MonoBehaviour
             control.jump = true;
         }
 
-        if(timeAfterJump > setTimeBetweenJump) // if jump is finished, reset flag so it can jump again if needed
+        if(timeAfterJump > setTimeBetweenJump) // If jump is finished, reset flag so it can jump again if needed.
         {
             timeAfterJump = 0;
             dontKeepJumpFlag = false;

@@ -28,7 +28,7 @@ public class RedSlimeController : MonoBehaviour
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
 
-    // for pausing when attacked
+    // For pausing when attacked.
     private float originalSpeed;
     public float speed;
     private float dazedTime;
@@ -64,7 +64,7 @@ public class RedSlimeController : MonoBehaviour
 
     void Update()
     {
-        // pausing mechanism when the enemy got attacked 
+        // Pausing mechanism when the enemy got attacked.
         if(dazedTime <= 0)
         {
             control.maxSpeed = originalSpeed;
@@ -86,9 +86,6 @@ public class RedSlimeController : MonoBehaviour
 
             knightToSlimeDist = Vector3.Distance(knight.transform.position, gameObject.transform.position);
             knightToSlimeInitDist = Vector3.Distance(knight.transform.position, initialSlimePosition);
-
-            // Debug.Log(knightToSlimeDist);
-            // Debug.Log(knightPostOutrunPosition.magnitude);
 
             if (knightToSlimeDist < followRange && knightToSlimeInitDist < detectionZone)
             {
@@ -113,6 +110,7 @@ public class RedSlimeController : MonoBehaviour
                 jumpInterval = Random.Range(minJumpInterval, maxJumpInterval);
                 control.jump = true;
             }
+
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
 
             if(health <= 0)

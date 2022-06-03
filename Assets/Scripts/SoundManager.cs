@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 
-// From Exercise-1
+// From Exercise 1.
 
 /**
  * Adapted from "Indroduction to AUDIO in Unity" by Brackeys:
@@ -12,7 +12,6 @@ using UnityEngine.Audio;
  *
  * Audio assets from: https://sirental.itch.io/elemental-dungeons
  */
-
 public class SoundManager : MonoBehaviour
 {
     [SerializeField]
@@ -30,7 +29,6 @@ public class SoundManager : MonoBehaviour
     private SoundClip trackPlaying;
     private SoundClip trackFading;
     private SoundClip sfxPlaying;
-
 
     void Awake()
     {
@@ -69,7 +67,8 @@ public class SoundManager : MonoBehaviour
         
         track.audioSource.Play();
 
-        if(null != this.trackPlaying) {
+        if(null != this.trackPlaying) 
+        {
             this.trackPlaying.audioSource.Stop();
         }   
 

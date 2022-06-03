@@ -6,6 +6,7 @@ namespace Obscura
 {
     [RequireComponent(typeof(Camera))]
     [RequireComponent(typeof(LineRenderer))]
+    
     public abstract class AbstractCameraController : MonoBehaviour
     {
         [SerializeField]

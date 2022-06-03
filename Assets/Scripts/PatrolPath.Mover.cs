@@ -2,9 +2,7 @@ using UnityEngine;
 
 public partial class PatrolPath
 {
-    /// <summary>
-    /// The Mover class oscillates between start and end points of a path at a defined speed.
-    /// </summary>
+    // The Mover class oscillates between start and end points of a path at a defined speed.
     public class Mover
     {
         PatrolPath path;
@@ -19,10 +17,7 @@ public partial class PatrolPath
             this.startTime = Time.time;
         }
 
-        /// <summary>
-        /// Get the position of the mover for the current frame.
-        /// </summary>
-        /// <value></value>
+        // Get the position of the mover for the current frame.
         public Vector2 Position
         {
             get

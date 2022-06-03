@@ -6,26 +6,22 @@ public class PatrollingWallToWall : MonoBehaviour
 {
     public float mMovementSpeed = 3.0f;
     public bool bIsGoingRight = true;
-
     public float mRaycastingDistance = 1f;
-
     private SpriteRenderer _mSpriteRenderer;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update.
     void Start()
     {
         _mSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _mSpriteRenderer.flipX = bIsGoingRight;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         Vector3 directionTranslation = (bIsGoingRight) ? transform.right : -transform.right;
         directionTranslation *= Time.deltaTime * mMovementSpeed;
-
         transform.Translate(directionTranslation);
-
 
         CheckForWalls();
     }
@@ -45,5 +41,4 @@ public class PatrollingWallToWall : MonoBehaviour
             }
         }
     }
-
 }

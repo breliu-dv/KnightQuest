@@ -1,7 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
-//From Exercise-1
+// From Exercise 1.
 
 [System.Serializable]
 public class SoundClip 

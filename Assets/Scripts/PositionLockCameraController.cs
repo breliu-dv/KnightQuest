@@ -21,9 +21,8 @@ namespace Obscura
         {
             var targetPosition = this.target.transform.position;
             var cameraPosition = this.managedCamera.transform.position;
-            //Debug.Log(cameraPosition);
 
-            cameraPosition = new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z); //lock at center. 
+            cameraPosition = new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z); // Lock at center. 
 
             this.managedCamera.transform.position = cameraPosition;
 
@@ -40,10 +39,10 @@ namespace Obscura
 
         public override void DrawCameraLogic()
         {
-            // Stage 1
+            // Stage 1.
             this.cameraLineRenderer.positionCount = 8;
             this.cameraLineRenderer.useWorldSpace = false;
-            this.cameraLineRenderer.SetPosition(0, new Vector3(0,0,85));//center
+            this.cameraLineRenderer.SetPosition(0, new Vector3(0,0,85)); // center
             this.cameraLineRenderer.SetPosition(1, new Vector3(0,10,85)); // go up
             this.cameraLineRenderer.SetPosition(2, new Vector3(0,0,85)); // start at center
             this.cameraLineRenderer.SetPosition(3, new Vector3(10,0,85)); // go right

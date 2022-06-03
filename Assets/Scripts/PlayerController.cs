@@ -19,33 +19,23 @@ public class PlayerController : MonoBehaviour
     public float mSpeed = 5.0f;
     public float mJumpStrength = 10.0f;
 
-    
-
     [Header("State Sprites")]
     public RuntimeAnimatorController mIdleController;
     public RuntimeAnimatorController mRunningController;
     public RuntimeAnimatorController mJumpingController;
 
-
     private Animator _mAnimatorComponent;
     private bool _bIsGoingRight = true;
     private bool _bPlayerStateChanged = false;
-
     private bool _bInputsDisabled = false;
-
     private bool _bPlayerInvincible = false;
-
-
     private SoundManager _mSoundManager;
-
 
     void Start()
     {
         _mAnimatorComponent = gameObject.GetComponent<Animator>();
         _mAnimatorComponent.runtimeAnimatorController = mIdleController;
-
         _mSoundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
-
     }
 
     // Use state machine, much better
@@ -53,8 +43,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!_bInputsDisabled)
         {
-
             _bPlayerStateChanged = false;
+
             // check state changes
             if (mPlayerState == CharacterState.IDLE)
             {
@@ -98,8 +88,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-
-
             if (mPlayerState == CharacterState.JUMPING || mPlayerState == CharacterState.RUNNING)
             {
                 if (Input.GetKey(KeyCode.RightArrow))
@@ -115,6 +103,7 @@ public class PlayerController : MonoBehaviour
             }
 
             gameObject.GetComponent<SpriteRenderer>().flipX = !_bIsGoingRight;
+
             if (_bPlayerStateChanged)
             {
                 ChangeAnimator();
@@ -152,6 +141,7 @@ public class PlayerController : MonoBehaviour
         while (true)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position - Vector3.up * 1f, -Vector2.up, 0.05f);
+            
             if (hit.collider != null)
             {
                 if (hit.transform.tag == "Terrain")
@@ -164,12 +154,12 @@ public class PlayerController : MonoBehaviour
                     {
                         mPlayerState = CharacterState.IDLE;
                     }
+
                     break;
                 }
             }
 
             yield return new WaitForSeconds(0.05f);
-
         }
 
         ChangeAnimator();
@@ -191,7 +181,6 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().velocity = -10f * heading / magnitude;
             StartCoroutine("Coroutine_BlockPlayerInputs");
             StartCoroutine("Coroutine_SetPlayerInvincible");
-
         }
     }
 
@@ -222,19 +211,21 @@ public class PlayerController : MonoBehaviour
         _bPlayerInvincible = newState;
     }
 
-    public void CheckWall() {
+    public void CheckWall() 
+    {
         List<float> directions = new List<float>{-1, 1};
 
-        for (int i = 0; i < directions.Count; i++) {
+        for (int i = 0; i < directions.Count; i++) 
+        {
             RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * directions[i], transform.right * directions[i], 0.05f);
+            
             if (hit.collider != null)
             {
-                if (hit.transform.tag == "Terrain") {
+                if (hit.transform.tag == "Terrain") 
+                {
                     transform.Translate(-1f * transform.right * directions[i] * 0.025f);
                 }
             }
         }
-            
     }
-
 }

@@ -13,30 +13,32 @@ public class AcidPool : MonoBehaviour
     private GameObject player;
     private BoxCollider2D boxCollider;
 
-    void Awake() {
+    void Awake() 
+    {
         this.boxCollider = this.GetComponent<BoxCollider2D>();
     }
+
     void Update()
     {
         if (this.boxCollider.IsTouching(player.GetComponent<CapsuleCollider2D>()))
         {
             Action<int> DamageKnight = player.GetComponent<KnightController>().DoDamage;
             
-            // If first time entering acid
+            // If first time entering acid.
             if (!this.enteredAcid)
             {
                 this.enteredAcid = true;
                 DamageKnight(damage);
                 this.nextDamage = Time.time + this.damageInterval;
             }
-            // If was already in acid and is time to do next damage
+            // If was already in acid and is time to do next damage.
             else if (this.nextDamage <= Time.time)
             {
                 DamageKnight(damage);
                 this.nextDamage = Time.time + this.damageInterval;
             }
         }
-        // Not touching the player
+        // Not touching the player.
         else
         {
             this.enteredAcid = false;

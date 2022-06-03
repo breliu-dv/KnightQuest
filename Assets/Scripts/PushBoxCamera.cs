@@ -17,8 +17,8 @@ namespace Obscura
             this.cameraLineRenderer = this.gameObject.GetComponent<LineRenderer>();
         }
 
-        //Use the LateUpdate message to avoid setting the camera's position before
-        //GameObject locations are finalized.
+        // Use the LateUpdate message to avoid setting the camera's position before
+        // GameObject locations are finalized.
         void LateUpdate()
         {
             var targetPosition = this.target.transform.position;

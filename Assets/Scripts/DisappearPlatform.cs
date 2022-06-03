@@ -55,6 +55,7 @@ public class DisappearPlatform : MonoBehaviour
         {
             col.a = 1 - elapsedTime / mTimePerCycle;
             _mTilemap.color = col;
+            
             if (_mTilemap.color.a < mThresholdRigid && _mBoxCollider.enabled) 
             {
                 _mBoxCollider.enabled = false;

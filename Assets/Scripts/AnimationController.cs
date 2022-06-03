@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// AnimationController integrates physics and animation. It is generally used for simple enemy animation.
-/// </summary>
+// AnimationController integrates physics and animation. 
+// It is generally used for simple enemy animation.
 [RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
 public class AnimationController : KinematicObject
 {
@@ -47,6 +46,7 @@ public class AnimationController : KinematicObject
         else if (stopJump)
         {
             stopJump = false;
+            
             if (velocity.y > 0)
             {
                 velocity.y = velocity.y * model.jumpDeceleration;

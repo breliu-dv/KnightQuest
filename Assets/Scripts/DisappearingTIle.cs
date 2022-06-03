@@ -17,7 +17,6 @@ public class DisappearingTIle : MonoBehaviour
     private SpriteRenderer _mSpriteRenderer;
     private BoxCollider2D _mBoxCollider;
     
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,18 +25,24 @@ public class DisappearingTIle : MonoBehaviour
         StartCoroutine("StartStartOffset");
     }
 
-    IEnumerator StartStartOffset() {
+    IEnumerator StartStartOffset() 
+    {
         yield return new WaitForSeconds(mStartOffset);
         yield return StartCoroutine("StartIdleBeforeDisappear");
     }
 
 
-    IEnumerator StartDisappear() {
+    IEnumerator StartDisappear() 
+    {
         Color col = _mSpriteRenderer.color;
-        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
+        
+        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) 
+        {
             col.a = 1 - elapsedTime / mTimePerCycle;
             _mSpriteRenderer.color = col;
-            if (_mSpriteRenderer.color.a < mThresholdRigid && _mBoxCollider.enabled) {
+
+            if (_mSpriteRenderer.color.a < mThresholdRigid && _mBoxCollider.enabled) 
+            {
                 _mBoxCollider.enabled = false;
             }
 
@@ -50,16 +55,20 @@ public class DisappearingTIle : MonoBehaviour
         yield return StartCoroutine("StartIdleBeforeAppear");
     }
 
-    IEnumerator StartAppear() {
+    IEnumerator StartAppear() 
+    {
         Color col = _mSpriteRenderer.color;
-        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) {
+
+        for (float elapsedTime = 0f; elapsedTime < mTimePerCycle; elapsedTime += mTimeBetweenCalls) 
+        {
             col.a = elapsedTime / mTimePerCycle;
             _mSpriteRenderer.color = col;
-            if (_mSpriteRenderer.color.a < mThresholdRigid && !_mBoxCollider.enabled) {
+
+            if (_mSpriteRenderer.color.a < mThresholdRigid && !_mBoxCollider.enabled) 
+            {
                 _mBoxCollider.enabled = true;
             }
             
-
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 
@@ -69,16 +78,20 @@ public class DisappearingTIle : MonoBehaviour
         yield return StartCoroutine("StartIdleBeforeDisappear");
     }
 
-    IEnumerator StartIdleBeforeDisappear() {
-        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) {
+    IEnumerator StartIdleBeforeDisappear() 
+    {
+        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) 
+        {
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 
         yield return StartCoroutine("StartDisappear");
     }
 
-    IEnumerator StartIdleBeforeAppear() {
-        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) {
+    IEnumerator StartIdleBeforeAppear() 
+    {
+        for (float elapsedTime = 0f; elapsedTime < mIdleTime; elapsedTime += mTimeBetweenCalls) 
+        {
             yield return new WaitForSeconds(mTimeBetweenCalls);
         }
 

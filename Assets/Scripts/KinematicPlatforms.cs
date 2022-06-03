@@ -34,6 +34,7 @@ public class KinematicPlatforms : MonoBehaviour
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
+        
         initialXStart = gameObject.transform.position.x;
         initialYStart = gameObject.transform.position.y;
     }
