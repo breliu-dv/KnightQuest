@@ -42,6 +42,9 @@ public class BlueSlimeController : MonoBehaviour
     private float currentHealth;
     private float timeAfterJump = 0.0f;
     public LayerMask groundLayer;
+    public LayerMask slimeBlueLayer;
+    public LayerMask slimeGreenLayer;
+    public LayerMask slimeRedLayer;
     private float originalSpeed;
     private float originalJumpSpeed;
     private Vector2 spawnPosition;
@@ -153,6 +156,15 @@ public class BlueSlimeController : MonoBehaviour
         RaycastHit2D hitLWallShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, groundLayer);
         RaycastHit2D hitRWallShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, groundLayer);
         
+        RaycastHit2D hitLBlueSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeBlueLayer);
+        RaycastHit2D hitRBlueSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeBlueLayer);
+
+        RaycastHit2D hitLGreenSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeGreenLayer);
+        RaycastHit2D hitRGreenSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeGreenLayer);
+        
+        RaycastHit2D hitLRedSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeRedLayer);
+        RaycastHit2D hitRRedSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeRedLayer);
+
         RaycastHit2D hitLWallSuperShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance/shortWallDistanceModifier, groundLayer);
         RaycastHit2D hitRWallSuperShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance/shortWallDistanceModifier, groundLayer);
 
@@ -162,9 +174,11 @@ public class BlueSlimeController : MonoBehaviour
         timeAfterJump += Time.deltaTime;
 
         float originalTempTakeOffToUnstuck = tempTakeOffToUnstuck;
+
         if(hitLWallSuperShort || hitRWallSuperShort) 
         {
             timePassedSinceStuck += Time.deltaTime;
+
             if(objVelocity.x == 0 && timePassedSinceStuck > 0.20)
             {
                 tempTakeOffToUnstuck = secondTempTakeOffToUnstuck;
@@ -176,6 +190,26 @@ public class BlueSlimeController : MonoBehaviour
             {
                 tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
                 control.setJumpTakeOffSpeed(tempTakeOffToUnstuck);
+                control.jump = true;
+            }
+        }
+        else if (hitLBlueSlimeShort || hitRBlueSlimeShort || hitLGreenSlimeShort || hitRGreenSlimeShort || hitLRedSlimeShort || hitRRedSlimeShort)
+        {
+            float takeOffFactor = 4;
+
+            timePassedSinceStuck += Time.deltaTime;
+
+            if(objVelocity.x == 0 && timePassedSinceStuck > 0.20)
+            {
+                tempTakeOffToUnstuck = secondTempTakeOffToUnstuck;
+                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck / takeOffFactor);
+                control.jump = true;
+                timePassedSinceStuck = 0;
+            }
+            else if (objVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
+            {
+                tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
+                control.setJumpTakeOffSpeed(tempTakeOffToUnstuck / takeOffFactor);
                 control.jump = true;
             }
         }
