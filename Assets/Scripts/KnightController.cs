@@ -309,20 +309,6 @@ public class KnightController : MonoBehaviour
         }
     }
 
-    // void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     knightCollideObject = collision;
-
-    //     Debug.Log(knightCollideObject.gameObject);
-    //     knightCollideObject.gameObject.transform.SetParent(gameObject.transform, true);
-    // }
-
-    // void OnCollisionExit2D(Collision2D collides)
-    // {
-    //     Debug.Log("exit WITH MOVING PLAYFORM");
-    //     collides.gameObject.transform.parent = null;
-    // }
-
     public void SetSpawn(Vector2 newSpawn)
     {
         this.spawnPosition = newSpawn;
