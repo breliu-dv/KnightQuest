@@ -310,6 +310,10 @@ public class KnightController : MonoBehaviour
         knightCollideObject = collision;
     }
 
+    public void SetSpawn(Vector2 newSpawn)
+    {
+        this.spawnPosition = newSpawn;
+    }
     bool IsGrounded() 
     {
         //Vector2 position = transform.position;
