@@ -186,6 +186,15 @@ MonoBehaviour:
   minJumpInterval: 1
   maxJumpInterval: 4
   _psystem: {fileID: 3936905588921903572, guid: 6197ce6b09a89124a9dd089f7bedc052, type: 3}
+  slimeBlueLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  slimeGreenLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  slimeRedLayer:
+    serializedVersion: 2
+    m_Bits: 256
   speed: 0
   startDazeTime: 0
   maxHealth: 60

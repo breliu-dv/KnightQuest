@@ -27,6 +27,17 @@ public class RedSlimeController : MonoBehaviour
     private bool gotChasedAtLeastOnce;
     private float timeBeforeJump = 0.0f;
     private float jumpInterval = 0.0f;
+    public LayerMask slimeBlueLayer;
+    public LayerMask slimeGreenLayer;
+    public LayerMask slimeRedLayer;
+    private float timePassedSinceStuck;
+    private Vector3 objVelocity;
+    private float tempTakeOffToUnstuck = 30.0f;
+    private float secondTempTakeOffToUnstuck = 50.0f;
+    private Vector3 prevPos; 
+    private Vector3 newPos; 
+    private float timeAfterJump = 0.0f;
+    private float originalJumpSpeed;
 
     // For pausing when attacked.
     private float originalSpeed;
@@ -43,6 +54,12 @@ public class RedSlimeController : MonoBehaviour
         this.originalSpeed = this.control.maxSpeed;
         this.spawnPosition = this.transform.position;
         this.currentHealth = this.maxHealth;
+
+        this.prevPos = this.transform.position;
+        this.newPos = this.transform.position;
+        this.originalJumpSpeed = this.control.getJumpTakeOffSpeed();
+        this.timePassedSinceStuck = 0;
+
     }
 
     void Awake()
@@ -115,6 +132,57 @@ public class RedSlimeController : MonoBehaviour
             }
 
             control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+            
+            Vector2 leftPos = transform.position;
+            Vector2 rightPos = transform.position;
+
+            leftPos.x -= (0.73f/2);
+            leftPos.y += 0.2f;
+
+            rightPos.x += (0.73f/2);
+            rightPos.y += 0.2f;
+
+            float distance = 1.0f;
+            RaycastHit2D hitLBlueSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeBlueLayer);
+            RaycastHit2D hitRBlueSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeBlueLayer);
+
+            RaycastHit2D hitLGreenSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeGreenLayer);
+            RaycastHit2D hitRGreenSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeGreenLayer);
+
+            RaycastHit2D hitLRedSlimeShort = Physics2D.Raycast(leftPos, new Vector2(-1, 0), distance, slimeRedLayer);
+            RaycastHit2D hitRRedSlimeShort = Physics2D.Raycast(rightPos, new Vector2(1, 0), distance, slimeRedLayer);
+            
+            newPos = transform.position;
+            objVelocity = (newPos - prevPos) / Time.fixedDeltaTime;
+            prevPos = newPos;
+            timeAfterJump += Time.deltaTime;
+
+            float originalTempTakeOffToUnstuck = tempTakeOffToUnstuck;
+
+            if (hitLBlueSlimeShort || hitRBlueSlimeShort || hitLGreenSlimeShort || hitRGreenSlimeShort || hitLRedSlimeShort || hitRRedSlimeShort)
+            {
+                float takeOffFactor = 4;
+
+                timePassedSinceStuck += Time.deltaTime;
+
+                if(objVelocity.x == 0 && timePassedSinceStuck > 0.20)
+                {
+                    tempTakeOffToUnstuck = secondTempTakeOffToUnstuck;
+                    control.setJumpTakeOffSpeed(tempTakeOffToUnstuck / takeOffFactor);
+                    control.jump = true;
+                    timePassedSinceStuck = 0;
+                }
+                else if (objVelocity.x == 0 && timePassedSinceStuck > 0.1 && timePassedSinceStuck < 0.15)
+                {
+                    tempTakeOffToUnstuck = originalTempTakeOffToUnstuck;
+                    control.setJumpTakeOffSpeed(tempTakeOffToUnstuck / takeOffFactor);
+                    control.jump = true;
+                }
+            }
+            else
+            {
+                control.setJumpTakeOffSpeed(originalJumpSpeed);
+            }
         }
     }
 
