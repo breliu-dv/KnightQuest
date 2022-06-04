@@ -31,7 +31,7 @@ public class KnightController : MonoBehaviour
     private float maxHealth = 100f;
     private float currentHealth = 0.0f;
     private float timeAfterDamage = 0.0f;
-
+    public bool respawnAllEnemies;
     public HealthBar healthBar;
 
     // variables to attack enemies.
@@ -278,7 +278,11 @@ public class KnightController : MonoBehaviour
         this.currentHealth = this.maxHealth;
         this.healthBar.SetHealth(currentHealth);
         this.m_animator.SetTrigger("Respawn");
-        GameObject.Find("EnemyManager").GetComponent<PublisherManager>().Trigger(1);
+
+        if(respawnAllEnemies)
+        {
+            GameObject.Find("EnemyManager").GetComponent<PublisherManager>().Trigger(1);
+        }
     }
 
     // Animation Events
