@@ -11,6 +11,7 @@ public class KnightController : MonoBehaviour
     [SerializeField] float      m_rollForce = 6.0f;
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
+    [SerializeField] float      heavyChargeTime = 0.0f;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -25,7 +26,6 @@ public class KnightController : MonoBehaviour
     private float               m_timeSinceAttack = 0.0f;
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
-    // private float               m_rollDuration = 1.3f;
     private float               m_rollCurrentTime;
     private Vector2             spawnPosition;
     [SerializeField] float      respawnTime = 1.5f;
@@ -136,144 +136,35 @@ public class KnightController : MonoBehaviour
             m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
             m_animator.SetBool("WallSlide", m_isWallSliding);
 
+            // Increment Attack Charge Timer
             if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
             {
                 attackTimer += Time.deltaTime;
             }
+
             //Attack
-            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < 2.0f && attackTimer > 0.0f && !m_isWallSliding)
+            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
             {
-                Debug.Log("Normal Attack");
-                attackTimer = 0.0f;
-                m_currentAttack++;
-
-                // Loop back to one after third attack
-                if (m_currentAttack > 3)
-                {
-                    m_currentAttack = 1;
-                }
-
-                // Reset Attack combo if time since last attack is too large
-                if (m_timeSinceAttack > 1.0f)
-                {
-                    m_currentAttack = 1;
-                }
-
-                // Call one of three attack animations "Attack1", "Attack2", "Attack3"
-                m_animator.SetTrigger("Attack" + m_currentAttack);
-
-                // maybe add attack pts here?
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
-
-                for(int i = 0; i< enemiesToDamage.Length;i++)
-                {
-                    enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
-                }
-
-                // for green enemies attack
-                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
-
-                for(int i = 0; i< enemiesToAttack.Length;i++)
-                {
-                    enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
-                }
-
-                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
-
-                for(int i = 0; i< redEnemiesToAttack.Length;i++)
-                {
-                    redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
-                }
-
-                 // Reset timer
-                m_timeSinceAttack = 0.0f;                
+                Attack();                
                 
             }
-            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= 2.0f && !m_isWallSliding)
+
+            // Heavy Attack
+            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
             {
-                attackTimer = 0.0f;
-                Debug.Log("Heavy Attack!");
-                // maybe add attack pts here?
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
-
-                for(int i = 0; i< enemiesToDamage.Length;i++)
-                {
-                    enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
-                }
-
-                // for green enemies attack
-                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
-
-                for(int i = 0; i< enemiesToAttack.Length;i++)
-                {
-                    enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
-                }
-
-                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
-
-                for(int i = 0; i< redEnemiesToAttack.Length;i++)
-                {
-                    redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
-                }
-                // Reset timer
-                m_timeSinceAttack = 0.0f;
+                heavyAttack();
             }
 
             // Spin Attack
             else if (Input.GetKeyDown("e") && !m_rolling && !m_isWallSliding)
             {
-                // Right Hit box
-                Collider2D[] rightEnemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
-
-                for(int i = 0; i< rightEnemiesToDamage.Length;i++)
-                {
-                    rightEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
-                }
-
-                // for green enemies attack
-                Collider2D[] rightEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
-
-                for(int i = 0; i< rightEnemiesToAttack.Length;i++)
-                {
-                    rightEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
-                }
-
-                Collider2D[] rightRedEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
-
-                for(int i = 0; i< rightRedEnemiesToAttack.Length;i++)
-                {
-                    rightRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
-                }
-
-                // Left Hit box
-                Collider2D[] leftEnemiesToDamage = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,blueEnemy);
-
-                for(int i = 0; i< leftEnemiesToDamage.Length;i++)
-                {
-                    leftEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
-                }
-
-                // for green enemies attack
-                Collider2D[] leftEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,greenEnemy);
-
-                for(int i = 0; i< leftEnemiesToAttack.Length;i++)
-                {
-                    leftEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
-                }
-
-                Collider2D[] leftRedEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,redEnemy);
-
-                for(int i = 0; i< leftRedEnemiesToAttack.Length;i++)
-                {
-                    leftRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
-                }
+                spinAttack();
             }
 
             // Block
             else if (Input.GetMouseButtonDown(1) && !m_rolling)
             {
-                m_animator.SetTrigger("Block");
-                m_animator.SetBool("IdleBlock", true);
+                Block();
             }
 
             else if (Input.GetMouseButtonUp(1))
@@ -284,29 +175,20 @@ public class KnightController : MonoBehaviour
             // Roll
             else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
             {
-                m_rolling = true;
-                m_animator.SetTrigger("Roll");
-                this.roll.Execute(this.gameObject, this.m_facingDirection, m_rollForce);
+                Roll();
             }
                 
-
             //Jump
             else if (Input.GetKeyDown("space") && IsGrounded() && !m_rolling)
             {
-                m_animator.SetTrigger("Jump");
-                // m_grounded = false;
-                m_animator.SetBool("Grounded", false);
-                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-                //m_groundSensor.Disable(0.2f);
+                Jump();
             }
+
+            // Double Jump
             else if (Input.GetKeyDown("space") && !IsGrounded() && !m_rolling && canDoubleJump)
             {
                 canDoubleJump = false;
-                // Jump mechanic
-                m_animator.SetTrigger("Jump");
-                m_animator.SetBool("Grounded", false);
-                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-                // m_groundSensor.Disable(0.2f);
+                Jump();
             }
 
             //Run
@@ -448,5 +330,153 @@ public class KnightController : MonoBehaviour
         }
         
         return false;
+    }
+
+    // Functions for certain movement that will be used in the mobile implementation
+    void Attack()
+    {
+        Debug.Log("Normal Attack");
+            attackTimer = 0.0f;
+            m_currentAttack++;
+
+            // Loop back to one after third attack
+            if (m_currentAttack > 3)
+            {
+                m_currentAttack = 1;
+            }
+
+            // Reset Attack combo if time since last attack is too large
+            if (m_timeSinceAttack > 1.0f)
+            {
+                m_currentAttack = 1;
+            }
+
+            // Call one of three attack animations "Attack1", "Attack2", "Attack3"
+            m_animator.SetTrigger("Attack" + m_currentAttack);
+
+            // maybe add attack pts here?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
+
+            for(int i = 0; i< enemiesToDamage.Length;i++)
+            {
+                enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+            }
+
+            // for green enemies attack
+            Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
+
+            for(int i = 0; i< enemiesToAttack.Length;i++)
+            {
+                enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+            }
+
+            Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
+
+            for(int i = 0; i< redEnemiesToAttack.Length;i++)
+            {
+                redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+            }
+
+            // Reset timer
+            m_timeSinceAttack = 0.0f;
+    }
+
+    void heavyAttack()
+    {
+        attackTimer = 0.0f;
+            Debug.Log("Heavy Attack!");
+            // maybe add attack pts here?
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
+
+            for(int i = 0; i< enemiesToDamage.Length;i++)
+            {
+                enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+            }
+
+            // for green enemies attack
+            Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
+
+            for(int i = 0; i< enemiesToAttack.Length;i++)
+            {
+                enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+            }
+
+            Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
+
+            for(int i = 0; i< redEnemiesToAttack.Length;i++)
+            {
+                redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+            }
+            // Reset timer
+            m_timeSinceAttack = 0.0f;
+    }
+
+    void spinAttack()
+    {
+        // Right Hit box
+        Collider2D[] rightEnemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
+
+        for(int i = 0; i< rightEnemiesToDamage.Length;i++)
+        {
+            rightEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+        }
+
+        // for green enemies attack
+        Collider2D[] rightEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
+
+        for(int i = 0; i< rightEnemiesToAttack.Length;i++)
+        {
+            rightEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+        }
+
+        Collider2D[] rightRedEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
+
+        for(int i = 0; i< rightRedEnemiesToAttack.Length;i++)
+        {
+            rightRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+        }
+
+        // Left Hit box
+        Collider2D[] leftEnemiesToDamage = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,blueEnemy);
+
+        for(int i = 0; i< leftEnemiesToDamage.Length;i++)
+        {
+            leftEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+        }
+
+        // for green enemies attack
+        Collider2D[] leftEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,greenEnemy);
+
+        for(int i = 0; i< leftEnemiesToAttack.Length;i++)
+        {
+            leftEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+        }
+
+        Collider2D[] leftRedEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,redEnemy);
+
+        for(int i = 0; i< leftRedEnemiesToAttack.Length;i++)
+        {
+            leftRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+        }
+    }
+
+    void Roll()
+    {
+        m_rolling = true;
+        m_animator.SetTrigger("Roll");
+        this.roll.Execute(this.gameObject, this.m_facingDirection, m_rollForce);
+    }
+
+    void Jump()
+    {
+        m_animator.SetTrigger("Jump");
+        m_animator.SetBool("Grounded", false);
+        m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+    }
+
+    void Block()
+    {
+        m_animator.SetTrigger("Block");
+        m_animator.SetBool("IdleBlock", true);
     }
 }
