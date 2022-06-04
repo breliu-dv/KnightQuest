@@ -32,6 +32,7 @@ public class KnightController : MonoBehaviour
     private float               currentHealth = 0.0f;
     private float               timeAfterDamage = 0.0f;
     private bool                canDoubleJump = true;
+    private float               attackTimer = 0.0f;
 
     public HealthBar healthBar;
 
@@ -124,9 +125,16 @@ public class KnightController : MonoBehaviour
                 m_animator.SetTrigger("Hurt");
             }
 
-            //Attack
-            else if(Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+            else if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
             {
+                attackTimer += Time.deltaTime;
+                Debug.Log("Time");
+            }
+            //Attack
+            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < 2.0f && attackTimer > 0.0f)
+            {
+                Debug.Log("Normal Attack");
+                attackTimer = 0.0f;
                 m_currentAttack++;
 
                 // Loop back to one after third attack
@@ -167,6 +175,36 @@ public class KnightController : MonoBehaviour
                     redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
                 }
 
+                 // Reset timer
+                m_timeSinceAttack = 0.0f;                
+                
+            }
+            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= 2.0f)
+            {
+                attackTimer = 0.0f;
+                Debug.Log("Heavy Attack!");
+                // maybe add attack pts here?
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+
+                for(int i = 0; i< enemiesToDamage.Length;i++)
+                {
+                    enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                }
+
+                // for green enemies attack
+                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+
+                for(int i = 0; i< enemiesToAttack.Length;i++)
+                {
+                    enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                }
+
+                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+
+                for(int i = 0; i< redEnemiesToAttack.Length;i++)
+                {
+                    redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                }
                 // Reset timer
                 m_timeSinceAttack = 0.0f;
             }
