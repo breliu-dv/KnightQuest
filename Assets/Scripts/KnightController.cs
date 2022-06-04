@@ -28,9 +28,10 @@ public class KnightController : MonoBehaviour
     private float               m_rollCurrentTime;
     private Vector2             spawnPosition;
     [SerializeField] float      respawnTime = 1.5f;
-    private float maxHealth = 100f;
-    private float currentHealth = 0.0f;
-    private float timeAfterDamage = 0.0f;
+    private float               maxHealth = 100f;
+    private float               currentHealth = 0.0f;
+    private float               timeAfterDamage = 0.0f;
+    private bool                canDoubleJump = true;
 
     public HealthBar healthBar;
 
@@ -201,6 +202,15 @@ public class KnightController : MonoBehaviour
                 m_animator.SetBool("Grounded", false);
                 m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
                 //m_groundSensor.Disable(0.2f);
+            }
+            else if (Input.GetKeyDown("space") && !IsGrounded() && !m_rolling && canDoubleJump)
+            {
+                canDoubleJump = false;
+                // Jump mechanic
+                m_animator.SetTrigger("Jump");
+                m_animator.SetBool("Grounded", false);
+                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+                // m_groundSensor.Disable(0.2f);
             }
 
             //Run
