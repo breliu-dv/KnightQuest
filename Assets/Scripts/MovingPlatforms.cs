@@ -22,7 +22,6 @@ public class MovingPlatforms : MonoBehaviour
         {
             Debug.Log(transform.position);
             Debug.Log(knight.transform.position);
-            
             knight.transform.parent = transform;
         }
     }
