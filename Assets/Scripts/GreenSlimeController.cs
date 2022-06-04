@@ -79,7 +79,8 @@ public class GreenSlimeController : MonoBehaviour
         GameObject.Find("EnemyManager").GetComponent<PublisherManager>().SubscribeToGroup(1, Respawn);
     }
 
-    void Respawn() {
+    void Respawn() 
+    {
         this.transform.position = this.spawnPosition;
         this.currentHealth = this.maxHealth;
         this.spriteRenderer.enabled = true;
@@ -91,11 +92,12 @@ public class GreenSlimeController : MonoBehaviour
     {
         this.dazedTime = this.startDazeTime;
         this.currentHealth -= damage;
+
         if(this.currentHealth <= 0)
         {
-            //Destroy(gameObject);
             SlimeDeath();
         }
+
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
     }

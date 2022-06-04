@@ -59,7 +59,6 @@ public class RedSlimeController : MonoBehaviour
         this.newPos = this.transform.position;
         this.originalJumpSpeed = this.control.getJumpTakeOffSpeed();
         this.timePassedSinceStuck = 0;
-
     }
 
     void Awake()
@@ -73,6 +72,7 @@ public class RedSlimeController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<KnightController>();
+
         if (player != null) 
         {
             _psystem.transform.position = this.gameObject.transform.position;
@@ -194,7 +194,8 @@ public class RedSlimeController : MonoBehaviour
         GameObject.Find("EnemyManager").GetComponent<PublisherManager>().SubscribeToGroup(1, Respawn);
     }
 
-    void Respawn() {
+    void Respawn() 
+    {
         this.transform.position = this.spawnPosition;
         this.currentHealth = this.maxHealth;
         this.spriteRenderer.enabled = true;
@@ -206,11 +207,12 @@ public class RedSlimeController : MonoBehaviour
     {
         this.dazedTime = this.startDazeTime;
         this.currentHealth -= damage;
+
         if(this.currentHealth <= 0)
         {
-            // Destroy(gameObject);
             SlimeDeath();
         }
+
         // need animator here. (Its animators job).
         Debug.Log("damage Taken!");
     }

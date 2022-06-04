@@ -9,10 +9,23 @@ public class MovingPlatforms : MonoBehaviour
     internal PatrolPath.Mover mover;
     internal PlatformAnimatorController control;
     public bool disableYMovement;
-
+    public GameObject knight;
+ 
     void Awake()
     {
         control = GetComponent<PlatformAnimatorController>();
+    }
+
+    void OnCollisionEnter2D(Collision2D collides)
+    {
+        Debug.Log(collides.gameObject.transform);
+        collides.gameObject.transform.SetParent(gameObject.transform, true);
+    }
+
+    void OnCollisionExit2D(Collision2D collides)
+    {
+        Debug.Log("exit WITH MOVING PLAYFORM");
+        collides.gameObject.transform.parent = null;
     }
 
     void Update()
