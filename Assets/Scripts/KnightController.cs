@@ -84,6 +84,11 @@ public class KnightController : MonoBehaviour
             m_rolling = false;
         }
 
+        // Re-enable Double Jump when on the ground
+        if (IsGrounded())
+        {
+            canDoubleJump = true;
+        }
 
         m_animator.SetBool("Grounded", IsGrounded());
 
