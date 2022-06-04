@@ -25,6 +25,7 @@ public class KnightController : MonoBehaviour
     private float               m_timeSinceAttack = 0.0f;
     private float               m_delayToIdle = 0.0f;
     private float               m_rollDuration = 8.0f / 14.0f;
+    // private float               m_rollDuration = 1.3f;
     private float               m_rollCurrentTime;
     private Vector2             spawnPosition;
     [SerializeField] float      respawnTime = 1.5f;
@@ -38,7 +39,8 @@ public class KnightController : MonoBehaviour
 
     // variables to attack enemies.
     public float attackRange;
-    public Transform attackPos;
+    public Transform rightAttackPos;
+    public Transform leftAttackPos;
     public LayerMask blueEnemy;
     public LayerMask greenEnemy;
     public LayerMask redEnemy;
@@ -67,7 +69,7 @@ public class KnightController : MonoBehaviour
 
     // Update is called once per frame
     void Update ()
-    {
+    {   
         timeAfterDamage += Time.deltaTime;
         // print(IsGrounded());
         // Increase timer that controls attack combo
@@ -83,6 +85,7 @@ public class KnightController : MonoBehaviour
         if(m_rollCurrentTime > m_rollDuration)
         {
             m_rolling = false;
+            m_rollCurrentTime = 0.0f;
         }
 
         // Re-enable Double Jump when on the ground
@@ -97,19 +100,33 @@ public class KnightController : MonoBehaviour
         if (this.currentHealth > 0f) 
         {
             float inputX = Input.GetAxis("Horizontal");
-
-            // Swap direction of sprite depending on walk direction
-            if (inputX > 0)
+            if(inputX > 0 && m_rolling)
             {
-                this.right.Execute(this.gameObject, inputX, m_speed);
+                m_facingDirection = 1;
+                float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                this.right.Execute(this.gameObject, inputX, speed);
+            }
+            else if (inputX < 0 && m_rolling)
+            {
+                m_facingDirection = -1;
+                float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                this.left.Execute(this.gameObject, inputX, speed);
+            }
+            // Swap direction of sprite depending on walk direction
+            else if (inputX > 0)
+            {
+                float speed = inputX * m_speed;
+                this.right.Execute(this.gameObject, inputX, speed);
                 m_facingDirection = 1;
             }
                 
             else if (inputX < 0)
             {
-                this.left.Execute(this.gameObject, inputX, m_speed);
+                float speed = inputX * m_speed;
+                this.left.Execute(this.gameObject, inputX, speed);
                 m_facingDirection = -1;
             }
+            
 
             //Set AirSpeed in animator
             m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
@@ -119,19 +136,12 @@ public class KnightController : MonoBehaviour
             m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
             m_animator.SetBool("WallSlide", m_isWallSliding);
 
-            //Hurt
-            if (Input.GetKeyDown("q") && !m_rolling)
-            {
-                m_animator.SetTrigger("Hurt");
-            }
-
-            else if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+            if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
             {
                 attackTimer += Time.deltaTime;
-                Debug.Log("Time");
             }
             //Attack
-            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < 2.0f && attackTimer > 0.0f)
+            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < 2.0f && attackTimer > 0.0f && !m_isWallSliding)
             {
                 Debug.Log("Normal Attack");
                 attackTimer = 0.0f;
@@ -153,7 +163,7 @@ public class KnightController : MonoBehaviour
                 m_animator.SetTrigger("Attack" + m_currentAttack);
 
                 // maybe add attack pts here?
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
 
                 for(int i = 0; i< enemiesToDamage.Length;i++)
                 {
@@ -161,14 +171,14 @@ public class KnightController : MonoBehaviour
                 }
 
                 // for green enemies attack
-                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
 
                 for(int i = 0; i< enemiesToAttack.Length;i++)
                 {
                     enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
                 }
 
-                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
 
                 for(int i = 0; i< redEnemiesToAttack.Length;i++)
                 {
@@ -179,12 +189,12 @@ public class KnightController : MonoBehaviour
                 m_timeSinceAttack = 0.0f;                
                 
             }
-            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= 2.0f)
+            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= 2.0f && !m_isWallSliding)
             {
                 attackTimer = 0.0f;
                 Debug.Log("Heavy Attack!");
                 // maybe add attack pts here?
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,blueEnemy);
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
 
                 for(int i = 0; i< enemiesToDamage.Length;i++)
                 {
@@ -192,14 +202,14 @@ public class KnightController : MonoBehaviour
                 }
 
                 // for green enemies attack
-                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,greenEnemy);
+                Collider2D[] enemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
 
                 for(int i = 0; i< enemiesToAttack.Length;i++)
                 {
                     enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
                 }
 
-                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(attackPos.position,attackRange,redEnemy);
+                Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
 
                 for(int i = 0; i< redEnemiesToAttack.Length;i++)
                 {
@@ -207,6 +217,56 @@ public class KnightController : MonoBehaviour
                 }
                 // Reset timer
                 m_timeSinceAttack = 0.0f;
+            }
+
+            // Spin Attack
+            else if (Input.GetKeyDown("e") && !m_rolling && !m_isWallSliding)
+            {
+                // Right Hit box
+                Collider2D[] rightEnemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
+
+                for(int i = 0; i< rightEnemiesToDamage.Length;i++)
+                {
+                    rightEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                }
+
+                // for green enemies attack
+                Collider2D[] rightEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,greenEnemy);
+
+                for(int i = 0; i< rightEnemiesToAttack.Length;i++)
+                {
+                    rightEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                }
+
+                Collider2D[] rightRedEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
+
+                for(int i = 0; i< rightRedEnemiesToAttack.Length;i++)
+                {
+                    rightRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                }
+
+                // Left Hit box
+                Collider2D[] leftEnemiesToDamage = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,blueEnemy);
+
+                for(int i = 0; i< leftEnemiesToDamage.Length;i++)
+                {
+                    leftEnemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                }
+
+                // for green enemies attack
+                Collider2D[] leftEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,greenEnemy);
+
+                for(int i = 0; i< leftEnemiesToAttack.Length;i++)
+                {
+                    leftEnemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                }
+
+                Collider2D[] leftRedEnemiesToAttack = Physics2D.OverlapCircleAll(leftAttackPos.position,attackRange,redEnemy);
+
+                for(int i = 0; i< leftRedEnemiesToAttack.Length;i++)
+                {
+                    leftRedEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                }
             }
 
             // Block
@@ -226,7 +286,7 @@ public class KnightController : MonoBehaviour
             {
                 m_rolling = true;
                 m_animator.SetTrigger("Roll");
-                this.roll.Execute(this.gameObject, this.m_facingDirection, this.m_rollForce);
+                this.roll.Execute(this.gameObject, this.m_facingDirection, m_rollForce);
             }
                 
 
@@ -289,7 +349,7 @@ public class KnightController : MonoBehaviour
     public void onDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position,attackRange);
+        Gizmos.DrawWireSphere(rightAttackPos.position,attackRange);
     }
 
     public void DoDamage(int damage) 
