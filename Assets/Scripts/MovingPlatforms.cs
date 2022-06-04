@@ -16,16 +16,24 @@ public class MovingPlatforms : MonoBehaviour
         control = GetComponent<PlatformAnimatorController>();
     }
 
-    void OnCollisionEnter2D(Collision2D collides)
+    void OnCollisionEnter2D(Collision2D otherCollide)
     {
-        Debug.Log(collides.gameObject.transform);
-        collides.gameObject.transform.SetParent(gameObject.transform, true);
+        if(otherCollide.gameObject == knight)
+        {
+            Debug.Log(transform.position);
+            Debug.Log(knight.transform.position);
+            
+            knight.transform.parent = transform;
+        }
     }
 
-    void OnCollisionExit2D(Collision2D collides)
+    void OnCollisionExit2D(Collision2D otherCollide)
     {
-        Debug.Log("exit WITH MOVING PLAYFORM");
-        collides.gameObject.transform.parent = null;
+        if(otherCollide.gameObject == knight)
+        {
+            Debug.Log("exit WITH MOVING PLAYFORM");
+            knight.transform.parent = null;
+        }
     }
 
     void Update()
