@@ -35,8 +35,10 @@ public class KnightController : MonoBehaviour
     private bool                canDoubleJump = true;
     private float               attackTimer = 0.0f;
     public bool                 respawnAllEnemies;
+    public bool                 isHeldDown=false;
 
     public HealthBar healthBar;
+    public Joystick joystick;
 
     // variables to attack enemies.
     public float attackRange;
@@ -71,146 +73,258 @@ public class KnightController : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {   
-        timeAfterDamage += Time.deltaTime;
-        // print(IsGrounded());
-        // Increase timer that controls attack combo
-        m_timeSinceAttack += Time.deltaTime;
+        ///mobile version
+        #if UNITY_IOS || UNITY_ANDROID
 
-        // Increase timer that checks roll duration
-        if(m_rolling)
-        {
-            m_rollCurrentTime += Time.deltaTime;
-        }
+            timeAfterDamage += Time.deltaTime;
+            // print(IsGrounded());
+            // Increase timer that controls attack combo
+            m_timeSinceAttack += Time.deltaTime;
 
-        // Disable rolling if timer extends duration
-        if(m_rollCurrentTime > m_rollDuration)
-        {
-            m_rolling = false;
-            m_rollCurrentTime = 0.0f;
-        }
-
-        // Re-enable Double Jump when on the ground
-        if (IsGrounded())
-        {
-            canDoubleJump = true;
-        }
-
-        m_animator.SetBool("Grounded", IsGrounded());
-
-        // -- Handle input and movement --
-        if (this.currentHealth > 0f) 
-        {
-            float inputX = Input.GetAxis("Horizontal");
-            if(inputX > 0 && m_rolling)
+            // Increase timer that checks roll duration
+            if(m_rolling)
             {
-                m_facingDirection = 1;
-                float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
-                this.right.Execute(this.gameObject, inputX, speed);
-            }
-            else if (inputX < 0 && m_rolling)
-            {
-                m_facingDirection = -1;
-                float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
-                this.left.Execute(this.gameObject, inputX, speed);
-            }
-            // Swap direction of sprite depending on walk direction
-            else if (inputX > 0)
-            {
-                float speed = inputX * m_speed;
-                this.right.Execute(this.gameObject, inputX, speed);
-                m_facingDirection = 1;
-            }
-                
-            else if (inputX < 0)
-            {
-                float speed = inputX * m_speed;
-                this.left.Execute(this.gameObject, inputX, speed);
-                m_facingDirection = -1;
-            }
-            
-
-            //Set AirSpeed in animator
-            m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
-
-            // -- Handle Animations --
-            //Wall Slide
-            m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
-            m_animator.SetBool("WallSlide", m_isWallSliding);
-
-            // Increment Attack Charge Timer
-            if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
-            {
-                attackTimer += Time.deltaTime;
+                m_rollCurrentTime += Time.deltaTime;
             }
 
-            //Attack
-            else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
+            // Disable rolling if timer extends duration
+            if(m_rollCurrentTime > m_rollDuration)
             {
-                Attack();                
-                
+                m_rolling = false;
+                m_rollCurrentTime = 0.0f;
             }
 
-            // Heavy Attack
-            else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
+            // Re-enable Double Jump when on the ground
+            if (IsGrounded())
             {
-                heavyAttack();
+                canDoubleJump = true;
             }
 
-            // Spin Attack
-            else if (Input.GetKeyDown("e") && !m_rolling && !m_isWallSliding)
-            {
-                spinAttack();
-            }
+            m_animator.SetBool("Grounded", IsGrounded());
 
-            // Block
-            else if (Input.GetMouseButtonDown(1) && !m_rolling)
+            // -- Handle input and movement --
+            if (this.currentHealth > 0f) 
             {
-                Block();
-            }
-
-            else if (Input.GetMouseButtonUp(1))
-            {
-                m_animator.SetBool("IdleBlock", false);
-            }
-
-            // Roll
-            else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
-            {
-                Roll();
-            }
-                
-            //Jump
-            else if (Input.GetKeyDown("space") && IsGrounded() && !m_rolling)
-            {
-                Jump();
-            }
-
-            // Double Jump
-            else if (Input.GetKeyDown("space") && !IsGrounded() && !m_rolling && canDoubleJump)
-            {
-                canDoubleJump = false;
-                Jump();
-            }
-
-            //Run
-            else if (Mathf.Abs(inputX) > Mathf.Epsilon)
-            {
-                // Reset timer
-                m_delayToIdle = 0.05f;
-                m_animator.SetInteger("AnimState", 1);
-            }
-
-            //Idle
-            else
-            {
-                // Prevents flickering transitions to idle
-                m_delayToIdle -= Time.deltaTime;
-                if (m_delayToIdle < 0)
+                float inputX = joystick.Horizontal;
+                float inputY = joystick.Vertical;
+                if(inputX > 0 && m_rolling)
                 {
-                    m_animator.SetInteger("AnimState", 0);
+                    m_facingDirection = 1;
+                    float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                    this.right.Execute(this.gameObject, inputX, speed);
+                }
+                else if (inputX < 0 && m_rolling)
+                {
+                    m_facingDirection = -1;
+                    float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                    this.left.Execute(this.gameObject, inputX, speed);
+                }
+                // Swap direction of sprite depending on walk direction
+                else if (inputX > 0)
+                {
+                    float speed = inputX * m_speed;
+                    this.right.Execute(this.gameObject, inputX, speed);
+                    m_facingDirection = 1;
+                }
+                    
+                else if (inputX < 0)
+                {
+                    float speed = inputX * m_speed;
+                    this.left.Execute(this.gameObject, inputX, speed);
+                    m_facingDirection = -1;
+                }
+                
+
+                //Set AirSpeed in animator
+                m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
+
+                // -- Handle Animations --
+                //Wall Slide
+                m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
+                m_animator.SetBool("WallSlide", m_isWallSliding);
+
+                // Increment Attack Charge Timer
+                if (isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling)
+                {
+                    attackTimer += Time.deltaTime;
+                    Debug.Log(attackTimer);
+                }
+
+                //Attack
+                else if(!isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
+                {
+                    Attack();                
+                }
+
+                // Heavy Attack
+                else if (!isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
+                {
+                    heavyAttack();
+                }
+
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    m_animator.SetBool("IdleBlock", false);
+                }
+
+                //Run
+                else if (Mathf.Abs(inputX) > Mathf.Epsilon)
+                {
+                    // Reset timer
+                    m_delayToIdle = 0.05f;
+                    m_animator.SetInteger("AnimState", 1);
+                }
+
+                //Idle
+                else
+                {
+                    // Prevents flickering transitions to idle
+                    m_delayToIdle -= Time.deltaTime;
+                    if (m_delayToIdle < 0)
+                    {
+                        m_animator.SetInteger("AnimState", 0);
+                    }
                 }
             }
-        }
+
+
+        //desktop version
+        #else
+            Destroy (GameObject.Find ("Mobile Inputs"));
+            timeAfterDamage += Time.deltaTime;
+            // print(IsGrounded());
+            // Increase timer that controls attack combo
+            m_timeSinceAttack += Time.deltaTime;
+
+            // Increase timer that checks roll duration
+            if(m_rolling)
+            {
+                m_rollCurrentTime += Time.deltaTime;
+            }
+
+            // Disable rolling if timer extends duration
+            if(m_rollCurrentTime > m_rollDuration)
+            {
+                m_rolling = false;
+                m_rollCurrentTime = 0.0f;
+            }
+
+            // Re-enable Double Jump when on the ground
+            if (IsGrounded())
+            {
+                canDoubleJump = true;
+            }
+
+            m_animator.SetBool("Grounded", IsGrounded());
+
+            // -- Handle input and movement --
+            if (this.currentHealth > 0f) 
+            {
+                float inputX = Input.GetAxis("Horizontal");
+                if(inputX > 0 && m_rolling)
+                {
+                    m_facingDirection = 1;
+                    float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                    this.right.Execute(this.gameObject, inputX, speed);
+                }
+                else if (inputX < 0 && m_rolling)
+                {
+                    m_facingDirection = -1;
+                    float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
+                    this.left.Execute(this.gameObject, inputX, speed);
+                }
+                // Swap direction of sprite depending on walk direction
+                else if (inputX > 0)
+                {
+                    float speed = inputX * m_speed;
+                    this.right.Execute(this.gameObject, inputX, speed);
+                    m_facingDirection = 1;
+                }
+                    
+                else if (inputX < 0)
+                {
+                    float speed = inputX * m_speed;
+                    this.left.Execute(this.gameObject, inputX, speed);
+                    m_facingDirection = -1;
+                }
+                
+
+                //Set AirSpeed in animator
+                m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
+
+                // -- Handle Animations --
+                //Wall Slide
+                m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
+                m_animator.SetBool("WallSlide", m_isWallSliding);
+
+                // Increment Attack Charge Timer
+                if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+                {
+                    attackTimer += Time.deltaTime;
+                }
+
+                //Attack
+                else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
+                {
+                    Attack();                
+                    
+                }
+
+                // Heavy Attack
+                else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
+                {
+                    heavyAttack();
+                }
+
+                // Spin Attack
+                else if (Input.GetKeyDown("e") && !m_rolling && !m_isWallSliding)
+                {
+                    spinAttack();
+                }
+
+                // Block
+                else if (Input.GetMouseButtonDown(1) && !m_rolling)
+                {
+                    Block();
+                }
+
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    m_animator.SetBool("IdleBlock", false);
+                }
+
+                // Roll
+                else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
+                {
+                    Roll();
+                }
+                    
+                //Jump
+                else if (Input.GetKeyDown("space"))
+                {
+                    Jump();
+                }
+
+                //Run
+                else if (Mathf.Abs(inputX) > Mathf.Epsilon)
+                {
+                    // Reset timer
+                    m_delayToIdle = 0.05f;
+                    m_animator.SetInteger("AnimState", 1);
+                }
+
+                //Idle
+                else
+                {
+                    // Prevents flickering transitions to idle
+                    m_delayToIdle -= Time.deltaTime;
+                    if (m_delayToIdle < 0)
+                    {
+                        m_animator.SetInteger("AnimState", 0);
+                    }
+                }
+            }
+        #endif
     }
 
     public void SetPlayerHealth(float newHealthValue)
@@ -302,6 +416,18 @@ public class KnightController : MonoBehaviour
     {
         this.spawnPosition = newSpawn;
     }
+
+    public void onPress ()
+     {
+         isHeldDown = true;
+         Debug.Log(isHeldDown);
+     }
+ 
+     public void onRelease ()
+     {
+         isHeldDown = false;
+         Debug.Log(isHeldDown);
+     }
 
     bool IsGrounded() 
     {
@@ -461,23 +587,51 @@ public class KnightController : MonoBehaviour
         }
     }
 
-    void Roll()
+    public void mobile_spin()
     {
-        m_rolling = true;
-        m_animator.SetTrigger("Roll");
-        this.roll.Execute(this.gameObject, this.m_facingDirection, m_rollForce);
+        if (!m_rolling && !m_isWallSliding)
+        {
+            spinAttack();
+        }
     }
 
-    void Jump()
+    public void Roll()
     {
-        m_animator.SetTrigger("Jump");
-        m_animator.SetBool("Grounded", false);
-        m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+        if (!m_rolling && !m_isWallSliding && IsGrounded())
+        {
+            m_rolling = true;
+            m_animator.SetTrigger("Roll");
+            this.roll.Execute(this.gameObject, this.m_facingDirection, m_rollForce);
+        }
+        
     }
 
-    void Block()
+    public void Jump()
     {
-        m_animator.SetTrigger("Block");
-        m_animator.SetBool("IdleBlock", true);
+        if (IsGrounded() && !m_rolling)
+        {
+            m_animator.SetTrigger("Jump");
+            m_animator.SetBool("Grounded", false);
+            m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+        }
+
+            // Double Jump
+        else if (!IsGrounded() && !m_rolling && canDoubleJump)
+        {
+            canDoubleJump = false;
+            m_animator.SetTrigger("Jump");
+            m_animator.SetBool("Grounded", false);
+            m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+        }
+    }
+
+    public void Block()
+    {
+        if (!m_rolling)
+        {
+            m_animator.SetTrigger("Block");
+            m_animator.SetBool("IdleBlock", true);
+        }
+        
     }
 }
