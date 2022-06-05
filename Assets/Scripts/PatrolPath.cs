@@ -18,14 +18,8 @@ public partial class PatrolPath : MonoBehaviour
         endPosition = Vector3.right;
     }
 
-    void Awake()
-    {
-        Debug.Log(this.gameObject.transform.position == this.transform.parent.gameObject.transform.position);
-    }
-
     void Update()
     {
-        Debug.Log(this.gameObject.transform.position == this.transform.parent.gameObject.transform.position);
         if(movingObj != null)
         {
             gameObject.transform.position = movingObj.transform.position;
