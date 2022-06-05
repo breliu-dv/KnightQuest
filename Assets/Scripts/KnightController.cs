@@ -49,6 +49,7 @@ public class KnightController : MonoBehaviour
     public float damage;
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
+    [SerializeField] SoundManager soundManager;
 
 
     // Use this for initialization
@@ -361,6 +362,7 @@ public class KnightController : MonoBehaviour
             for(int i = 0; i< enemiesToDamage.Length;i++)
             {
                 enemiesToDamage[i].GetComponent<BlueSlimeController>().TakeDamage(damage);
+                soundManager.NotifyHit();
             }
 
             // for green enemies attack
@@ -369,6 +371,7 @@ public class KnightController : MonoBehaviour
             for(int i = 0; i< enemiesToAttack.Length;i++)
             {
                 enemiesToAttack[i].GetComponent<GreenSlimeController>().TakeDamage(damage);
+                soundManager.NotifyHit();
             }
 
             Collider2D[] redEnemiesToAttack = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,redEnemy);
@@ -376,6 +379,7 @@ public class KnightController : MonoBehaviour
             for(int i = 0; i< redEnemiesToAttack.Length;i++)
             {
                 redEnemiesToAttack[i].GetComponent<RedSlimeController>().TakeDamage(damage);
+                soundManager.NotifyHit();
             }
 
             // Reset timer
