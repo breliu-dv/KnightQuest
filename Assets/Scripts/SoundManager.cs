@@ -86,7 +86,9 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        track.audioSource.Play();
+        Debug.Log(track.title);
+        //track.audioSource.Play();
+        track.audioSource.PlayOneShot(track.clip);
     }
 
     public void NotifyJump()
@@ -96,7 +98,9 @@ public class SoundManager : MonoBehaviour
 
     public void NotifyHit()
     {
-        this.PlaySoundEffect("hit");
+        
+        this.PlaySoundEffect("hit" + Random.Range(0, sfxClips.Count));
+        
     }
 
     public void NotifyPickup()
