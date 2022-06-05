@@ -420,13 +420,11 @@ public class KnightController : MonoBehaviour
     public void onPress ()
      {
          isHeldDown = true;
-         Debug.Log(isHeldDown);
      }
  
      public void onRelease ()
      {
          isHeldDown = false;
-         Debug.Log(isHeldDown);
      }
 
     bool IsGrounded() 
