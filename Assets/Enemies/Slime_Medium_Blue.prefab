@@ -222,7 +222,7 @@ MonoBehaviour:
   maxJumpInterval: 5
   speed: 0
   startDazeTime: 0
-  maxHealth: 60
+  maxHealth: 70
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

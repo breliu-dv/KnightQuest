@@ -197,7 +197,7 @@ MonoBehaviour:
     m_Bits: 256
   speed: 0
   startDazeTime: 0
-  maxHealth: 60
+  maxHealth: 80
 --- !u!1 &2709085380778589950
 GameObject:
   m_ObjectHideFlags: 0

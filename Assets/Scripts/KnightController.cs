@@ -29,7 +29,7 @@ public class KnightController : MonoBehaviour
     private float               m_rollCurrentTime;
     private Vector2             spawnPosition;
     [SerializeField] float      respawnTime = 1.5f;
-    private float               maxHealth = 100f;
+    private float               maxHealth = 60f;
     private float               currentHealth = 0.0f;
     private float               timeAfterDamage = 0.0f;
     private bool                canDoubleJump = true;
