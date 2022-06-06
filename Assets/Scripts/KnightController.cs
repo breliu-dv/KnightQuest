@@ -36,6 +36,7 @@ public class KnightController : MonoBehaviour
     private float               attackTimer = 0.0f;
     public bool                 respawnAllEnemies;
     public bool                 isHeldDown=false;
+    public bool                 charging = false;
 
     public HealthBar healthBar;
     public Joystick joystick;
@@ -92,6 +93,8 @@ public class KnightController : MonoBehaviour
             {
                 m_rolling = false;
                 m_rollCurrentTime = 0.0f;
+                var m_body2d = gameObject.GetComponent<Rigidbody2D>();
+                m_body2d.velocity = new Vector2(0, m_body2d.velocity.y);
             }
 
             // Re-enable Double Jump when on the ground
@@ -107,32 +110,33 @@ public class KnightController : MonoBehaviour
             {
                 float inputX = joystick.Horizontal;
                 float inputY = joystick.Vertical;
-                if(inputX > 0 && m_rolling)
+                if(inputX > 0 && m_rolling && !charging)
                 {
                     m_facingDirection = 1;
                     float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
                     this.right.Execute(this.gameObject, inputX, speed);
                 }
-                else if (inputX < 0 && m_rolling)
+                else if (inputX < 0 && m_rolling && !charging)
                 {
                     m_facingDirection = -1;
                     float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
                     this.left.Execute(this.gameObject, inputX, speed);
                 }
                 // Swap direction of sprite depending on walk direction
-                else if (inputX > 0)
+                else if (inputX > 0 && !charging)
                 {
                     float speed = inputX * m_speed;
                     this.right.Execute(this.gameObject, inputX, speed);
                     m_facingDirection = 1;
                 }
                     
-                else if (inputX < 0)
+                else if (inputX < 0 && !charging)
                 {
                     float speed = inputX * m_speed;
                     this.left.Execute(this.gameObject, inputX, speed);
                     m_facingDirection = -1;
                 }
+
                 
 
                 //Set AirSpeed in animator
@@ -153,13 +157,15 @@ public class KnightController : MonoBehaviour
                 //Attack
                 else if(!isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
                 {
-                    Attack();                
+                    Attack();               
+                    charging = false; 
                 }
 
                 // Heavy Attack
                 else if (!isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
                 {
                     heavyAttack();
+                    charging = false;
                 }
 
                 else if (Input.GetMouseButtonUp(1))
@@ -188,7 +194,7 @@ public class KnightController : MonoBehaviour
             }
 
 
-        //desktop version
+        //desktop version and webgl
         #else
             Destroy (GameObject.Find ("Mobile Inputs"));
             timeAfterDamage += Time.deltaTime;
@@ -207,6 +213,8 @@ public class KnightController : MonoBehaviour
             {
                 m_rolling = false;
                 m_rollCurrentTime = 0.0f;
+                var m_body2d = gameObject.GetComponent<Rigidbody2D>();
+                m_body2d.velocity = new Vector2(0, m_body2d.velocity.y);
             }
 
             // Re-enable Double Jump when on the ground
@@ -221,27 +229,27 @@ public class KnightController : MonoBehaviour
             if (this.currentHealth > 0f) 
             {
                 float inputX = Input.GetAxis("Horizontal");
-                if(inputX > 0 && m_rolling)
+                if(inputX > 0 && m_rolling && !charging)
                 {
                     m_facingDirection = 1;
                     float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
                     this.right.Execute(this.gameObject, inputX, speed);
                 }
-                else if (inputX < 0 && m_rolling)
+                else if (inputX < 0 && m_rolling && !charging)
                 {
                     m_facingDirection = -1;
                     float speed = (m_facingDirection * m_rollForce) + (inputX * m_speed);
                     this.left.Execute(this.gameObject, inputX, speed);
                 }
                 // Swap direction of sprite depending on walk direction
-                else if (inputX > 0)
+                else if (inputX > 0 && !charging)
                 {
                     float speed = inputX * m_speed;
                     this.right.Execute(this.gameObject, inputX, speed);
                     m_facingDirection = 1;
                 }
                     
-                else if (inputX < 0)
+                else if (inputX < 0 && !charging)
                 {
                     float speed = inputX * m_speed;
                     this.left.Execute(this.gameObject, inputX, speed);
@@ -261,12 +269,14 @@ public class KnightController : MonoBehaviour
                 if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling)
                 {
                     attackTimer += Time.deltaTime;
+                    charging = true;
                 }
 
                 //Attack
                 else if(!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
                 {
-                    Attack();                
+                    Attack();         
+                    charging = false;       
                     
                 }
 
@@ -274,6 +284,7 @@ public class KnightController : MonoBehaviour
                 else if (!Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer >= heavyChargeTime && !m_isWallSliding)
                 {
                     heavyAttack();
+                    charging = false;
                 }
 
                 // Spin Attack
