@@ -37,7 +37,7 @@ HealthBar Ui
 
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
 
-A standard physics system was used when movement was being implemented into the game. Our team decided to use a prefab that was found on the Unity Asset Store, which included some premade movement options. In addition to modifying the premade movement options, we also implemented our own movement moves, such as double jump, a spin attack, and a heavy attack.
+A standard physics system was used when movement was being implemented into the game. Our team decided to use a prefab that was found on the Unity Asset Store, which included some premade movement options. In addition to modifying the premade movement options, we also implemented our own movement moves, such as double jump and a heavy attack.
 
 [Right Character Movement Class](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/MoveCharacterRight.cs#L1)
 
