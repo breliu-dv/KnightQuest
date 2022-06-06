@@ -47,7 +47,7 @@ The Gameplay UI provided tons of pop-up menus which allows the players to explor
 
 
 
-- Pop-up ControlMenu - This menu provides players to look at the controls before they start the game. Based on the feedback from other players non-group members, they are quite confuse on what are the controls of the game. So we decided to add a control menu in order to help the players play the game without guessing the controls. These control menu only provides on desktop version, since the mobile version are pretty straightforward. 
+- [Pop-up ControlMenu](https://user-images.githubusercontent.com/58205103/172249171-9e655f05-925c-4f12-a48f-46cd2bbfcfca.png) - This menu provides players to look at the controls before they start the game. Based on the feedback from other players non-group members, they are quite confuse on what are the controls of the game. So we decided to add a control menu in order to help the players play the game without guessing the controls. These control menu only provides on desktop version, since the mobile version are pretty straightforward. 
 
 - Narrative(Mission) UI - I added a [mission narrative UI](https://drive.google.com/file/d/1mJtjdSWjwBttYB0ggX10bPFK7CWL_Yp7/view?usp=sharing) to explain the objective of the game and explain a mini-backstory.
 
