@@ -31,7 +31,7 @@ The user interface is designed based on the core game logic and giving necessary
 
 - Easy Scene - This Scene provides "Easy Difficulty" gameplay where their less enemies and the enemies are weaker.
 - Ending Scene - This Scene provides "Ending Menu Scene" where it asks the player to play again or go back to the main menu. 
-- Hard Scene - This Scene provides "Hard Difficulty" gameplay where their more enemies and the enemies are stronger than "Medium Difficulty".
+- Hard Scene - This Scene provides "Hard Difficulty" gameplay where their more enemies and the enemies are stronger than "Medium Difficulty". The difference with this difficulty is that the enemies will respawn to its own position when the player dies. 
 - MainMenu Scene -  This Scene provides three things "Play Game", "Controls" and "Quit" button.
 - Medium Scene - This Scene provides "Medium Difficulty" gameplay where their more enemies and the enemies are stronger than "Easy Difficulty".
 
@@ -41,7 +41,8 @@ The Gameplay UI provided tons of pop-up menus which allows the players to explor
 
 <img width="894" alt="Screen Shot 2022-06-06 at 12 25 15 AM" src="https://user-images.githubusercontent.com/58205103/172207449-3cf7ee82-ef2f-4802-95ca-44a13c2287c5.png">
 
-- Pop-up MainMenu - This is the main scene when you are about to start the game. Players can look the controls before they start the game. 
+- [Pop-up MainMenu](https://user-images.githubusercontent.com/58205103/172240085-cc2b8307-c72e-4069-a5f9-700d6f8ee843.png) - This is the main scene when you are about to start the game. Players can look the controls before they start the game. 
+
 
 
 - Pop-up ControlMenu - This menu provides players to look at the controls before they start the game. Based on the feedback from other players non-group members, they are quite confuse on what are the controls of the game. So we decided to add a control menu in order to help the players play the game without guessing the controls. These control menu only provides on desktop version, since the mobile version are pretty straightforward. 
