@@ -88,7 +88,7 @@ Last but not least, another important design pattern that was used is the observ
 
 https://stealthix.itch.io/animated-slimes
 
-https://stuartspixelgames.com/2021/10/15how-to-use-2d-sprites-with-particle-emitter-unity/
+https://stuartspixelgames.com/2021/10/15/how-to-use-2d-sprites-with-particle-emitter-unity/
 
 https://www.noveltech.dev/work/tutorial-platformer-2d-unity/
 
