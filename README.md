@@ -72,6 +72,18 @@ Besides the slimes, I also managed other important game systems and the underlyi
 
 Last but not least, another important design pattern that was used is the observer pattern of which was modified and adopted from exercise 3. This effectively allows the slimes to re-spawn after they die during the hard difficulty of the game in a modular and easily maintainable manner. When the slimes die, aside from the usual logic to handle the disabling of the slime, they also automatically [subscribe to the re-spawn group](https://github.com/breliu-dv/KnightQuest/blob/4a70f0b0d863c637548bb8ee8b829f9192124834/Assets/Scripts/BlueSlimeController.cs#L248) and when the player plays the hard difficulty, then the [re-spawning of the enemies gets triggered](https://github.com/breliu-dv/KnightQuest/blob/4a70f0b0d863c637548bb8ee8b829f9192124834/Assets/Scripts/KnightController.cs#L393) when the knight re-spawns from its own death.
 
+### Sources used:
+
+https://stealthix.itch.io/animated-slimes
+
+https://stuartspixelgames.com/2021/10/15how-to-use-2d-sprites-with-particle-emitter-unity/
+
+https://www.noveltech.dev/work/tutorial-platformer-2d-unity/
+
+https://www.youtube.com/watch?v=UlEE6wjWuCY
+
+https://www.mousawidev.com/blog/make-2d-explosions-in-unity
+
 ## Producer
 
 
