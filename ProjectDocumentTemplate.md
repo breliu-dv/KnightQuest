@@ -92,13 +92,13 @@ In order to enhance the game feel user experience and ensure that the game feel 
 
 For the slimes, I tuned the slime controller parameters for the slimes in order to ensure that the slimes respond promptly and smoothly when it is following the knight, while also allowing for a balanced difficulty so that some slimes are faster than others, jump more, have longer patrol paths, chase the player more aggressively in terms of movement speed, as well as the distance that the slime chases the player before it gives up. The main goal of this is to ensure that the slimes cause the player to feel that the challenge of encountering the slimes, and adopt a strategy for surviving the encounter (either by fighting the slime or escaping from the slime). 
 
-Animation controller and their parameters for the slimes:
+Animation controller and their parameters tuned for each slime:
 
 ![Alt text](https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/animationControl.png?raw=true)
 
 At the same time, because each slime has it's own unique properties and behavior (no two slimes have the same set of values in the fields of the unity inspector), the playability of the game is extended due to the uniqueness involved rather than simply repitition during each encounter with the enemies. In addition, the player will not be exhausted with the same slimes that all move at a same speed, instead, the player can essentially "take a break" between slimes of increased difficulty and also small streches of the game level that have less or even no slimes to deal with. This further enhances the mid level game feel experience as the player will not be completely burned out with fighting enemies before the player reaches the end of the level (where the real challenge with fighting the slimes come!).
 
-Controllers and their parameters for the green, blue, and red slimes, respectively:
+Controllers and their parameters that I tuned for the green, blue, and red slimes, respectively:
 
 ![](https://raw.githubusercontent.com/breliu-dv/KnightQuest/main/documentImages/greenSlimeControl.png)
 
@@ -109,3 +109,11 @@ Controllers and their parameters for the green, blue, and red slimes, respective
 In addition, the starting health and damage levels of both the slime and the knight are tuned such that the gameplay is coherently tuned between the slimes damaging the player and the player damaging the slime depending on the difficulty level. The player will have a slightly easier time with the enemies in the easy level while normal and hard difficulty levels will require the player to devise a smarter and potentially more conservative attack or encounter strategy in order to preserve the knight's health. Thus, the tuning of the different parameters that affects the difficulty of the game is vital for ensuring that this game can be enjoyable and fun for gamers of different abilities and backgrounds.
 
 Last but not least, I also added and adjusted the different parameters pertaining to the moving and disappearing platforms so that they provide a fair amount of challenge to the player to respond promptly to the control inputs, while ensuring that the transitions of the disappearing platforms are gradual. This is important in ensuring that the user can visually see the enviornment around them and devise a successful movement strategy and avoid falling onto the deadly traps. Most importantly, as the environment provides contextual clues to the player, the moving platforms and slimes all have to move at a smooth, reasonable speed. This is to ensure that the player has the sufficient reaction time that is needed to effectively time the strategically sound knight movements as well as respond to the jumps needed to navigate through the moving platforms, and knight movements needed to launch an effective attack against the slime enemies.
+
+The parameters that I tuned for the moving platforms:
+
+![](https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/disappearPlatform.png?raw=true)
+
+And for the disappearing platforms:
+
+![](https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/movingPlatform.png?raw=true)
