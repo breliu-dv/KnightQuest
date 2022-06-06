@@ -141,3 +141,14 @@ Our game was implemented on 4 different platforms: Windows, IOS, Android, and We
 [How the script identified the platform if the platform was IOS or Android](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L81)
 
 [How the script identified the platform if the platform was Windows or WebGL](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L208)
+
+## Sources Used
+https://stealthix.itch.io/animated-slimes
+
+https://stuartspixelgames.com/2021/10/15how-to-use-2d-sprites-with-particle-emitter-unity/
+
+https://www.noveltech.dev/work/tutorial-platformer-2d-unity/
+
+https://www.youtube.com/watch?v=UlEE6wjWuCY
+
+https://www.mousawidev.com/blog/make-2d-explosions-in-unity
