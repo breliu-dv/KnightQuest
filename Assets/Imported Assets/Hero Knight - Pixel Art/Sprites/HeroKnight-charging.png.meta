@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 596929d66e7b0bc409b8920193ac57fd
+guid: 07bd9a9ff0d8e734d9a2d151f407b2ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HeroKnightChargeAttack_1
+      name: HeroKnight-charging_0
       rect:
         serializedVersion: 2
-        x: 177
-        y: 10
-        width: 32
-        height: 45
+        x: 23
+        y: 4
+        width: 55
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f36dccf4b556c184ea200dfa77ffebd6
-      internalID: -874831271
+      spriteID: 74840ce82c1c2e24085021176ced3a65
+      internalID: -5541113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnightChargeAttack_2
+      name: HeroKnight-charging_1
       rect:
         serializedVersion: 2
-        x: 284
-        y: 8
-        width: 39
-        height: 39
+        x: 107
+        y: 4
+        width: 55
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc5d5dc057e2b2e4e8de859b265433c7
-      internalID: -1295988818
+      spriteID: 7751e4498814dcc4c9d331e17a7f8440
+      internalID: 904794072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnightChargeAttack_4
+      name: HeroKnight-charging_2
       rect:
         serializedVersion: 2
-        x: 426
-        y: 13
-        width: 49
-        height: 39
+        x: 206
+        y: 4
+        width: 55
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e65c2b36e2099df469da8c78fb1ec8b4
-      internalID: 228810185
+      spriteID: 5dbb4ebae3dad1c4d8245724095b746e
+      internalID: -922316218
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnightChargeAttack_5
+      name: HeroKnight-charging_3
       rect:
         serializedVersion: 2
-        x: 561
-        y: 13
-        width: 38
-        height: 39
+        x: 307
+        y: 4
+        width: 55
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,71 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47fe641828d238e4c9d85946cefdfe79
-      internalID: 1198554086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeroKnightChargeAttack_0
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 10
-        width: 41
-        height: 40
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67bed321f36be5e40bc92c4608e93147
-      internalID: -701167509
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeroKnightChargeAttack_3
-      rect:
-        serializedVersion: 2
-        x: 299
-        y: 9
-        width: 76
-        height: 49
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2b89d83dea4eeab4d8f1912cf0931554
-      internalID: 325701502
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeroKnightChargeAttack_6
-      rect:
-        serializedVersion: 2
-        x: 689
-        y: 12
-        width: 41
-        height: 40
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6085e352b9d97754580b1e3edf72ff05
-      internalID: -404377287
+      spriteID: f4cbc31644a86fc4dbd2eba54d260136
+      internalID: 691040570
       vertices: []
       indices: 
       edges: []
@@ -261,13 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HeroKnightChargeAttack_2: -1295988818
-      HeroKnightChargeAttack_1: -874831271
-      HeroKnightChargeAttack_6: -404377287
-      HeroKnightChargeAttack_0: -701167509
-      HeroKnightChargeAttack_5: 1198554086
-      HeroKnightChargeAttack_4: 228810185
-      HeroKnightChargeAttack_3: 325701502
+      HeroKnight-charging_1: 904794072
+      HeroKnight-charging_0: -5541113
+      HeroKnight-charging_2: -922316218
+      HeroKnight-charging_3: 691040570
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
