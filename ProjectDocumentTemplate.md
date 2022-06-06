@@ -92,7 +92,8 @@ In order to enhance the game feel user experience and ensure that the game feel 
 
 For the slimes, I tuned the following parameters for the slimes in order to ensure that the slimes respond promptly and smoothly when it is following the knight, while also allowing for a balanced difficulty so that some slimes are faster than others, jump more, have longer patrol paths, chase the player more aggressively in terms of movement speed, as well as the distance that the slime chases the player before it gives up. The main goal of this is to ensure that the slimes cause the player to feel that the challenge of encountering the slimes, and adopt a strategy for surviving the encounter (either by fighting the slime or escaping from the slime). 
 
-![Alt text](https://github.com/breliu-dv/KnightQuest/blob/main/animationControl.png?raw=true "Animation controller for the slimes")
+Animation controller for the slimes:
+![Alt text](https://github.com/breliu-dv/KnightQuest/blob/main/animationControl.png?raw=true)
 
 At the same time, because each slime has it's own unique properties and behavior (no two slimes have the same set of values in the fields of the unity inspector), the playability of the game is extended due to the uniqueness involved rather than simply repitition during each encounter with the enemies. In addition, the player will not be exhausted with the same slimes that all move at a same speed, instead, the player can essentially "take a break" between slimes of increased difficulty and also small streches of the game level that have less or even no slimes to deal with. This further enhances the mid level game feel experience as the player will not be completely burned out with fighting enemies before the player reaches the end of the level (where the real challenge with fighting the slimes come!).
 
