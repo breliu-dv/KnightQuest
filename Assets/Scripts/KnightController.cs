@@ -54,7 +54,7 @@ public class KnightController : MonoBehaviour
     public float damage;
     public LayerMask groundLayer;
     private Collision2D knightCollideObject;
-    [SerializeField] SoundManager soundManager;
+    private SoundManager soundManager;
 
 
     // Use this for initialization
@@ -72,6 +72,7 @@ public class KnightController : MonoBehaviour
         this.currentHealth = this.maxHealth;
         this.healthBar.SetMaxHealth(maxHealth);
         this.spawnPosition = this.transform.position;
+        this.soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
