@@ -36,7 +36,9 @@ public class KnightController : MonoBehaviour
     private float               attackTimer = 0.0f;
     public bool                 respawnAllEnemies;
     public bool                 isHeldDown=false;
-    public bool                 charging = false;
+    private bool                charging = false;
+    private float               chargeAnimationTimer = 0.0f;
+    
 
     public HealthBar healthBar;
     public Joystick joystick;
@@ -150,11 +152,17 @@ public class KnightController : MonoBehaviour
 
                 // Increment Attack Charge Timer
                 if (isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && !m_isWallSliding)
-                {
+                {                   
+                    
+                    chargeAnimationTimer += Time.deltaTime;
                     attackTimer += Time.deltaTime;
-                    Debug.Log(attackTimer);
+                    if(chargeAnimationTimer > 0.5f)
+                    {
+                        m_animator.SetTrigger("HeroKnight_Charging");
+                        chargeAnimationTimer = 0.0f;
+                    }
+                    charging = true;
                 }
-
                 //Attack
                 else if(!isHeldDown && m_timeSinceAttack > 0.25f && !m_rolling && attackTimer < heavyChargeTime && attackTimer > 0.0f && !m_isWallSliding)
                 {
@@ -168,6 +176,7 @@ public class KnightController : MonoBehaviour
                     heavyAttack();
                     charging = false;
                 }
+
 
                 else if (Input.GetMouseButtonUp(1))
                 {
@@ -268,8 +277,15 @@ public class KnightController : MonoBehaviour
 
                 // Increment Attack Charge Timer
                 if (Input.GetMouseButton(0) && m_timeSinceAttack > 0.25f && !m_rolling && !m_isWallSliding)
-                {
+                {                   
+                    
+                    chargeAnimationTimer += Time.deltaTime;
                     attackTimer += Time.deltaTime;
+                    if(chargeAnimationTimer > 0.5f)
+                    {
+                        m_animator.SetTrigger("HeroKnight_Charging");
+                        chargeAnimationTimer = 0.0f;
+                    }
                     charging = true;
                 }
 
@@ -286,12 +302,7 @@ public class KnightController : MonoBehaviour
                 {
                     heavyAttack();
                     charging = false;
-                }
-
-                // Spin Attack
-                else if (Input.GetKeyDown("e") && !m_rolling && !m_isWallSliding)
-                {
-                    spinAttack();
+                    
                 }
 
                 else if (Input.GetMouseButtonUp(1))
@@ -519,6 +530,7 @@ public class KnightController : MonoBehaviour
     {
         attackTimer = 0.0f;
         Debug.Log("Heavy Attack!");
+        m_animator.SetTrigger("HeroKnight_ChargeAttack");
         // maybe add attack pts here?
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(rightAttackPos.position,attackRange,blueEnemy);
 
