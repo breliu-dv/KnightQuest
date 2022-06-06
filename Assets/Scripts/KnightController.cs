@@ -293,12 +293,6 @@ public class KnightController : MonoBehaviour
                     spinAttack();
                 }
 
-                // Block
-                else if (Input.GetMouseButtonDown(1) && !m_rolling)
-                {
-                    Block();
-                }
-
                 else if (Input.GetMouseButtonUp(1))
                 {
                     m_animator.SetBool("IdleBlock", false);
