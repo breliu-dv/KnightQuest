@@ -80,9 +80,9 @@ https://stuartspixelgames.com/2021/10/15how-to-use-2d-sprites-with-particle-emit
 
 https://www.noveltech.dev/work/tutorial-platformer-2d-unity/
 
-https://www.youtube.com/watch?v=UlEE6wjWuCY
-
 https://www.mousawidev.com/blog/make-2d-explosions-in-unity
+
+Tutorial for moving platforms: https://www.youtube.com/watch?v=UlEE6wjWuCY
 
 ## Producer
 
