@@ -37,6 +37,17 @@ HealthBar Ui
 
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
 
+A standard physics system was used when movement was being implemented into the game. Our team decided to use a prefab that was found on the Unity Asset Store, which included some premade movement options. In addition to modifying the premade movement options, we also implemented our own movement moves, such as double jump, a spin attack, and a heavy attack.
+
+[Right Character Movement Class](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/MoveCharacterRight.cs#L1)
+
+[Left Character Movement Class](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/MoveCharacterLeft.cs#L1)
+
+[Character Roll Movement Class](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/CharacterRoll.cs#L1)
+
+[All other movement related functions](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L1)
+
+
 ## Animation and Visuals
 
 **List your assets including their sources and licenses.**
@@ -88,3 +99,8 @@ HealthBar Ui
 **Document what you added to and how you tweaked your game to improve its game feel.**
 
 ## Cross Platform
+Our game was implemented on 4 different platforms: Windows, IOS, Android, and WebGL. The main part for this sub-role was having the KnightController script identifying what platform the game was running on. The other main part was to design the controls to be similar between all platforms.
+
+[How the script identified the platform if the platform was IOS or Android](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L81)
+
+[How the script identified the platform if the platform was Windows or WebGL](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L208)
