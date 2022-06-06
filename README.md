@@ -138,15 +138,17 @@ Last but not least, another important design pattern that was used is the observ
 
 ### Sources used:
 
-https://stealthix.itch.io/animated-slimes
+[Tutorial for animated slimes](https://stealthix.itch.io/animated-slimes)
 
-https://stuartspixelgames.com/2021/10/15/how-to-use-2d-sprites-with-particle-emitter-unity/
+[For creating raining spikes](https://stuartspixelgames.com/2021/10/15/how-to-use-2d-sprites-with-particle-emitter-unity/)
 
-https://www.noveltech.dev/work/tutorial-platformer-2d-unity/
+[Tutorial for creating disappearing platforms](https://www.noveltech.dev/disappearing-platforms)
 
-https://www.mousawidev.com/blog/make-2d-explosions-in-unity
+[For creating a patrol path for enemies](https://www.noveltech.dev/simple-patrolling-monster-unity/)
 
-Tutorial for moving platforms: https://www.youtube.com/watch?v=UlEE6wjWuCY
+[For making explosions for red slimes](https://www.mousawidev.com/blog/make-2d-explosions-in-unity)
+
+[Tutorial for moving platforms](https://www.youtube.com/watch?v=UlEE6wjWuCY)
 
 ## Producer (Brandon Liu)
 
