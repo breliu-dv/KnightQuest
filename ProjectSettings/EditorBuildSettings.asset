@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hard.unity
     guid: bbb60c627187f44c28551ba0ec58ca04
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 524b99079a1e54e31a356fb45dc24674
   m_configObjects: {}

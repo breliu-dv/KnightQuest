@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class EndLevel : MonoBehaviour
 {
     private StateManager _mStateManager;
@@ -23,7 +23,7 @@ public class EndLevel : MonoBehaviour
     {
         if (other.transform.tag == "Player") 
         {
-            _mStateManager.NotifyEndLevel();
+            SceneManager.LoadScene("Ending");
         }
     }
 }
