@@ -270,7 +270,8 @@ Me and my team spend a lot of time thinking about regarding to the narrative to 
 This is the mini-narative of our game:
 **"The Royal Family has been chased by these powerful slimes and gotten lost into a cave. You, their knight, have been given the task of finding the captured royal family and saving them from these unruly slimes."**
 
-https://drive.google.com/file/d/1mJtjdSWjwBttYB0ggX10bPFK7CWL_Yp7/view?usp=sharing
+<img width="885" alt="Screen Shot 2022-06-06 at 12 25 52 AM" src="https://user-images.githubusercontent.com/58205103/172232619-63bb552a-f9f9-4ca9-96f4-7925d7bf055b.png">
+
 
 
 ### Map Level Design
