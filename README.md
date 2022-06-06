@@ -53,7 +53,7 @@ The Gameplay UI provided tons of pop-up menus which allows the players to explor
 
 
 
-[HealthBarUi](https://user-images.githubusercontent.com/58205103/172116292-bb675fba-2b91-49e9-b82a-311701dba67a.png) - The HealthBar UI is anchored to the top left of the screen to adjust to any resolution, as well as communicate with the player how big is the damage that is taken from the enemy. The HealthBar of the player is set into 100 HP. The Player will be taken damage if the enemy collided onto the player. Health is checked on every update and the UI is updated accordingly. [Health Update code here](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L369)
+[HealthBarUi](https://user-images.githubusercontent.com/58205103/172116292-bb675fba-2b91-49e9-b82a-311701dba67a.png) - The HealthBar UI is anchored to the top left of the screen to adjust to any resolution, as well as communicate with the player how big is the damage that is taken from the enemy. The HealthBar of the player is set into 100 HP. The Player will be taken damage if the enemy collided onto the player. Health is checked on every update and the UI is updated accordingly under [KnightController Script](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L369)
 
 
 
@@ -296,6 +296,13 @@ This is the mini-narative of our game:
 
 Explanation: 
 - This map level design starts with a very simple spike trap on the **first layer of the cave** and there are only two [green slime enemies](https://user-images.githubusercontent.com/58205103/172133122-672c2ce3-3378-493f-8244-86185c618969.png). As you go deeper into the **second layer of the cave**, you notice there are more green slime enemies that is been spawn and spawning more traps and introduce new trap called "the raining spikes". Once you reach out to the **purple layer of the cave**, there will be more and more enemies will be spawn, more traps that is introduce such as acid lake and disappearing platforms. The main core of introduction in  **purple layer of the cave** are [redslime enemies](https://user-images.githubusercontent.com/58205103/172133457-36292440-3c63-4507-aa01-2c012903d3e1.png) and [blueslime enemies](https://user-images.githubusercontent.com/58205103/172133473-58f5ca6e-438f-4a64-b0a2-a8c361995330.png). 
+
+
+- In summary,the idea of this map level design is it starts with a very simple and basic enemies, as you progress through the map itself you will found out that the difficulty of the level itself is increasing. 
+
+
+- One thing to note regards to the design in this map is that it all varies to difficulty of the level "Easy","Medium" or "Hard". There are more and stronger enemies in "Hard" difficulty compare into "Easy" difficulty. 
+
 
 
 ### My other contributions with game logic
