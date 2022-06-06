@@ -261,9 +261,28 @@ Some critical feedback we managed to get from our interviews were that:
 3. There was no options to adjust the volume.
 4. There was no hint to show the current objective.
 
-## Narrative Design
+## MapLevel and Narrative Design (Ronvic Cuevas)
 
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.** 
+### Narrative Design
+The Royal Family has been chased by these powerful slimes and gotten lost into a cave. You, their knight, have been given the task of finding the captured royal family and saving them from these unruly slimes.
+
+
+### Map Level Design
+- Our designation of the map were designed to be harder as the player progresses onto the map itself. Since our main story is that the royal family has been chased by these unruly slimes and got force to hide onto the cave, so we decided to design a map that is only connects to the story. I am responsible for implementing the map itself and provided the following assets: Tilemaps, spikes, acid water, slimes, and the royal family. 
+
+**Here is the Explanation below on how the map was design when the player is able to progress through it.**
+
+
+<img width="935" alt="Screen Shot 2022-06-06 at 1 50 24 AM" src="https://user-images.githubusercontent.com/58205103/172128787-217d852f-a624-4d46-a84b-ca800c25e25d.png">
+
+
+Explanation: 
+- This map level design starts with a very simple spike trap on the **first layer of the cave** and there are only two [green slime enemies](https://user-images.githubusercontent.com/58205103/172133122-672c2ce3-3378-493f-8244-86185c618969.png). As you go deeper into the **second layer of the cave**, you notice there are more green slime enemies that is been spawn and spawning more traps and introduce new trap called "the raining spikes". Once you reach out to the **purple layer of the cave**, there will be more and more enemies will be spawn, more traps that is introduce such as acid lake and disappearing platforms. The main core of introduction in  **purple layer of the cave** are [redslime enemies](https://user-images.githubusercontent.com/58205103/172133457-36292440-3c63-4507-aa01-2c012903d3e1.png) and [blueslime enemies](https://user-images.githubusercontent.com/58205103/172133473-58f5ca6e-438f-4a64-b0a2-a8c361995330.png). 
+
+
+### My other contributions with game logic
+- I was able to implement a moving platform that has to do with gamelogic. Where the idea is to create two waypoints and a movingplatform script for moving the player. Also, a [stickyplatform script](https://github.com/breliu-dv/KnightQuest/blob/b560351dbce111e11657168aa8956721df5c170a/Assets/Scripts/StickyPlatform.cs#L5) in order to make the player move with the platform itself. 
 
 ## Press Kit and Trailer
 
