@@ -6,12 +6,7 @@ KnightQuest is a 2D platformer with simple sword combat mechanics. The goal of t
 
 ## Gameplay Explanation ##
 
-**In this section, explain how the game should be played. Treat this as a manual within a game. It is encouraged to explain the button mappings and the most optimal gameplay strategy.**
-
-Gameplay in KnightQuest revolves around moving or jumping to traverse obstacles or avoid enemies, as well as attacking. The A and D keys are used to move left and right respectively, while the spacebar allows the player to jump. Pressing spacebar again after having jumped allows the player to jump one more time before landing. Pressing the left mouse button for fewer than 2 seconds will perform an attack, while holding for 2 or more seconds will perform a heavy attack. Pressing E performs a spin attack. When the player touches a slime, they will take damage, indicated to the player by a reduction of their health bar. Players may encounter chests that restore health when stood on. Platforming generally requires good timing to ensure that the player does not land on an enemy or fall off a platform. At certain point, players will reach checkpoints that will update where they spawn on death. 
-
-
-**If you did work that should be factored in to your grade that does not fit easily into the proscribed roles, add it here! Please include links to resources and descriptions of game-related material that does not fit into roles here.**
+Gameplay in KnightQuest revolves around moving or jumping to traverse obstacles or avoid enemies, as well as attacking. The A and D keys are used to move left and right respectively, while the spacebar allows the player to jump. Pressing spacebar again after having jumped allows the player to jump one more time before landing. Pressing the left mouse button for fewer than 2 seconds will perform an attack, while holding for 2 or more seconds will perform a heavy attack. Players can also move faster by rolling with shift. When the player touches a slime, they will take damage, indicated to the player by a reduction of their health bar. Players may encounter chests that restore health when stood on. Platforming generally requires good timing to ensure that the player does not land on an enemy or fall off a platform. At certain point, players will reach checkpoints that will update where they spawn on death. 
 
 # Main Roles #
 
@@ -98,25 +93,115 @@ Tutorial for moving platforms: https://www.youtube.com/watch?v=UlEE6wjWuCY
 
 ## Producer
 
+For my role as producer, I helped to coordinate group work by making sure tasks were completed on time and by helping communicate between roles for tasks involving multiple people. I also helped schedule group meetings and led discussions on the design of the game and the implementation of mechanics. I worked to ensure that tasks being worked on did not conflict with each other. In cases where two or more people needed to work on the same files, I worked to ensure that merge conflicts were managed correctly. Because we needed to be able to test out basic mechanics like movement and attack, I proposed creating a prototype map so that our different roles could begin working even when the map was not yet implemented. This allowed our movement and input people to start working, while we could also begin work on figuring out how mapping using tilemaps worked.
+
+https://github.com/breliu-dv/KnightQuest/commit/8cd2b996a207d4090f8dab8f60e6dad5f88f9794
+
+https://github.com/breliu-dv/KnightQuest/commit/77db96442d857c775014e33d261fa940d139bf99
+
+
+
+<img src="https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/producer/KQMapSketch.png?raw=true" alt="map sketch" width="800"/>
+
+In a later meeting, I met with Rajesh to actually go about [designing the map in figma](https://www.figma.com/file/33mqwguJ93fDOn8D8WW5sF/Knight-Quest-Map-Sketch). During the meeting, we spent time discussing how the player would move through the level and what sort of progression there would be. I made sure in that discussion to consider the enjoyability of certain obstacles, the potential for some degree of learning and exploration for the player, as well how difficult implementing certain mechanics might be. In regards to that last point in particular, I made sure to limit our ideas such that those implementing the mechanics would not find it overly complicated to do so. Finally, after we finalized the level, I spoke in a separate meeting with Ronvic and Henry, our UI person who would be handling the map implementation and our Game Logic person who would be implementing many of the mechanics respectively. I explained alongside Rajesh our proposed plan for the map, heping to answer questions they had regarding the specific details, such as the behavior of the three slime enemies as well as the trap and obstacle mechanics.
+
+Other meetings were similarly focused around ensuring that everyone understood who was working on what, as well as on discussing possible ways of implementing our ideas. Additionally, I considered input from team members on how much we could complete on time and adjusted our scope accordingly. I also led meetings other times to discuss the process of merging branches. For tasks distinct from each other, I created new branches so that team members could work on their systems separately without having to worry about merge conflicts. When we each reached a stage where our systems were functional, I arranged those meetings so that I could discuss with group members how the merges should occur and which changes could be overwritten. If a file could not be merged seamlessly, one variant was discarded and I worked to reconcile changes after performing the merge to ensure that everything still worked properly. The link below is a list of some merges for branch pull requests.
+
+https://github.com/breliu-dv/KnightQuest/pulls?q=is%3Apr+is%3Aclosed
+
+In addition to merges, I helped with assorted coding tasks which either fixed bugs/issues or implemented certain systems while others were working on their tasks. Below are some example commits.
+
+### Adjustments
+
+https://github.com/breliu-dv/KnightQuest/commit/5e0a0464608f514f32c0f01526865224fb157a3a
+
+https://github.com/breliu-dv/KnightQuest/commit/b358c3b4b0f249632b0024c9a0f116849b361ed9
+
+https://github.com/breliu-dv/KnightQuest/commit/9146b21866f67b4e5100b73b9b9677794443ee59
+
+https://github.com/breliu-dv/KnightQuest/commit/d5cfca4d7fcb7da172c4b82cd3a55470e3cdf0b5
+
+
+
+### Fixes
+
+https://github.com/breliu-dv/KnightQuest/commit/8d504be467618cbc90f5f37e602fcc4cc5c4f02e
+
+https://github.com/breliu-dv/KnightQuest/commit/2aa563e61cd78c07a90b60b195f66dc07937e201
+
+https://github.com/breliu-dv/KnightQuest/commit/2cfdd89ffd1c1810303df81953539da0d67341fa
+
+https://github.com/breliu-dv/KnightQuest/commit/e3645f551a66e8695ba2bbb2d91e0fc37fd0b1b7
+
+https://github.com/breliu-dv/KnightQuest/commit/1189613c1287d2378debc2aa766790af5c8bcf73
+
+
+### Implementations
+
+https://github.com/breliu-dv/KnightQuest/commit/cdc7b8e43f3279e13e78926e9717156c27276718
+
 
 
 # Sub-Roles
 
 ## Audio
 
-**List your assets including their sources and licenses.**
+The implementation of audio for this project uses a slightly modified version of the SoundManager introduced in exercise 1. As an adjustment, the [SoundManager class](https://github.com/breliu-dv/KnightQuest/blob/683755b6c437f8cd7d70dad71bcf1f9e65a7709b/Assets/Scripts/SoundManager.cs) has an added function for handling notifications of hits by the player on an enemy. When a player’s attack contacts an enemy, it calls the [NotifyHit function](https://github.com/breliu-dv/KnightQuest/blob/683755b6c437f8cd7d70dad71bcf1f9e65a7709b/Assets/Scripts/SoundManager.cs#L98-L103) in the SoundManager class. That function randomly selects one of the five hit sound effects it has then plays it as a one off. For red slimes which explode, they call the [NotifyExplosion function](https://github.com/breliu-dv/KnightQuest/blob/683755b6c437f8cd7d70dad71bcf1f9e65a7709b/Assets/Scripts/SoundManager.cs#L105-L108) to trigger the explosion sound effect. Additionally, there is a background music track that loops continuously from when the game starts.
 
-**Describe the implementation of your audio system.**
+In general, the sort of sound style that was aimed for in the game was informed by the visual style we chose. Because the visuals fell within the pixel art end of the spectrum, sounds and music that might be considered 'retro' were chosen. This is why the background music is a chiptune track called [“Dance Till You Die.”](https://github.com/breliu-dv/KnightQuest/blob/683755b6c437f8cd7d70dad71bcf1f9e65a7709b/Assets/Sound/BGM/holiznacc0_dance_till_you_die.mp3) The track has a somewhat lively feel that matched the tone of the game, since the player is attempting to be vigilant against enemies and obstacles. There was some consideration for the use of a more medieval sounding piece given that the game is about a knight trying to rescue the royal family, but these tended to be too mellow or melancholic sounding, which led to the selection of the piece that was ultimately chosen.
 
-**Document the sound style.** 
+In regards to the sound effects, these were similarly ‘retro’ sounding in theme. The pack from which the enemy damage sound effects were procured from labeled the sounds ‘retro,’ and these sounds seemed to work well for providing feedback to the player that their attack successfully connected. This is important for both game feel and for ensuring the player is not left wondering whether their attack missed. It is especially important when attacking enemies who take more than one hit to defeat. A random sound from the set of 5 hit sounds is played so that it does not sound repetitive when the player is performing attacks. The explosion sound effect is used when a red slime collides with the player, which triggers it as explained previously. This sound effect is also an 8-bit sound, in keeping with the style of the other sounds. While the sound effect itself is perhaps more like a firecracker in terms of sound, this means that it may also be less grating too hear when it is played multiple times, as may be the case when the player is surrounded by red slimes.
+
+### Background Music: 
+
+Dance Till You Die
+
+License: CC0 1.0 Universal License
+
+Source: https://freemusicarchive.org/music/holiznacc0/chiptunes/dance-till-you-die/
+
+
+### Sound Effects:
+
+Retro Impact Punch Hurt 01
+
+License: CC0 1.0 Universal License
+
+Source: https://kronbits.itch.io/freesfx
+
+
+Retro Impact Punch 07
+
+License: CC0 1.0 Universal License
+
+Source: https://kronbits.itch.io/freesfx
+
+
+Retro FootStep Mud 01
+
+License: CC0 1.0 Universal License
+
+Source: https://kronbits.itch.io/freesfx
+
+
+Retro FootStep Krushed Landing 01
+
+License: CC0 1.0 Universal License
+
+Source: https://kronbits.itch.io/freesfx
+
+
+Explosion
+
+License: CC0 1.0 Universal License
+
+Source: https://freesound.org/people/V-ktor/sounds/435413/
+
+
 
 ## Gameplay Testing
 
-**Add a link to the full results of your gameplay tests.**
-
 [Folder of the Interviews](https://drive.google.com/drive/folders/1qV-ZfHp3jSqQEk9fboCThBnKkWAtSsOj?usp=sharing)
-
-**Summarize the key findings from your gameplay tests.**
 
 As the interviewees were put straight into the game, many novice gamers did not know what to do or where to start. The objective was unclear since there were no story line before the start of the game. After learning the controls, most of the novice gamers managed to complete the game eventually. The experienced gamers were quick to find the unbalanced mechanics of the game and abuse those mechanics. For example, attacks have no cooldown so if you manage to click fast enough, you can kill the enemies really quickly. This is also because the enemies do not have a invincibility buffer after taking damage.
 
