@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 754428404622291566}
   ouch: {fileID: 0}
-  maxHealth: 40
+  maxHealth: 20
   startDazeTime: 0
 --- !u!1 &7454888289809829964
 GameObject:

@@ -44,7 +44,7 @@ public class RedSlimeController : MonoBehaviour
     public float speed;
     private float dazedTime;
     public float startDazeTime;
-    public float maxHealth = 80.0f;
+    public float maxHealth = 60.0f;
     private float currentHealth;
     private Vector2 spawnPosition;
     void Start()
