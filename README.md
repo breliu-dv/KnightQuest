@@ -26,9 +26,7 @@ You should replay any **bold text** with your relevant information. Liberally us
 
 **Describe your user interface and how it relates to gameplay. This can be done via the template.**
 
-The user interface is designed based on the core game logic and any information we believe is necessary for the player to have when challenging the Demon King. There are four scenes, three of which are for purposes of the user interface only. Any buttons or interactables in the UI have simple shadows when hovered or clicked to provide feedback to the player, letting them know a button is interactable or that they have successfully clicked the button. All user interfaces were tested for any major discrepancies between differing monitor specs and should display properly for all aspect ratios and resolutions.
-
-The user interface is designed based on the core game logic and giving necessary information to provide better user experience for the players. Our game is a platform game and providing these five scenes helps the players to interact to the game itself.
+The user interface is designed based on the core game logic and giving necessary information to provide better user experience for the players. Our game is a platform game and providing these five scenes helps the players to interact to the game itself. Any button that has been designed has a hover shadow in order to let the player know that this is the UI button they are choosing. When the button gets darker, it means the player click that button and proceed to the next menu or scene. The hovering allows the players to be more interactable with the UI itself.
 <img width="532" alt="Screen Shot 2022-06-06 at 1 34 51 AM" src="https://user-images.githubusercontent.com/58205103/172125964-93db4ae1-5b5d-4386-8274-509bfdaf82f8.png">
 
 - Easy Scene - This Scene provides "Easy Difficulty" gameplay where their less enemies and the enemies are weaker.
