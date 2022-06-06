@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2276946055001219400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2276946055001219446}
+  - component: {fileID: 2276946055001219401}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2276946055001219446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276946055001219400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 135.4627, y: -70.66217, z: -0.04151689}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2276946055001219401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276946055001219400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9d97e584243425eaa4638723611ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixerGroup: {fileID: -1654981932333034491, guid: 2908ee76ff5d74f49939d6493dfc1224, type: 2}
+  sfxMixerGroup: {fileID: -8510537306512611413, guid: 2908ee76ff5d74f49939d6493dfc1224, type: 2}
+  musicTracks:
+  - clip: {fileID: 8300000, guid: 7c0e46cb8f64249e98578d49e1837e3d, type: 3}
+    audioSource: {fileID: 0}
+    title: bgm0
+    volume: 1
+    pitch: 1
+    loop: 1
+  sfxClips:
+  - clip: {fileID: 8300000, guid: 49c0de247ea9144f584aaad62b0af31b, type: 3}
+    audioSource: {fileID: 0}
+    title: hit0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: fd2350c35dd684fa795a9f0a6a4733bb, type: 3}
+    audioSource: {fileID: 0}
+    title: hit1
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: bdc77a6b6db864cac88ed5e66f905d51, type: 3}
+    audioSource: {fileID: 0}
+    title: hit2
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: 9d9eebc7df07d40069c02a6f716ef1c9, type: 3}
+    audioSource: {fileID: 0}
+    title: hit3
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: dc76272a37a894190a5f99bfd7ac2bc6, type: 3}
+    audioSource: {fileID: 0}
+    title: hit4
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: 6f590bb26e8e32f4d8ef877e8c12626d, type: 3}
+    audioSource: {fileID: 0}
+    title: explosion
+    volume: 1
+    pitch: 1
+    loop: 0

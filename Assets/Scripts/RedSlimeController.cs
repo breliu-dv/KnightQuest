@@ -47,6 +47,7 @@ public class RedSlimeController : MonoBehaviour
     public float maxHealth = 60.0f;
     private float currentHealth;
     private Vector2 spawnPosition;
+    private SoundManager soundManager;
     void Start()
     {
         this.initialSlimePosition = gameObject.transform.position;
@@ -67,6 +68,7 @@ public class RedSlimeController : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _audio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -79,6 +81,7 @@ public class RedSlimeController : MonoBehaviour
             player.DoDamage(damage);
            _psystem.GetComponent<ParticleSystem>().Play();
             Debug.Log(_psystem.GetComponent<ParticleSystem>());
+            soundManager.NotifyExplosion();
         }
     }
 

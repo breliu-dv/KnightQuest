@@ -98,8 +98,13 @@ public class SoundManager : MonoBehaviour
     public void NotifyHit()
     {
         
-        this.PlaySoundEffect("hit" + Random.Range(0, sfxClips.Count));
+        this.PlaySoundEffect("hit" + Random.Range(0, 5));   // 5 is last for hit sfx
         
+    }
+
+    public void NotifyExplosion()
+    {
+        this.PlaySoundEffect("explosion");
     }
 
     public void NotifyPickup()
