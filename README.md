@@ -58,7 +58,19 @@ A standard physics system was used when movement was being implemented into the 
 
 **Describe the default input configuration.**
 
+The default input configuration is basic left, right movement with 'a' and 'd'. The jump and double jumps will be controlled by the spacebar. The roll mechanic is controlled by left shift. A string of normal attacks is controlled by a sequence of left clicks. Holding the left click for more than 2 seconds will execute a heavy attack.
+
 **Add an entry for each platform or input style your project supports.**
+
+1. Mobile
+  
+  The mobile version uses a touch screen joystick to control the player movement. There will be labeled buttons on the UI of the mobile version to prompt different attacks and character movement.
+  
+2. Desktop
+
+  On detection that the game is not ran on a mobile platform, all the mobile input UI would be removed.
+
+3. Web
 
 ## Game Logic
 
@@ -102,7 +114,21 @@ Tutorial for moving platforms: https://www.youtube.com/watch?v=UlEE6wjWuCY
 
 **Add a link to the full results of your gameplay tests.**
 
+[Folder of the Interviews](https://drive.google.com/drive/folders/1qV-ZfHp3jSqQEk9fboCThBnKkWAtSsOj?usp=sharing)
+
 **Summarize the key findings from your gameplay tests.**
+
+As the interviewees were put straight into the game, many novice gamers did not know what to do or where to start. The objective was unclear since there were no story line before the start of the game. After learning the controls, most of the novice gamers managed to complete the game eventually. The experienced gamers were quick to find the unbalanced mechanics of the game and abuse those mechanics. For example, attacks have no cooldown so if you manage to click fast enough, you can kill the enemies really quickly. This is also because the enemies do not have a invincibility buffer after taking damage.
+
+Some of the playtesters discovered the bug of jumping and rolling which gave a speed boost to the character. This incentivised some players to "speedrun" the game.
+
+We removed some of the mechanics from our game like the spin attack.
+
+Some critical feedback we managed to get from our interviews were that: 
+1. players do not know the controls of the game right off the bat
+2. There was no pause button to leave the game.
+3. There was no options to adjust the volume.
+4. There was no hint to show the current objective.
 
 ## Narrative Design
 
