@@ -265,7 +265,12 @@ Some critical feedback we managed to get from our interviews were that:
 
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.** 
 ### Narrative Design
-The Royal Family has been chased by these powerful slimes and gotten lost into a cave. You, their knight, have been given the task of finding the captured royal family and saving them from these unruly slimes.
+Me and my team spend a lot of time thinking about regarding to the narrative to our game. Since our game is not purely narrative base, and mostly focus on the action and exploration of the platform itself and giving challenges and fun to the players by giving them difficulty level, We came up with a simple narrative, where the family got lost into the woods and got chased by powerful slimes, then got stuck into the cave for a very long time. So as a knight, your job is to rescue the royal family who has been captured from the slimes. 
+
+This is the mini-narative of our game:
+**"The Royal Family has been chased by these powerful slimes and gotten lost into a cave. You, their knight, have been given the task of finding the captured royal family and saving them from these unruly slimes."**
+
+https://drive.google.com/file/d/1mJtjdSWjwBttYB0ggX10bPFK7CWL_Yp7/view?usp=sharing
 
 
 ### Map Level Design
