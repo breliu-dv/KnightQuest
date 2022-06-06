@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour
        SceneManager.LoadScene("Hard");
    }
 
+//    public void ControlsMenu()
+//    {}
    public void QuitGame()
    {
        Application.Quit();
