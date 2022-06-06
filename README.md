@@ -54,7 +54,7 @@ The Gameplay UI provided tons of pop-up menus which allows the players to explor
 
 
 
-## Movement/Physics
+## Movement/Physics (Donald Chan)
 
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
 
@@ -69,7 +69,7 @@ A standard physics system was used when movement was being implemented into the 
 [All other movement related functions](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L1)
 
 
-## Animation and Visuals
+## Animation and Visuals (Rajesh Mudaliar)
 
 **List your assets including their sources and licenses.**
 
@@ -103,7 +103,7 @@ When it came to animation, most of them were provided by the third-party asset m
 
 
 
-## Input
+## Input (Ryan Wong)
 
 **Describe the default input configuration.**
 
@@ -121,7 +121,7 @@ The default input configuration is basic left, right movement with 'a' and 'd'. 
 
 3. Web
 
-## Game Logic
+## Game Logic (Henry Chou)
 
 To implement the core game logic systems of our game, which is our AI for the slime enemies, first, the AI for the green, blue, and red slimes were implemented according to the specifications that we defined for each of the types of slimes. For the green slime, I created green slime controller script where the green slime will move back and forth between two position values in the X axis, while ensuring that velocity and health values are managed properly within the code as the [player attacks the green slime](https://github.com/breliu-dv/KnightQuest/blob/24a773359ad45dea47ebe8d45a6a6e47d97a9296/Assets/Scripts/GreenSlimeController.cs#L91) and also when the [green slime attacks the player](https://github.com/breliu-dv/KnightQuest/blob/24a773359ad45dea47ebe8d45a6a6e47d97a9296/Assets/Scripts/GreenSlimeController.cs#L42). For the blue slime, the underlying AI logic had to be implemented in an more intricate manner as the slime has to not only [chase the player](https://github.com/breliu-dv/KnightQuest/blob/4a70f0b0d863c637548bb8ee8b829f9192124834/Assets/Scripts/BlueSlimeController.cs#L104) but also ensure that it does not move outside of a predefined boundary, [get stuck behind an obstacle or wall](https://github.com/breliu-dv/KnightQuest/blob/4a70f0b0d863c637548bb8ee8b829f9192124834/Assets/Scripts/BlueSlimeController.cs#L196), as well as [only jump when it is supposed to jump](https://github.com/breliu-dv/KnightQuest/blob/4a70f0b0d863c637548bb8ee8b829f9192124834/Assets/Scripts/BlueSlimeController.cs#L221). 
 
@@ -145,7 +145,7 @@ https://www.mousawidev.com/blog/make-2d-explosions-in-unity
 
 Tutorial for moving platforms: https://www.youtube.com/watch?v=UlEE6wjWuCY
 
-## Producer
+## Producer (Brandon Liu)
 
 For my role as producer, I helped to coordinate group work by making sure tasks were completed on time and by helping communicate between roles for tasks involving multiple people. I also helped schedule group meetings and led discussions on the design of the game and the implementation of mechanics. I worked to ensure that tasks being worked on did not conflict with each other. In cases where two or more people needed to work on the same files, I worked to ensure that merge conflicts were managed correctly. Because we needed to be able to test out basic mechanics like movement and attack, I proposed creating a prototype map so that our different roles could begin working even when the map was not yet implemented. This allowed our movement and input people to start working, while we could also begin work on figuring out how mapping using tilemaps worked.
 
@@ -253,7 +253,7 @@ Source: https://freesound.org/people/V-ktor/sounds/435413/
 
 
 
-## Gameplay Testing
+## Gameplay Testing (Ryan Wong)
 
 [Folder of the Interviews](https://drive.google.com/drive/folders/1qV-ZfHp3jSqQEk9fboCThBnKkWAtSsOj?usp=sharing)
 
@@ -298,7 +298,7 @@ Explanation:
 ### My other contributions with game logic
 - I was able to implement a moving platform that has to do with gamelogic. Where the idea is to create two waypoints and a movingplatform script for moving the player. Also, a [stickyplatform script](https://github.com/breliu-dv/KnightQuest/blob/b560351dbce111e11657168aa8956721df5c170a/Assets/Scripts/StickyPlatform.cs#L5) in order to make the player move with the platform itself. 
 
-## Press Kit and Trailer
+## Press Kit and Trailer (Rajesh Mudaliar)
 
 **Include links to your presskit materials and trailer.**
 
@@ -317,7 +317,7 @@ The structure of the trailer was designed in a way that it showcases all the imp
 For the presskit, I was initially planning on using presskit() but since it needed web server-related things I deicded a simple website made using Wix would be enough. The presskit includes all the necessary information that the press can use to write about our game. It includes descriptions and summary of the game, the trailer, screenshots, as well as a contact form to reach us. The screenshots for the game were chosen based on how much color/vibrant they were. I thought that the more visually appealing and mysterious the screenshots are, the more interest it would garner.
 
 
-## Game Feel
+## Game Feel (Henry Chou)
 
 In order to enhance the game feel user experience and ensure that the game feel is the most ideal, I added and tuned the various parameters of the slimes and their respective behaviors for each and every individual slime present in the game, locations, appearances, and behavior of the various obstacles as well as the platforms that move or disappear.
 
@@ -350,7 +350,7 @@ And for the disappearing platforms:
 ![](https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/gameFeel/movingPlatform.png?raw=true)
 
 
-## Cross Platform
+## Cross Platform (Donald Chan)
 Our game was implemented on 4 different platforms: Windows, IOS, Android, and WebGL. The main part for this sub-role was having the KnightController script identifying what platform the game was running on. The other main part was to design the controls to be similar between all platforms.
 
 [How the script identified the platform if the platform was IOS or Android](https://github.com/breliu-dv/KnightQuest/blob/37519690f1b5ff7f8343d983feb7f3d123c4764d/Assets/Scripts/KnightController.cs#L81)
