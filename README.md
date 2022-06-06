@@ -134,7 +134,6 @@ And for the disappearing platforms:
 
 ![](https://github.com/breliu-dv/KnightQuest/blob/main/documentImages/movingPlatform.png?raw=true)
 
-**Document what you added to and how you tweaked your game to improve its game feel.**
 
 ## Cross Platform
 Our game was implemented on 4 different platforms: Windows, IOS, Android, and WebGL. The main part for this sub-role was having the KnightController script identifying what platform the game was running on. The other main part was to design the controls to be similar between all platforms.
