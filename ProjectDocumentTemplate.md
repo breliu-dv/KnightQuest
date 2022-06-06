@@ -86,8 +86,6 @@ Last but not least, another important design pattern that was used is the observ
 
 ## Game Feel
 
-**Document what you added to and how you tweaked your game to improve its game feel.**
-
 In order to enhance the game feel user experience and ensure that the game feel is the most ideal, I added and tuned the various parameters of the slimes and their respective behaviors for each and every individual slime present in the game, locations, appearances, and behavior of the various obstacles as well as the platforms that move or disappear.
 
 For the slimes, I tuned the slime controller parameters for the slimes in order to ensure that the slimes respond promptly and smoothly when it is following the knight, while also allowing for a balanced difficulty so that some slimes are faster than others, jump more, have longer patrol paths, chase the player more aggressively in terms of movement speed, as well as the distance that the slime chases the player before it gives up. The main goal of this is to ensure that the slimes cause the player to feel that the challenge of encountering the slimes, and adopt a strategy for surviving the encounter (either by fighting the slime or escaping from the slime). 
