@@ -27,6 +27,9 @@ You should replay any **bold text** with your relevant information. Liberally us
 **Describe your user interface and how it relates to gameplay. This can be done via the template.**
 
 The user interface is designed based on the core game logic and giving necessary information to provide better user experience for the players. Our game is a platform game and providing these five scenes helps the players to interact to the game itself. Any button that has been designed has a hover shadow in order to let the player know that this is the UI button they are choosing. When the button gets darker, it means the player click that button and proceed to the next menu or scene. The hovering allows the players to be more interactable with the UI itself.
+
+
+
 <img width="532" alt="Screen Shot 2022-06-06 at 1 34 51 AM" src="https://user-images.githubusercontent.com/58205103/172125964-93db4ae1-5b5d-4386-8274-509bfdaf82f8.png">
 
 - Easy Scene - This Scene provides "Easy Difficulty" gameplay where their less enemies and the enemies are weaker.
