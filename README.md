@@ -47,7 +47,27 @@ A standard physics system was used when movement was being implemented into the 
 
 **List your assets including their sources and licenses.**
 
+***Third-Party***
+- https://assetstore.unity.com/packages/2d/environments/2d-platfrom-tile-set-cave-61672
+- https://assetstore.unity.com/packages/2d/characters/hero-knight-pixel-art-165188
+- https://stealthix.itch.io/animated-slimes
+- https://assetstore.unity.com/packages/2d/characters/pixel-monster-pack-75508
+
+***Self-Made***
+- Royal Family Members: https://github.com/breliu-dv/KnightQuest/blob/main/Assets/SelfMadeAssets/RoyalFamily/royal_pixel.png
+
+***Modified***
+- Hero Knight Charging Sprites:https://github.com/breliu-dv/KnightQuest/blob/main/Assets/Imported%20Assets/Hero%20Knight%20-%20Pixel%20Art/Sprites/HeroKnight-charging.png
+- Hero Knight Charge Attack: https://github.com/breliu-dv/KnightQuest/blob/main/Assets/Imported%20Assets/Hero%20Knight%20-%20Pixel%20Art/Sprites/HeroKnightChargeAttack.png
+- Animated acid Tile: https://github.com/breliu-dv/KnightQuest/blob/main/Assets/Tilemaps/Acid_Animated_Tile.asset
+
+***Self-made Animation related items***
+- https://github.com/breliu-dv/KnightQuest/blob/main/Assets/Imported%20Assets/Hero%20Knight%20-%20Pixel%20Art/Animations/HeroKnight_Charging.anim
+- https://github.com/breliu-dv/KnightQuest/blob/main/Assets/Imported%20Assets/Hero%20Knight%20-%20Pixel%20Art/Animations/HeroKnight_ChargeAttack.anim
+
 **Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
+
+
 
 ## Input
 
@@ -222,6 +242,9 @@ Some critical feedback we managed to get from our interviews were that:
 ## Press Kit and Trailer
 
 **Include links to your presskit materials and trailer.**
+
+Presskit: https://rajeshrm2911.wixsite.com/knight-quest
+Trailer: https://drive.google.com/file/d/12KD53g169RaQgLN_NK0hiQWI2YIRLR-K/view?usp=sharing
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
 
